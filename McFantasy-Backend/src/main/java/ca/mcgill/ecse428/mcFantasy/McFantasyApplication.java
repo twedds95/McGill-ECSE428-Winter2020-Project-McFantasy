@@ -1,4 +1,4 @@
-package ca.mcgill.ecse428.mcFantasy;
+package ca.mcgill.ecse428.mcfantasy;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.SpringApplication;
