@@ -1,5 +1,6 @@
 package ca.mcgill.ecse428.mcfantasy.model;
 
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -18,14 +19,15 @@ public void setName(String value) {
 public String getName() {
     return this.name;
 }
-   private UserAccount user;
+   private AppUser user;
    
    @ManyToOne(optional=false)
-   public UserAccount getUser() {
+   public AppUser getUser() {
       return this.user;
    }
    
-   public void setUser(UserAccount user) {
+   public void setUser(AppUser user) {
+
       this.user = user;
    }
    

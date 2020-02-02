@@ -1,5 +1,6 @@
 package ca.mcgill.ecse428.mcfantasy.model;
 
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.Set;
@@ -41,6 +42,7 @@ public void setRating(Integer value) {
 public Integer getRating() {
     return this.rating;
 }
+
 private Integer seasonsPlayed;
 
 public void setSeasonsPlayed(Integer value) {
