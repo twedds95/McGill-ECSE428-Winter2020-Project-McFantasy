@@ -9,6 +9,14 @@ import javax.persistence.ManyToMany;
 
 @Entity
 public class Player{
+private String position;
+
+public void setPosition(String value) {
+this.position = value;
+}
+public String getPosition() {
+return this.position;
+}
    private String name;
 
 public void setName(String value) {
@@ -34,14 +42,7 @@ public void setRating(Integer value) {
 public Integer getRating() {
     return this.rating;
 }
-private String position;
 
-public void setPosition(String value) {
-    this.position = value;
-}
-public String getPosition() {
-    return this.position;
-}
 private Integer seasonsPlayed;
 
 public void setSeasonsPlayed(Integer value) {

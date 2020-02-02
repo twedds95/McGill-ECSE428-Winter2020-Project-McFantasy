@@ -83,6 +83,7 @@ public Integer getMaxRating() {
    }
    
    public void setUser(AppUser user) {
+
       this.user = user;
    }
    

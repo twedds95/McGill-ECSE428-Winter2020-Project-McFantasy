@@ -1,0 +1,601 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com.yattasolutions.uml.diagrams.classifier:ClassDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com.yattasolutions.uml.diagrams.classifier="http://ns.yatta-solutions.com/umllab/diagrams/classifier/1.1.0" xmi:id="_bkldYEX0Eeqll4XR7bxNMA">
+  <modelElement href="McFantasy-Backend.uml#_caJzcEX0Eeqll4XR7bxNMA"/>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_dHjsAEX0Eeqll4XR7bxNMA" target="_dHmvUEX0Eeqll4XR7bxNMA">
+    <modelElement href="McFantasy-Backend.uml#_cjn4gEX0Eeqll4XR7bxNMA"/>
+    <nameVisual xmi:id="_dHjsAUX0Eeqll4XR7bxNMA" text=""/>
+    <sourceRole xmi:id="_dHjsAkX0Eeqll4XR7bxNMA" aggregationKind="NONE" name="date" navigable="true">
+      <modelElement href="McFantasy-Backend.uml#_cit5kEX0Eeqll4XR7bxNMA"/>
+      <visibility xmi:id="_dHjsA0X0Eeqll4XR7bxNMA" label="+"/>
+      <cardinality xmi:id="_dHkTEEX0Eeqll4XR7bxNMA" label="1" max="1" min="1"/>
+    </sourceRole>
+    <targetRole xmi:id="_dHkTEUX0Eeqll4XR7bxNMA" aggregationKind="NONE" name="">
+      <modelElement href="McFantasy-Backend.uml#_cjn4gUX0Eeqll4XR7bxNMA"/>
+      <visibility xmi:id="_dHkTEkX0Eeqll4XR7bxNMA" label="+"/>
+      <cardinality xmi:id="_dHkTE0X0Eeqll4XR7bxNMA" label="1" max="1" min="1"/>
+    </targetRole>
+  </edges>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_dHlhMEX0Eeqll4XR7bxNMA" sourceAnchor="0.0,94.0" targetAnchor="82.0,113.0" target="_dHmvUEX0Eeqll4XR7bxNMA" source="_dKbZ0EX0Eeqll4XR7bxNMA">
+    <modelElement href="McFantasy-Backend.uml#_cjcSUEX0Eeqll4XR7bxNMA"/>
+    <bendpoints xmi:id="_dbvzUUX0Eeqll4XR7bxNMA" sourceX="-170" targetY="149"/>
+    <nameVisual xmi:id="_dHlhMUX0Eeqll4XR7bxNMA" text="">
+      <visualProperties xmi:id="_db7ZgEX0Eeqll4XR7bxNMA" position="151.3258703396508,-16.18182789432211"/>
+    </nameVisual>
+    <sourceRole xmi:id="_dHlhMkX0Eeqll4XR7bxNMA" aggregationKind="NONE" name="team" navigable="true">
+      <modelElement href="McFantasy-Backend.uml#_ciwV0EX0Eeqll4XR7bxNMA"/>
+      <visualProperties xmi:id="_db6LYEX0Eeqll4XR7bxNMA" position="-69.12024202253863,-33.6487041207298"/>
+      <visibility xmi:id="_dHlhM0X0Eeqll4XR7bxNMA" label="+"/>
+      <cardinality xmi:id="_dHlhNEX0Eeqll4XR7bxNMA" label="1..*" max="-1" min="1"/>
+    </sourceRole>
+    <targetRole xmi:id="_dHlhNUX0Eeqll4XR7bxNMA" aggregationKind="NONE" name="game" navigable="true">
+      <modelElement href="McFantasy-Backend.uml#_cjbEMEX0Eeqll4XR7bxNMA"/>
+      <visualProperties xmi:id="_db7ZgUX0Eeqll4XR7bxNMA" position="160.3967795622366,115.7673210264391"/>
+      <visibility xmi:id="_dHmIQEX0Eeqll4XR7bxNMA" label="+"/>
+      <cardinality xmi:id="_dHmIQUX0Eeqll4XR7bxNMA" label="1..*" max="-1" min="1"/>
+    </targetRole>
+  </edges>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_dJQVIEX0Eeqll4XR7bxNMA" sourceAnchor="144.0,0.0" targetAnchor="147.0,77.0" target="_dJY4AEX0Eeqll4XR7bxNMA" source="_dKbZ0EX0Eeqll4XR7bxNMA">
+    <modelElement href="McFantasy-Backend.uml#_cjjAAEX0Eeqll4XR7bxNMA"/>
+    <bendpoints xmi:id="_dbvMQEX0Eeqll4XR7bxNMA" sourceY="-589" targetX="237"/>
+    <nameVisual xmi:id="_dJT_gEX0Eeqll4XR7bxNMA" text="">
+      <visualProperties xmi:id="_db158EX0Eeqll4XR7bxNMA" position="3.573380974010547,555.0245777527737"/>
+    </nameVisual>
+    <sourceRole xmi:id="_dJT_gUX0Eeqll4XR7bxNMA" name="team" navigable="true">
+      <modelElement href="McFantasy-Backend.uml#_cjhx4EX0Eeqll4XR7bxNMA"/>
+      <visualProperties xmi:id="_db1S4UX0Eeqll4XR7bxNMA" position="-8.533159002023353,-72.2598705437338"/>
+      <visibility xmi:id="_dJV0sUX0Eeqll4XR7bxNMA" label="+"/>
+      <cardinality xmi:id="_dJV0sEX0Eeqll4XR7bxNMA" label="1..*" max="-1" min="1"/>
+    </sourceRole>
+    <targetRole xmi:id="_dJUmkEX0Eeqll4XR7bxNMA" aggregationKind="NONE" name="user" navigable="true">
+      <modelElement href="McFantasy-Backend.uml#_cjXZ0EX0Eeqll4XR7bxNMA"/>
+      <visualProperties xmi:id="_db2hAEX0Eeqll4XR7bxNMA" position="229.8248111822188,555.8546506459717"/>
+      <visibility xmi:id="_dJV0s0X0Eeqll4XR7bxNMA" label="+"/>
+      <cardinality xmi:id="_dJV0skX0Eeqll4XR7bxNMA" label="1" max="1" min="1"/>
+    </targetRole>
+  </edges>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_dJYQ8EX0Eeqll4XR7bxNMA" sourceAnchor="0.0,28.0" targetAnchor="103.0,94.0" target="_dJY4AEX0Eeqll4XR7bxNMA" source="_dKx_IEX0Eeqll4XR7bxNMA">
+    <modelElement href="McFantasy-Backend.uml#_cjk1MEX0Eeqll4XR7bxNMA"/>
+    <bendpoints xmi:id="_dbwaYEX0Eeqll4XR7bxNMA" sourceX="-118" targetY="321"/>
+    <nameVisual xmi:id="_dJYQ8UX0Eeqll4XR7bxNMA" text="">
+      <visualProperties xmi:id="_db9OsEX0Eeqll4XR7bxNMA" position="91.73145036677172,-13.990791973741665"/>
+    </nameVisual>
+    <sourceRole xmi:id="_dJYQ8kX0Eeqll4XR7bxNMA" name="league" navigable="true">
+      <modelElement href="McFantasy-Backend.uml#_cjjnEEX0Eeqll4XR7bxNMA"/>
+      <visualProperties xmi:id="_db8AkEX0Eeqll4XR7bxNMA" position="-68.97210728129923,-32.770427155703516"/>
+      <visibility xmi:id="_dJYQ80X0Eeqll4XR7bxNMA" label="+"/>
+      <cardinality xmi:id="_dJYQ9EX0Eeqll4XR7bxNMA" label="1..*" max="-1" min="1"/>
+    </sourceRole>
+    <targetRole xmi:id="_dJYQ9UX0Eeqll4XR7bxNMA" aggregationKind="NONE" name="user" navigable="true">
+      <modelElement href="McFantasy-Backend.uml#_ci3qkEX0Eeqll4XR7bxNMA"/>
+      <visualProperties xmi:id="_db9OsUX0Eeqll4XR7bxNMA" position="95.33613452832788,288.97380669615904"/>
+      <visibility xmi:id="_dJYQ9kX0Eeqll4XR7bxNMA" label="+"/>
+      <cardinality xmi:id="_dJYQ90X0Eeqll4XR7bxNMA" label="1" max="1" min="1"/>
+    </targetRole>
+  </edges>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_dJ-G0EX0Eeqll4XR7bxNMA" sourceAnchor="162.0,94.0" targetAnchor="144.0,170.0" target="_dKENcEX0Eeqll4XR7bxNMA" source="_dKbZ0EX0Eeqll4XR7bxNMA">
+    <modelElement href="McFantasy-Backend.uml#_cjadIEX0Eeqll4XR7bxNMA"/>
+    <bendpoints xmi:id="_dbvzUEX0Eeqll4XR7bxNMA" sourceX="334" targetY="813"/>
+    <nameVisual xmi:id="_dKAjEEX0Eeqll4XR7bxNMA" text="">
+      <visualProperties xmi:id="_db49QEX0Eeqll4XR7bxNMA" position="-262.8187934365643,1.5127577481877665"/>
+    </nameVisual>
+    <sourceRole xmi:id="_dKAjEUX0Eeqll4XR7bxNMA" aggregationKind="NONE" name="team" navigable="true">
+      <modelElement href="McFantasy-Backend.uml#_cjJXYEX0Eeqll4XR7bxNMA"/>
+      <visualProperties xmi:id="_db3vIEX0Eeqll4XR7bxNMA" position="30.032495096009825,-10.645069604980563"/>
+      <visibility xmi:id="_dKBxMUX0Eeqll4XR7bxNMA" label="+"/>
+      <cardinality xmi:id="_dKBxMEX0Eeqll4XR7bxNMA" label="1..*" max="-1" min="1"/>
+    </sourceRole>
+    <targetRole xmi:id="_dKBKIEX0Eeqll4XR7bxNMA" aggregationKind="NONE" name="player" navigable="true">
+      <modelElement href="McFantasy-Backend.uml#_cjYn8EX0Eeqll4XR7bxNMA"/>
+      <visualProperties xmi:id="_db5kUEX0Eeqll4XR7bxNMA" position="-244.8132518041749,802.4103804078004"/>
+      <visibility xmi:id="_dKBxM0X0Eeqll4XR7bxNMA" label="+"/>
+      <cardinality xmi:id="_dKBxMkX0Eeqll4XR7bxNMA" label="1..*" max="-1" min="1"/>
+    </targetRole>
+  </edges>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_dKDmYEX0Eeqll4XR7bxNMA" sourceAnchor="73.0,0.0" targetAnchor="179.0,85.0" target="_dKENcEX0Eeqll4XR7bxNMA" source="_dLM14EX0Eeqll4XR7bxNMA">
+    <modelElement href="McFantasy-Backend.uml#_cjri4EX0Eeqll4XR7bxNMA"/>
+    <bendpoints xmi:id="_dbxogEX0Eeqll4XR7bxNMA" sourceY="-140" targetX="90"/>
+    <nameVisual xmi:id="_dKDmYUX0Eeqll4XR7bxNMA" text="">
+      <visualProperties xmi:id="_dcGYoEX0Eeqll4XR7bxNMA" position="0.322648207575412,82.04123519477673"/>
+    </nameVisual>
+    <sourceRole xmi:id="_dKDmYkX0Eeqll4XR7bxNMA" aggregationKind="NONE" name="seasonStats" navigable="true">
+      <modelElement href="McFantasy-Backend.uml#_cjHiMEX0Eeqll4XR7bxNMA"/>
+      <visualProperties xmi:id="_dcFKgEX0Eeqll4XR7bxNMA" position="-27.239164530821654,-66.2260249219438"/>
+      <visibility xmi:id="_dKDmY0X0Eeqll4XR7bxNMA" label="+"/>
+      <cardinality xmi:id="_dKDmZEX0Eeqll4XR7bxNMA" label="1..*" max="-1" min="1"/>
+    </sourceRole>
+    <targetRole xmi:id="_dKDmZUX0Eeqll4XR7bxNMA" aggregationKind="NONE" name="">
+      <modelElement href="McFantasy-Backend.uml#_cjq70UX0Eeqll4XR7bxNMA"/>
+      <visualProperties xmi:id="_dcGYoUX0Eeqll4XR7bxNMA" position="92.32104204568986,55.875182148890076"/>
+      <visibility xmi:id="_dKDmZkX0Eeqll4XR7bxNMA" label="+"/>
+      <cardinality xmi:id="_dKDmZ0X0Eeqll4XR7bxNMA" label="1" max="1" min="1"/>
+    </targetRole>
+  </edges>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_dKVTMEX0Eeqll4XR7bxNMA" sourceAnchor="104.0,56.0" targetAnchor="85.0,0.0" target="_dKbZ0EX0Eeqll4XR7bxNMA" source="_dKx_IEX0Eeqll4XR7bxNMA">
+    <modelElement href="McFantasy-Backend.uml#_ci8jEEX0Eeqll4XR7bxNMA"/>
+    <nameVisual xmi:id="_dKZkoEX0Eeqll4XR7bxNMA" text="">
+      <visualProperties xmi:id="_db_q8EX0Eeqll4XR7bxNMA" position="-14.771971898016034,-77.89460894037427"/>
+    </nameVisual>
+    <sourceRole xmi:id="_dKaLsEX0Eeqll4XR7bxNMA" aggregationKind="NONE" name="league" navigable="true">
+      <modelElement href="McFantasy-Backend.uml#_ci7U8EX0Eeqll4XR7bxNMA"/>
+      <visualProperties xmi:id="_db-c0EX0Eeqll4XR7bxNMA" position="-35.083660673451504,25.554512033202833"/>
+      <visibility xmi:id="_dKaywUX0Eeqll4XR7bxNMA" label="+"/>
+      <cardinality xmi:id="_dKaywEX0Eeqll4XR7bxNMA" label="1..*" max="-1" min="1"/>
+    </sourceRole>
+    <targetRole xmi:id="_dKaLsUX0Eeqll4XR7bxNMA" aggregationKind="NONE" name="team" navigable="true">
+      <modelElement href="McFantasy-Backend.uml#_ci6G0EX0Eeqll4XR7bxNMA"/>
+      <visualProperties xmi:id="_db_q8UX0Eeqll4XR7bxNMA" position="-31.15975649614859,-220.2488695016873"/>
+      <visibility xmi:id="_dKayw0X0Eeqll4XR7bxNMA" label="+"/>
+      <cardinality xmi:id="_dKaywkX0Eeqll4XR7bxNMA" label="1..*" max="-1" min="1"/>
+    </targetRole>
+  </edges>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_dKtGoEX0Eeqll4XR7bxNMA" sourceAnchor="165.0,56.0" targetAnchor="74.0,56.0" target="_dKx_IEX0Eeqll4XR7bxNMA" source="_dHmvUEX0Eeqll4XR7bxNMA">
+    <modelElement href="McFantasy-Backend.uml#_cjptsEX0Eeqll4XR7bxNMA"/>
+    <bendpoints xmi:id="_dbtXEEX0Eeqll4XR7bxNMA" sourceX="142" targetY="111"/>
+    <nameVisual xmi:id="_dKvi4EX0Eeqll4XR7bxNMA" text="">
+      <visualProperties xmi:id="_dbzdsEX0Eeqll4XR7bxNMA" position="-129.81915293485133,-13.990629938397433"/>
+    </nameVisual>
+    <sourceRole xmi:id="_dKvi4UX0Eeqll4XR7bxNMA" aggregationKind="NONE" name="game" navigable="true">
+      <modelElement href="McFantasy-Backend.uml#_ci9xMEX0Eeqll4XR7bxNMA"/>
+      <visualProperties xmi:id="_dbxogUX0Eeqll4XR7bxNMA" position="31.852233570642227,-32.01672131400055"/>
+      <visibility xmi:id="_dKwxAUX0Eeqll4XR7bxNMA" label="+"/>
+      <cardinality xmi:id="_dKwxAEX0Eeqll4XR7bxNMA" label="1..*" max="-1" min="1"/>
+    </sourceRole>
+    <targetRole xmi:id="_dKvi4kX0Eeqll4XR7bxNMA" aggregationKind="NONE" name="">
+      <modelElement href="McFantasy-Backend.uml#_cjpGoEX0Eeqll4XR7bxNMA"/>
+      <visualProperties xmi:id="_dbzdsUX0Eeqll4XR7bxNMA" position="-174.79646569128954,79.27432143604305"/>
+      <visibility xmi:id="_dKxYEUX0Eeqll4XR7bxNMA" label="+"/>
+      <cardinality xmi:id="_dKxYEEX0Eeqll4XR7bxNMA" label="1" max="1" min="1"/>
+    </targetRole>
+  </edges>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_dHmvUEX0Eeqll4XR7bxNMA" name="Game" associationsIn="_dHjsAEX0Eeqll4XR7bxNMA _dHlhMEX0Eeqll4XR7bxNMA" associationsOut="_dKtGoEX0Eeqll4XR7bxNMA">
+    <modelElement href="McFantasy-Backend.uml#_cbt5sEX0Eeqll4XR7bxNMA"/>
+    <visualProperties xmi:id="_dHmvUUX0Eeqll4XR7bxNMA" position="30.0,30.0" size="-1.0,-1.0"/>
+    <stereotypes xmi:id="_dHmvUkX0Eeqll4XR7bxNMA" name="JPA1StyledElement">
+      <modelElement href="McFantasy-Backend.uml#_cb0nYEX0Eeqll4XR7bxNMA"/>
+    </stereotypes>
+    <visibility xmi:id="_dHmvU0X0Eeqll4XR7bxNMA" label="+"/>
+    <attributes xmi:id="_dHmvVEX0Eeqll4XR7bxNMA" name="gameId">
+      <modelElement href="McFantasy-Backend.uml#_cirdUEX0Eeqll4XR7bxNMA"/>
+      <stereotypes xmi:id="_dHmvVUX0Eeqll4XR7bxNMA" name="PrimaryKey">
+        <modelElement href="McFantasy-Backend.uml#_cisrcEX0Eeqll4XR7bxNMA"/>
+      </stereotypes>
+      <visibility xmi:id="_dHmvVkX0Eeqll4XR7bxNMA" label="+"/>
+      <cardinality xmi:id="_dHmvV0X0Eeqll4XR7bxNMA" label="1" max="1" min="1"/>
+      <type xmi:id="_dHmvWEX0Eeqll4XR7bxNMA" name="Integer">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_dHmvWUX0Eeqll4XR7bxNMA" name="date">
+      <modelElement href="McFantasy-Backend.uml#_cit5kEX0Eeqll4XR7bxNMA"/>
+      <stereotypes xmi:id="_dHmvWkX0Eeqll4XR7bxNMA" name="StyledElement">
+        <modelElement href="McFantasy-Backend.uml#_ciugoEX0Eeqll4XR7bxNMA"/>
+      </stereotypes>
+      <visibility xmi:id="_dHmvW0X0Eeqll4XR7bxNMA" label="+"/>
+      <cardinality xmi:id="_dHmvXEX0Eeqll4XR7bxNMA" label="1" max="1" min="1"/>
+      <type xmi:id="_dHmvXUX0Eeqll4XR7bxNMA" name="Date">
+        <modelElement href="McFantasy-Backend.uml#_cgXwMEX0Eeqll4XR7bxNMA"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_dHmvXkX0Eeqll4XR7bxNMA" name="team1Score">
+      <modelElement href="McFantasy-Backend.uml#_ciugoUX0Eeqll4XR7bxNMA"/>
+      <stereotypes xmi:id="_dHmvX0X0Eeqll4XR7bxNMA" name="StyledElement">
+        <modelElement href="McFantasy-Backend.uml#_civHsEX0Eeqll4XR7bxNMA"/>
+      </stereotypes>
+      <visibility xmi:id="_dHmvYEX0Eeqll4XR7bxNMA" label="+"/>
+      <cardinality xmi:id="_dHmvYUX0Eeqll4XR7bxNMA" label="1" max="1" min="1"/>
+      <type xmi:id="_dHmvYkX0Eeqll4XR7bxNMA" name="Integer">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_dHmvY0X0Eeqll4XR7bxNMA" name="team2Score">
+      <modelElement href="McFantasy-Backend.uml#_civuwEX0Eeqll4XR7bxNMA"/>
+      <stereotypes xmi:id="_dHmvZEX0Eeqll4XR7bxNMA" name="StyledElement">
+        <modelElement href="McFantasy-Backend.uml#_civuwUX0Eeqll4XR7bxNMA"/>
+      </stereotypes>
+      <visibility xmi:id="_dHmvZUX0Eeqll4XR7bxNMA" label="+"/>
+      <cardinality xmi:id="_dHmvZkX0Eeqll4XR7bxNMA" label="1" max="1" min="1"/>
+      <type xmi:id="_dHmvZ0X0Eeqll4XR7bxNMA" name="Integer">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_dHmvaEX0Eeqll4XR7bxNMA" name="team">
+      <modelElement href="McFantasy-Backend.uml#_ciwV0EX0Eeqll4XR7bxNMA"/>
+      <visibility xmi:id="_dHmvaUX0Eeqll4XR7bxNMA" label="+"/>
+      <cardinality xmi:id="_dHmvakX0Eeqll4XR7bxNMA" label="1..*" max="-1" min="1"/>
+      <type xmi:id="_dHmva0X0Eeqll4XR7bxNMA" name="Team">
+        <modelElement href="McFantasy-Backend.uml#_cc924EX0Eeqll4XR7bxNMA"/>
+      </type>
+    </attributes>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_dKbZ0EX0Eeqll4XR7bxNMA" name="Team" associationsIn="_dKVTMEX0Eeqll4XR7bxNMA" associationsOut="_dJQVIEX0Eeqll4XR7bxNMA _dJ-G0EX0Eeqll4XR7bxNMA _dHlhMEX0Eeqll4XR7bxNMA">
+    <modelElement href="McFantasy-Backend.uml#_cc924EX0Eeqll4XR7bxNMA"/>
+    <visualProperties xmi:id="_dKbZ0UX0Eeqll4XR7bxNMA" position="282.0,198.0" size="-1.0,-1.0"/>
+    <stereotypes xmi:id="_dKbZ0kX0Eeqll4XR7bxNMA" name="JPA1StyledElement">
+      <modelElement href="McFantasy-Backend.uml#_cc_sEEX0Eeqll4XR7bxNMA"/>
+    </stereotypes>
+    <visibility xmi:id="_dKbZ00X0Eeqll4XR7bxNMA" label="+"/>
+    <attributes xmi:id="_dKbZ1EX0Eeqll4XR7bxNMA" name="league">
+      <modelElement href="McFantasy-Backend.uml#_ci7U8EX0Eeqll4XR7bxNMA"/>
+      <visibility xmi:id="_dKbZ1UX0Eeqll4XR7bxNMA" label="+"/>
+      <cardinality xmi:id="_dKbZ1kX0Eeqll4XR7bxNMA" label="1..*" max="-1" min="1"/>
+      <type xmi:id="_dKbZ10X0Eeqll4XR7bxNMA" name="League">
+        <modelElement href="McFantasy-Backend.uml#_ccMa0EX0Eeqll4XR7bxNMA"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_dKbZ2EX0Eeqll4XR7bxNMA" name="teamID">
+      <modelElement href="McFantasy-Backend.uml#_cjQFEEX0Eeqll4XR7bxNMA"/>
+      <stereotypes xmi:id="_dKbZ2UX0Eeqll4XR7bxNMA" name="PrimaryKey">
+        <modelElement href="McFantasy-Backend.uml#_cjQsIEX0Eeqll4XR7bxNMA"/>
+      </stereotypes>
+      <visibility xmi:id="_dKbZ2kX0Eeqll4XR7bxNMA" label="+"/>
+      <cardinality xmi:id="_dKbZ20X0Eeqll4XR7bxNMA" label="1" max="1" min="1"/>
+      <type xmi:id="_dKbZ3EX0Eeqll4XR7bxNMA" name="Integer">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_dKbZ3UX0Eeqll4XR7bxNMA" name="name">
+      <modelElement href="McFantasy-Backend.uml#_cjR6QEX0Eeqll4XR7bxNMA"/>
+      <stereotypes xmi:id="_dKbZ3kX0Eeqll4XR7bxNMA" name="StyledElement">
+        <modelElement href="McFantasy-Backend.uml#_cjTIYEX0Eeqll4XR7bxNMA"/>
+      </stereotypes>
+      <visibility xmi:id="_dKbZ30X0Eeqll4XR7bxNMA" label="+"/>
+      <cardinality xmi:id="_dKbZ4EX0Eeqll4XR7bxNMA" label="1" max="1" min="1"/>
+      <type xmi:id="_dKbZ4UX0Eeqll4XR7bxNMA" name="String">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_dKbZ4kX0Eeqll4XR7bxNMA" name="wins">
+      <modelElement href="McFantasy-Backend.uml#_cjTIYUX0Eeqll4XR7bxNMA"/>
+      <stereotypes xmi:id="_dKbZ40X0Eeqll4XR7bxNMA" name="StyledElement">
+        <modelElement href="McFantasy-Backend.uml#_cjTvcEX0Eeqll4XR7bxNMA"/>
+      </stereotypes>
+      <visibility xmi:id="_dKbZ5EX0Eeqll4XR7bxNMA" label="+"/>
+      <cardinality xmi:id="_dKcA4EX0Eeqll4XR7bxNMA" label="1" max="1" min="1"/>
+      <type xmi:id="_dKcA4UX0Eeqll4XR7bxNMA" name="Integer">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_dKcA4kX0Eeqll4XR7bxNMA" name="loses">
+      <modelElement href="McFantasy-Backend.uml#_cjTvcUX0Eeqll4XR7bxNMA"/>
+      <stereotypes xmi:id="_dKcA40X0Eeqll4XR7bxNMA" name="StyledElement">
+        <modelElement href="McFantasy-Backend.uml#_cjUWgEX0Eeqll4XR7bxNMA"/>
+      </stereotypes>
+      <visibility xmi:id="_dKcA5EX0Eeqll4XR7bxNMA" label="+"/>
+      <cardinality xmi:id="_dKcA5UX0Eeqll4XR7bxNMA" label="1" max="1" min="1"/>
+      <type xmi:id="_dKcA5kX0Eeqll4XR7bxNMA" name="Integer">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_dKcA50X0Eeqll4XR7bxNMA" name="ties">
+      <modelElement href="McFantasy-Backend.uml#_cjU9kEX0Eeqll4XR7bxNMA"/>
+      <stereotypes xmi:id="_dKcA6EX0Eeqll4XR7bxNMA" name="StyledElement">
+        <modelElement href="McFantasy-Backend.uml#_cjU9kUX0Eeqll4XR7bxNMA"/>
+      </stereotypes>
+      <visibility xmi:id="_dKcA6UX0Eeqll4XR7bxNMA" label="+"/>
+      <cardinality xmi:id="_dKcA6kX0Eeqll4XR7bxNMA" label="1" max="1" min="1"/>
+      <type xmi:id="_dKcA60X0Eeqll4XR7bxNMA" name="Integer">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_dKcA7EX0Eeqll4XR7bxNMA" name="points">
+      <modelElement href="McFantasy-Backend.uml#_cjVkoEX0Eeqll4XR7bxNMA"/>
+      <stereotypes xmi:id="_dKcA7UX0Eeqll4XR7bxNMA" name="StyledElement">
+        <modelElement href="McFantasy-Backend.uml#_cjVkoUX0Eeqll4XR7bxNMA"/>
+      </stereotypes>
+      <visibility xmi:id="_dKcA7kX0Eeqll4XR7bxNMA" label="+"/>
+      <cardinality xmi:id="_dKcA70X0Eeqll4XR7bxNMA" label="1" max="1" min="1"/>
+      <type xmi:id="_dKcA8EX0Eeqll4XR7bxNMA" name="Integer">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_dKcA8UX0Eeqll4XR7bxNMA" name="totalRating">
+      <modelElement href="McFantasy-Backend.uml#_cjWLsEX0Eeqll4XR7bxNMA"/>
+      <stereotypes xmi:id="_dKcA8kX0Eeqll4XR7bxNMA" name="StyledElement">
+        <modelElement href="McFantasy-Backend.uml#_cjWywEX0Eeqll4XR7bxNMA"/>
+      </stereotypes>
+      <visibility xmi:id="_dKcA80X0Eeqll4XR7bxNMA" label="+"/>
+      <cardinality xmi:id="_dKcA9EX0Eeqll4XR7bxNMA" label="1" max="1" min="1"/>
+      <type xmi:id="_dKcA9UX0Eeqll4XR7bxNMA" name="Integer">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_dKcA9kX0Eeqll4XR7bxNMA" name="MaxRating">
+      <modelElement href="McFantasy-Backend.uml#_cjWywUX0Eeqll4XR7bxNMA"/>
+      <stereotypes xmi:id="_dKcA90X0Eeqll4XR7bxNMA" name="StyledElement">
+        <modelElement href="McFantasy-Backend.uml#_cjWywkX0Eeqll4XR7bxNMA"/>
+      </stereotypes>
+      <visibility xmi:id="_dKcA-EX0Eeqll4XR7bxNMA" label="+"/>
+      <cardinality xmi:id="_dKcA-UX0Eeqll4XR7bxNMA" label="1" max="1" min="1"/>
+      <type xmi:id="_dKcA-kX0Eeqll4XR7bxNMA" name="Integer">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_dKcA-0X0Eeqll4XR7bxNMA" name="user">
+      <modelElement href="McFantasy-Backend.uml#_cjXZ0EX0Eeqll4XR7bxNMA"/>
+      <visibility xmi:id="_dKcA_EX0Eeqll4XR7bxNMA" label="+"/>
+      <cardinality xmi:id="_dKcA_UX0Eeqll4XR7bxNMA" label="1" max="1" min="1"/>
+      <type xmi:id="_dKcA_kX0Eeqll4XR7bxNMA" name="UserAccount">
+        <modelElement href="McFantasy-Backend.uml#_cdbw8EX0Eeqll4XR7bxNMA"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_dKcA_0X0Eeqll4XR7bxNMA" name="player">
+      <modelElement href="McFantasy-Backend.uml#_cjYn8EX0Eeqll4XR7bxNMA"/>
+      <visibility xmi:id="_dKcBAEX0Eeqll4XR7bxNMA" label="+"/>
+      <cardinality xmi:id="_dKcBAUX0Eeqll4XR7bxNMA" label="1..*" max="-1" min="1"/>
+      <type xmi:id="_dKcBAkX0Eeqll4XR7bxNMA" name="Player">
+        <modelElement href="McFantasy-Backend.uml#_cckOQUX0Eeqll4XR7bxNMA"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_dKcBA0X0Eeqll4XR7bxNMA" name="game">
+      <modelElement href="McFantasy-Backend.uml#_cjbEMEX0Eeqll4XR7bxNMA"/>
+      <visibility xmi:id="_dKcBBEX0Eeqll4XR7bxNMA" label="+"/>
+      <cardinality xmi:id="_dKcBBUX0Eeqll4XR7bxNMA" label="1..*" max="-1" min="1"/>
+      <type xmi:id="_dKcBBkX0Eeqll4XR7bxNMA" name="Game">
+        <modelElement href="McFantasy-Backend.uml#_cbt5sEX0Eeqll4XR7bxNMA"/>
+      </type>
+    </attributes>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_dKx_IEX0Eeqll4XR7bxNMA" name="League" associationsIn="_dKtGoEX0Eeqll4XR7bxNMA" associationsOut="_dJYQ8EX0Eeqll4XR7bxNMA _dKVTMEX0Eeqll4XR7bxNMA">
+    <modelElement href="McFantasy-Backend.uml#_ccMa0EX0Eeqll4XR7bxNMA"/>
+    <visualProperties xmi:id="_dKx_IUX0Eeqll4XR7bxNMA" position="263.0,-81.0" size="-1.0,-1.0"/>
+    <stereotypes xmi:id="_dKx_IkX0Eeqll4XR7bxNMA" name="JPA1StyledElement">
+      <modelElement href="McFantasy-Backend.uml#_ccO3EEX0Eeqll4XR7bxNMA"/>
+    </stereotypes>
+    <visibility xmi:id="_dKx_I0X0Eeqll4XR7bxNMA" label="+"/>
+    <attributes xmi:id="_dKx_JEX0Eeqll4XR7bxNMA" name="name">
+      <modelElement href="McFantasy-Backend.uml#_ciyyEEX0Eeqll4XR7bxNMA"/>
+      <stereotypes xmi:id="_dKx_JUX0Eeqll4XR7bxNMA" name="PrimaryKey">
+        <modelElement href="McFantasy-Backend.uml#_cizZIEX0Eeqll4XR7bxNMA"/>
+      </stereotypes>
+      <visibility xmi:id="_dKx_JkX0Eeqll4XR7bxNMA" label="+"/>
+      <cardinality xmi:id="_dKx_J0X0Eeqll4XR7bxNMA" label="1" max="1" min="1"/>
+      <type xmi:id="_dKx_KEX0Eeqll4XR7bxNMA" name="String">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_dKx_KUX0Eeqll4XR7bxNMA" name="user">
+      <modelElement href="McFantasy-Backend.uml#_ci3qkEX0Eeqll4XR7bxNMA"/>
+      <visibility xmi:id="_dKx_KkX0Eeqll4XR7bxNMA" label="+"/>
+      <cardinality xmi:id="_dKx_K0X0Eeqll4XR7bxNMA" label="1" max="1" min="1"/>
+      <type xmi:id="_dKx_LEX0Eeqll4XR7bxNMA" name="UserAccount">
+        <modelElement href="McFantasy-Backend.uml#_cdbw8EX0Eeqll4XR7bxNMA"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_dKx_LUX0Eeqll4XR7bxNMA" name="team">
+      <modelElement href="McFantasy-Backend.uml#_ci6G0EX0Eeqll4XR7bxNMA"/>
+      <visibility xmi:id="_dKx_LkX0Eeqll4XR7bxNMA" label="+"/>
+      <cardinality xmi:id="_dKx_L0X0Eeqll4XR7bxNMA" label="1..*" max="-1" min="1"/>
+      <type xmi:id="_dKx_MEX0Eeqll4XR7bxNMA" name="Team">
+        <modelElement href="McFantasy-Backend.uml#_cc924EX0Eeqll4XR7bxNMA"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_dKx_MUX0Eeqll4XR7bxNMA" name="game">
+      <modelElement href="McFantasy-Backend.uml#_ci9xMEX0Eeqll4XR7bxNMA"/>
+      <visibility xmi:id="_dKx_MkX0Eeqll4XR7bxNMA" label="+"/>
+      <cardinality xmi:id="_dKx_M0X0Eeqll4XR7bxNMA" label="1..*" max="-1" min="1"/>
+      <type xmi:id="_dKx_NEX0Eeqll4XR7bxNMA" name="Game">
+        <modelElement href="McFantasy-Backend.uml#_cbt5sEX0Eeqll4XR7bxNMA"/>
+      </type>
+    </attributes>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_dLM14EX0Eeqll4XR7bxNMA" name="SeasonStats" associationsOut="_dKDmYEX0Eeqll4XR7bxNMA">
+    <modelElement href="McFantasy-Backend.uml#_cc0s8EX0Eeqll4XR7bxNMA"/>
+    <visualProperties xmi:id="_dLM14UX0Eeqll4XR7bxNMA" position="830.0,-466.0" size="-1.0,-1.0"/>
+    <stereotypes xmi:id="_dLM14kX0Eeqll4XR7bxNMA" name="JPA1StyledElement">
+      <modelElement href="McFantasy-Backend.uml#_cc3JMEX0Eeqll4XR7bxNMA"/>
+    </stereotypes>
+    <visibility xmi:id="_dLM140X0Eeqll4XR7bxNMA" label="+"/>
+    <attributes xmi:id="_dLM15EX0Eeqll4XR7bxNMA" name="year">
+      <modelElement href="McFantasy-Backend.uml#_cjMasEX0Eeqll4XR7bxNMA"/>
+      <stereotypes xmi:id="_dLM15UX0Eeqll4XR7bxNMA" name="PrimaryKey">
+        <modelElement href="McFantasy-Backend.uml#_cjNo0EX0Eeqll4XR7bxNMA"/>
+      </stereotypes>
+      <visibility xmi:id="_dLM15kX0Eeqll4XR7bxNMA" label="+"/>
+      <cardinality xmi:id="_dLM150X0Eeqll4XR7bxNMA" label="1" max="1" min="1"/>
+      <type xmi:id="_dLM16EX0Eeqll4XR7bxNMA" name="Integer">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_dLM16UX0Eeqll4XR7bxNMA" name="goals">
+      <modelElement href="McFantasy-Backend.uml#_cjOP4EX0Eeqll4XR7bxNMA"/>
+      <stereotypes xmi:id="_dLM16kX0Eeqll4XR7bxNMA" name="StyledElement">
+        <modelElement href="McFantasy-Backend.uml#_cjO28EX0Eeqll4XR7bxNMA"/>
+      </stereotypes>
+      <visibility xmi:id="_dLM160X0Eeqll4XR7bxNMA" label="+"/>
+      <cardinality xmi:id="_dLM17EX0Eeqll4XR7bxNMA" label="1" max="1" min="1"/>
+      <type xmi:id="_dLM17UX0Eeqll4XR7bxNMA" name="Integer">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_dLM17kX0Eeqll4XR7bxNMA" name="assists">
+      <modelElement href="McFantasy-Backend.uml#_cjO28UX0Eeqll4XR7bxNMA"/>
+      <stereotypes xmi:id="_dLM170X0Eeqll4XR7bxNMA" name="StyledElement">
+        <modelElement href="McFantasy-Backend.uml#_cjPeAEX0Eeqll4XR7bxNMA"/>
+      </stereotypes>
+      <visibility xmi:id="_dLM18EX0Eeqll4XR7bxNMA" label="+"/>
+      <cardinality xmi:id="_dLM18UX0Eeqll4XR7bxNMA" label="1" max="1" min="1"/>
+      <type xmi:id="_dLM18kX0Eeqll4XR7bxNMA" name="Integer">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </type>
+    </attributes>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_dKENcEX0Eeqll4XR7bxNMA" name="Player" associationsIn="_dJ-G0EX0Eeqll4XR7bxNMA _dKDmYEX0Eeqll4XR7bxNMA">
+    <modelElement href="McFantasy-Backend.uml#_cckOQUX0Eeqll4XR7bxNMA"/>
+    <visualProperties xmi:id="_dKENcUX0Eeqll4XR7bxNMA" position="634.0,-691.0" size="-1.0,-1.0"/>
+    <stereotypes xmi:id="_dKENckX0Eeqll4XR7bxNMA" name="JPA1StyledElement">
+      <modelElement href="McFantasy-Backend.uml#_ccmDcEX0Eeqll4XR7bxNMA"/>
+    </stereotypes>
+    <visibility xmi:id="_dKENc0X0Eeqll4XR7bxNMA" label="+"/>
+    <attributes xmi:id="_dKENdEX0Eeqll4XR7bxNMA" name="name">
+      <modelElement href="McFantasy-Backend.uml#_cjA0gEX0Eeqll4XR7bxNMA"/>
+      <stereotypes xmi:id="_dKENdUX0Eeqll4XR7bxNMA" name="PrimaryKey">
+        <modelElement href="McFantasy-Backend.uml#_cjBbkEX0Eeqll4XR7bxNMA"/>
+      </stereotypes>
+      <visibility xmi:id="_dKENdkX0Eeqll4XR7bxNMA" label="+"/>
+      <cardinality xmi:id="_dKENd0X0Eeqll4XR7bxNMA" label="1" max="1" min="1"/>
+      <type xmi:id="_dKENeEX0Eeqll4XR7bxNMA" name="String">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_dKENeUX0Eeqll4XR7bxNMA" name="jerseyNumber">
+      <modelElement href="McFantasy-Backend.uml#_cjCpsEX0Eeqll4XR7bxNMA"/>
+      <stereotypes xmi:id="_dKENekX0Eeqll4XR7bxNMA" name="StyledElement">
+        <modelElement href="McFantasy-Backend.uml#_cjDQwEX0Eeqll4XR7bxNMA"/>
+      </stereotypes>
+      <visibility xmi:id="_dKENe0X0Eeqll4XR7bxNMA" label="+"/>
+      <cardinality xmi:id="_dKENfEX0Eeqll4XR7bxNMA" label="1" max="1" min="1"/>
+      <type xmi:id="_dKENfUX0Eeqll4XR7bxNMA" name="Integer">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_dKENfkX0Eeqll4XR7bxNMA" name="rating">
+      <modelElement href="McFantasy-Backend.uml#_cjD30EX0Eeqll4XR7bxNMA"/>
+      <stereotypes xmi:id="_dKENf0X0Eeqll4XR7bxNMA" name="StyledElement">
+        <modelElement href="McFantasy-Backend.uml#_cjD30UX0Eeqll4XR7bxNMA"/>
+      </stereotypes>
+      <visibility xmi:id="_dKENgEX0Eeqll4XR7bxNMA" label="+"/>
+      <cardinality xmi:id="_dKENgUX0Eeqll4XR7bxNMA" label="1" max="1" min="1"/>
+      <type xmi:id="_dKENgkX0Eeqll4XR7bxNMA" name="Integer">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_dKENiEX0Eeqll4XR7bxNMA" name="seasonsPlayed">
+      <modelElement href="McFantasy-Backend.uml#_cjFF8EX0Eeqll4XR7bxNMA"/>
+      <stereotypes xmi:id="_dKENiUX0Eeqll4XR7bxNMA" name="StyledElement">
+        <modelElement href="McFantasy-Backend.uml#_cjFtAEX0Eeqll4XR7bxNMA"/>
+      </stereotypes>
+      <visibility xmi:id="_dKENikX0Eeqll4XR7bxNMA" label="+"/>
+      <cardinality xmi:id="_dKENi0X0Eeqll4XR7bxNMA" label="1" max="1" min="1"/>
+      <type xmi:id="_dKENjEX0Eeqll4XR7bxNMA" name="Integer">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_dKENjUX0Eeqll4XR7bxNMA" name="totalGoals">
+      <modelElement href="McFantasy-Backend.uml#_cjFtAUX0Eeqll4XR7bxNMA"/>
+      <stereotypes xmi:id="_dKENjkX0Eeqll4XR7bxNMA" name="StyledElement">
+        <modelElement href="McFantasy-Backend.uml#_cjGUEEX0Eeqll4XR7bxNMA"/>
+      </stereotypes>
+      <visibility xmi:id="_dKENj0X0Eeqll4XR7bxNMA" label="+"/>
+      <cardinality xmi:id="_dKENkEX0Eeqll4XR7bxNMA" label="1" max="1" min="1"/>
+      <type xmi:id="_dKENkUX0Eeqll4XR7bxNMA" name="Integer">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_dKENkkX0Eeqll4XR7bxNMA" name="totalAssists">
+      <modelElement href="McFantasy-Backend.uml#_cjG7IEX0Eeqll4XR7bxNMA"/>
+      <stereotypes xmi:id="_dKE0gEX0Eeqll4XR7bxNMA" name="StyledElement">
+        <modelElement href="McFantasy-Backend.uml#_cjG7IUX0Eeqll4XR7bxNMA"/>
+      </stereotypes>
+      <visibility xmi:id="_dKE0gUX0Eeqll4XR7bxNMA" label="+"/>
+      <cardinality xmi:id="_dKE0gkX0Eeqll4XR7bxNMA" label="1" max="1" min="1"/>
+      <type xmi:id="_dKE0g0X0Eeqll4XR7bxNMA" name="Integer">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_dKE0hEX0Eeqll4XR7bxNMA" name="seasonStats">
+      <modelElement href="McFantasy-Backend.uml#_cjHiMEX0Eeqll4XR7bxNMA"/>
+      <visibility xmi:id="_dKE0hUX0Eeqll4XR7bxNMA" label="+"/>
+      <cardinality xmi:id="_dKE0hkX0Eeqll4XR7bxNMA" label="1..*" max="-1" min="1"/>
+      <type xmi:id="_dKE0h0X0Eeqll4XR7bxNMA" name="SeasonStats">
+        <modelElement href="McFantasy-Backend.uml#_cc0s8EX0Eeqll4XR7bxNMA"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_dKE0iEX0Eeqll4XR7bxNMA" name="team">
+      <modelElement href="McFantasy-Backend.uml#_cjJXYEX0Eeqll4XR7bxNMA"/>
+      <visibility xmi:id="_dKE0iUX0Eeqll4XR7bxNMA" label="+"/>
+      <cardinality xmi:id="_dKE0ikX0Eeqll4XR7bxNMA" label="1..*" max="-1" min="1"/>
+      <type xmi:id="_dKE0i0X0Eeqll4XR7bxNMA" name="Team">
+        <modelElement href="McFantasy-Backend.uml#_cc924EX0Eeqll4XR7bxNMA"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_dKE0jEX0Eeqll4XR7bxNMA" name="stilPlaying">
+      <modelElement href="McFantasy-Backend.uml#_cjLMkEX0Eeqll4XR7bxNMA"/>
+      <stereotypes xmi:id="_dKE0jUX0Eeqll4XR7bxNMA" name="StyledElement">
+        <modelElement href="McFantasy-Backend.uml#_cjLMkUX0Eeqll4XR7bxNMA"/>
+      </stereotypes>
+      <visibility xmi:id="_dKE0jkX0Eeqll4XR7bxNMA" label="+"/>
+      <cardinality xmi:id="_dKE0j0X0Eeqll4XR7bxNMA" label="1" max="1" min="1"/>
+      <type xmi:id="_dKE0kEX0Eeqll4XR7bxNMA" name="Boolean">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_hkOEkEX0Eeqll4XR7bxNMA" name="position">
+      <modelElement href="McFantasy-Backend.uml#_hkMPYEX0Eeqll4XR7bxNMA"/>
+      <visibility xmi:id="_hkOEkUX0Eeqll4XR7bxNMA" label="+"/>
+      <cardinality xmi:id="_hkOEkkX0Eeqll4XR7bxNMA" label="1" max="1" min="1"/>
+      <type xmi:id="_hkOEk0X0Eeqll4XR7bxNMA" name="String">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </type>
+    </attributes>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_dJY4AEX0Eeqll4XR7bxNMA" name="UserAccount" associationsIn="_dJQVIEX0Eeqll4XR7bxNMA _dJYQ8EX0Eeqll4XR7bxNMA">
+    <modelElement href="McFantasy-Backend.uml#_cdbw8EX0Eeqll4XR7bxNMA"/>
+    <visualProperties xmi:id="_dJY4AUX0Eeqll4XR7bxNMA" position="42.0,-468.0" size="-1.0,-1.0"/>
+    <stereotypes xmi:id="_dJY4AkX0Eeqll4XR7bxNMA" name="JPA1StyledElement">
+      <modelElement href="McFantasy-Backend.uml#_cddmIEX0Eeqll4XR7bxNMA"/>
+    </stereotypes>
+    <visibility xmi:id="_dJY4A0X0Eeqll4XR7bxNMA" label="+"/>
+    <attributes xmi:id="_dJY4BEX0Eeqll4XR7bxNMA" name="email">
+      <modelElement href="McFantasy-Backend.uml#_cjeHgEX0Eeqll4XR7bxNMA"/>
+      <stereotypes xmi:id="_dJY4BUX0Eeqll4XR7bxNMA" name="PrimaryKey">
+        <modelElement href="McFantasy-Backend.uml#_cjeukEX0Eeqll4XR7bxNMA"/>
+      </stereotypes>
+      <visibility xmi:id="_dJY4BkX0Eeqll4XR7bxNMA" label="+"/>
+      <cardinality xmi:id="_dJY4B0X0Eeqll4XR7bxNMA" label="1" max="1" min="1"/>
+      <type xmi:id="_dJY4CEX0Eeqll4XR7bxNMA" name="String">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_dJY4CUX0Eeqll4XR7bxNMA" name="name">
+      <modelElement href="McFantasy-Backend.uml#_cjfVoEX0Eeqll4XR7bxNMA"/>
+      <stereotypes xmi:id="_dJY4CkX0Eeqll4XR7bxNMA" name="StyledElement">
+        <modelElement href="McFantasy-Backend.uml#_cjf8sEX0Eeqll4XR7bxNMA"/>
+      </stereotypes>
+      <visibility xmi:id="_dJY4C0X0Eeqll4XR7bxNMA" label="+"/>
+      <cardinality xmi:id="_dJY4DEX0Eeqll4XR7bxNMA" label="1" max="1" min="1"/>
+      <type xmi:id="_dJY4DUX0Eeqll4XR7bxNMA" name="String">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_dJY4DkX0Eeqll4XR7bxNMA" name="password">
+      <modelElement href="McFantasy-Backend.uml#_cjgjwEX0Eeqll4XR7bxNMA"/>
+      <stereotypes xmi:id="_dJY4D0X0Eeqll4XR7bxNMA" name="StyledElement">
+        <modelElement href="McFantasy-Backend.uml#_cjgjwUX0Eeqll4XR7bxNMA"/>
+      </stereotypes>
+      <visibility xmi:id="_dJY4EEX0Eeqll4XR7bxNMA" label="+"/>
+      <cardinality xmi:id="_dJY4EUX0Eeqll4XR7bxNMA" label="1" max="1" min="1"/>
+      <type xmi:id="_dJY4EkX0Eeqll4XR7bxNMA" name="String">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_dJY4GEX0Eeqll4XR7bxNMA" name="team">
+      <modelElement href="McFantasy-Backend.uml#_cjhx4EX0Eeqll4XR7bxNMA"/>
+      <visibility xmi:id="_dJY4GUX0Eeqll4XR7bxNMA" label="+"/>
+      <cardinality xmi:id="_dJY4GkX0Eeqll4XR7bxNMA" label="1..*" max="-1" min="1"/>
+      <type xmi:id="_dJY4G0X0Eeqll4XR7bxNMA" name="Team">
+        <modelElement href="McFantasy-Backend.uml#_cc924EX0Eeqll4XR7bxNMA"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_dJY4HEX0Eeqll4XR7bxNMA" name="league">
+      <modelElement href="McFantasy-Backend.uml#_cjjnEEX0Eeqll4XR7bxNMA"/>
+      <visibility xmi:id="_dJY4HUX0Eeqll4XR7bxNMA" label="+"/>
+      <cardinality xmi:id="_dJY4HkX0Eeqll4XR7bxNMA" label="1..*" max="-1" min="1"/>
+      <type xmi:id="_dJY4H0X0Eeqll4XR7bxNMA" name="League">
+        <modelElement href="McFantasy-Backend.uml#_ccMa0EX0Eeqll4XR7bxNMA"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_2lzA8EX0Eeqll4XR7bxNMA" name="picture">
+      <modelElement href="McFantasy-Backend.uml#_2lqeEEX0Eeqll4XR7bxNMA"/>
+      <visibility xmi:id="_2lzA8UX0Eeqll4XR7bxNMA" label="+"/>
+      <cardinality xmi:id="_2lzA8kX0Eeqll4XR7bxNMA" label="1" max="1" min="1"/>
+      <type xmi:id="_-gtpEEX0Eeqll4XR7bxNMA" name="Blob">
+        <modelElement href="McFantasy-Backend.uml#_3P68AEX0Eeqll4XR7bxNMA"/>
+      </type>
+    </attributes>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:UMLDataTypeVisual" xmi:id="_3P8KIEX0Eeqll4XR7bxNMA" name="Blob">
+    <modelElement href="McFantasy-Backend.uml#_3P68AEX0Eeqll4XR7bxNMA"/>
+    <visualProperties xmi:id="_3P8KIUX0Eeqll4XR7bxNMA" position="547.0,4.0" size="-1.0,-1.0"/>
+    <visibility xmi:id="_3P8KIkX0Eeqll4XR7bxNMA" label="+"/>
+  </nodes>
+</com.yattasolutions.uml.diagrams.classifier:ClassDiagram>
