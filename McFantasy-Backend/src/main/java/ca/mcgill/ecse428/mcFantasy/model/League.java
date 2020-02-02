@@ -19,14 +19,14 @@ public void setName(String value) {
 public String getName() {
     return this.name;
 }
-   private User user;
+   private AppUser user;
    
    @ManyToOne(optional=false)
-   public User getUser() {
+   public AppUser getUser() {
       return this.user;
    }
    
-   public void setUser(User user) {
+   public void setUser(AppUser user) {
       this.user = user;
    }
    

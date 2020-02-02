@@ -75,14 +75,14 @@ public void setMaxRating(Integer value) {
 public Integer getMaxRating() {
     return this.MaxRating;
 }
-   private User user;
+   private AppUser user;
    
    @ManyToOne(optional=false)
-   public User getUser() {
+   public AppUser getUser() {
       return this.user;
    }
    
-   public void setUser(User user) {
+   public void setUser(AppUser user) {
       this.user = user;
    }
    

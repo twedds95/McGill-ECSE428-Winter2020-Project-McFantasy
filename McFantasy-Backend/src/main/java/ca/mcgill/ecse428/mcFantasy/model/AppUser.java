@@ -3,12 +3,14 @@ package ca.mcgill.ecse428.mcfantasy.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+
+import java.sql.Blob;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.OneToMany;
 
 @Entity
-public class User{
+public class AppUser{
    private String email;
 
 public void setEmail(String value) {
@@ -34,12 +36,12 @@ public void setPassword(String value) {
 public String getPassword() {
     return this.password;
 }
-private Picture profilePicture;
+private Blob profilePicture;
 
-public void setProfilePicture(Picture value) {
+public void setProfilePicture(Blob value) {
     this.profilePicture = value;
 }
-public Picture getProfilePicture() {
+public Blob getProfilePicture() {
     return this.profilePicture;
 }
    private Set<Team> team;

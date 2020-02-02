@@ -34,12 +34,12 @@ public void setRating(Integer value) {
 public Integer getRating() {
     return this.rating;
 }
-private Position position;
+private String position;
 
-public void setPosition(Position value) {
+public void setPosition(String value) {
     this.position = value;
 }
-public Position getPosition() {
+public String getPosition() {
     return this.position;
 }
 private Integer seasonsPlayed;
