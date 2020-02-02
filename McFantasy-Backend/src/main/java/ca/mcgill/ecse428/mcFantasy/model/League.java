@@ -1,5 +1,6 @@
 package ca.mcgill.ecse428.mcfantasy.model;
 
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
