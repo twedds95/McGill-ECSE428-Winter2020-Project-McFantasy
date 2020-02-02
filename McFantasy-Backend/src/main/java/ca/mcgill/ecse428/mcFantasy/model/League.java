@@ -18,14 +18,14 @@ public void setName(String value) {
 public String getName() {
     return this.name;
 }
-   private User user;
+   private UserAccount user;
    
    @ManyToOne(optional=false)
-   public User getUser() {
+   public UserAccount getUser() {
       return this.user;
    }
    
-   public void setUser(User user) {
+   public void setUser(UserAccount user) {
       this.user = user;
    }
    
