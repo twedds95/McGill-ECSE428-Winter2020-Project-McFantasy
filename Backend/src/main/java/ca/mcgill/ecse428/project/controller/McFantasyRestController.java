@@ -1,15 +1,8 @@
 package ca.mcgill.ecse428.project.controller;
 
-
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.sql.Blob;
 import java.sql.SQLException;
-
-import javax.sql.rowset.serial.SerialBlob;
 import javax.sql.rowset.serial.SerialException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,9 +11,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-
 import ca.mcgill.ecse428.project.model.AppUser;
 import ca.mcgill.ecse428.project.service.McFantasyService;
+
+
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -47,13 +41,11 @@ public class McFantasyRestController {
 		return user;
 	}
 	
-//	@GetMapping(value = { "/user/{email}", "/user/{email}/" })
-//	public AppUser getUser(@PathVariable("email") String email) {
-//		ByteArrayInputStream bis = new ByteArrayInputStream();
-//	    BufferedImage bImage2 = ImageIO.read(bis);
-//	    ImageIO.write(bImage2, "jpg", new File("output.jpg") );
-//	
-//	}
+	@GetMapping(value = { "/user/{email}", "/user/{email}/" })
+	public AppUser getUser(@PathVariable("email") String email) {
+		AppUser user = service.getUser(email);
+	    return user;
+	}
 	
 	
 }
