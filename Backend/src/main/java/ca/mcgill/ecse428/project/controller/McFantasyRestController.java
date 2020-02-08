@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import ca.mcgill.ecse428.project.model.AppUser;
+import ca.mcgill.ecse428.project.model.Team;
+import ca.mcgill.ecse428.project.model.Player;
 import ca.mcgill.ecse428.project.service.McFantasyService;
 
 
@@ -41,11 +43,50 @@ public class McFantasyRestController {
 		return user;
 	}
 	
+	
 	@GetMapping(value = { "/user/{email}", "/user/{email}/" })
 	public AppUser getUser(@PathVariable("email") String email) {
 		AppUser user = service.getUser(email);
 	    return user;
 	}
 	
+	/**
+	 * @author Ali Tapan
+	 */
+	@PostMapping(value = { "/team/{id}", "/team/{id}/"})
+	public Team createTeam(@PathVariable("id") Integer teamID,
+			@RequestParam(name = "name") String name,
+			@RequestParam(name = "user") AppUser user) throws IllegalArgumentException, SerialException, SQLException, IOException {
+		Team team = service.createTeam(teamID, name, user);
+		return team;
+	}
+	
+	/**
+	 * @author Ali Tapan
+	 */
+	@GetMapping(value = {"/team/{id}", "/team/{id}/"})
+	public Team getTeam(@PathVariable("id") Integer teamID) {
+		Team team = service.getTeam(teamID);
+		return team;
+	}
+	
+	/**
+	 * @author Ali Tapan
+	 */
+	@PostMapping(value = { "/player/{name}", "/player/{name}/"})
+	public Player createPlayer(@PathVariable("name") String name,
+			@RequestParam(name = "position") String position) throws IllegalArgumentException, SerialException, SQLException, IOException {
+		Player player = service.createPlayer(name, position);
+		return player;
+	}
+	
+	/**
+	 * @author Ali Tapan
+	 */
+	@GetMapping(value = {"/team/{id}", "/team/{id}/"})
+	public Player getPlayer(@PathVariable("name") String name) {
+		Player player = service.getPlayer(name);
+		return player;
+	}
 	
 }

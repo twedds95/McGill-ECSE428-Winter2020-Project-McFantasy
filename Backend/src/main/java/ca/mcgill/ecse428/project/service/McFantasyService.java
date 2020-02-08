@@ -3,6 +3,7 @@ package ca.mcgill.ecse428.project.service;
 
 
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ import ca.mcgill.ecse428.project.dao.PlayerRepository;
 import ca.mcgill.ecse428.project.dao.SeasonStatsRepository;
 import ca.mcgill.ecse428.project.dao.TeamRepository;
 import ca.mcgill.ecse428.project.model.AppUser;
+import ca.mcgill.ecse428.project.model.Player;
 import ca.mcgill.ecse428.project.model.Team;
 @Service
 public class McFantasyService {
@@ -66,18 +68,7 @@ public class McFantasyService {
 	}
 	
 	/**
-	 * <p>
-	 * Create a Team
-	 * <p>
-	 * <p>
-	 * Initialize a team with no players, no league and no games
-	 * <p>
-	 * 
-	 * @param teamID, name, user
-	 * @return Team object
-	 * 
 	 * @author Ali Tapan
-	 * @version 1.0
 	 */
 	@Transactional 
 	public Team createTeam(Integer teamID, String name, AppUser user) {
@@ -117,23 +108,65 @@ public class McFantasyService {
 	}	
 		
 	/**
-	 * <p>
-	 * Get Team
-	 * <p>
-	 * <p>
-	 * Get a team with a given teamID
-	 * <p>
-	 * 
-	 * @param teamID
-	 * @return Team object
-	 * 
 	 * @author Ali Tapan
-	 * @version 1.0
 	 */	
 	@Transactional 
 	public Team getTeam(Integer teamID) {
 		Team team = teamRepo.findByTeamID(teamID);
 		return team;
 	}
+	
+	/**
+	 * @author Ali Tapan
+	 */
+	@Transactional
+	public Player createPlayer(String name, String position) {  // Pls note that you cant create players with same name!
+		// Check if the inputs are wrong
+		String error ="";
+		if (name == null || name.trim().length() == 0) {
+			error += "Player name cannot be empty!";
+		} 
+		if (position == null || position.trim().length() == 0) {
+			error += "Player position cannot be empty!";
+		}
+		if (playerRepo.existsById(name)) {
+			error += "Player with this name has already been created!";
+		} 
+		if (error.length() > 0 ){
+			throw new IllegalArgumentException(error);
+		}
+		// Initialize the player
+		Player player = new Player();
+		player.setName(name);
+		player.setPosition(position);
+		player.setJerseyNumber(0);
+		player.setRating(0);
+		player.setSeasonsPlayed(0);
+		player.setStilPlaying(true);
+		player.setTotalAssists(0);
+		player.setTotalGoals(0);
+		playerRepo.save(player);
+		return player;
+	}
+	
+	/**
+	 * @author Ali Tapan
+	 */
+	@Transactional
+	public Player getPlayer(String name) {
+		Player player = playerRepo.findByName(name);
+		return player;
+	}
+	
+	
+	@Transactional
+	public Team addPlayer(Set<Player> players, Team team) {
+		Team t = teamRepo.findByName(team.getName());
+		t.setPlayer(players);
+		// Will also update player's team in the future
+		teamRepo.save(t);
+		return t;
+	}
+	
 	
 }
