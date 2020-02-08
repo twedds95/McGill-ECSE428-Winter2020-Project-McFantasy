@@ -15,7 +15,7 @@ import ca.mcgill.ecse428.project.dao.PlayerRepository;
 import ca.mcgill.ecse428.project.dao.SeasonStatsRepository;
 import ca.mcgill.ecse428.project.dao.TeamRepository;
 import ca.mcgill.ecse428.project.model.AppUser;
-
+import ca.mcgill.ecse428.project.model.Team;
 @Service
 public class McFantasyService {
 	
@@ -84,14 +84,17 @@ public class McFantasyService {
 		// Check if the inputs are wrong
 		String error ="";
 		if (name == null || name.trim().length() == 0) {
-			terror += "Team name cannot be empty!";
+			error += "Team name cannot be empty!";
 		} 
 		if (teamID >= 0) {
 			error += "Team ID cannot be zero or less than zero!";
 		}
-		if (teamRepo.existsById(teamID)) {
-			error += "Team with this name has already been created!";
-		} 
+		
+		// Need to fix this at some point:
+//		if (teamRepo.existsById(teamID) {
+//			error += "Team with this name has already been created!";
+//		} 
+		
 		if (user == null) {
 			error += "Application user is null!";
 		}

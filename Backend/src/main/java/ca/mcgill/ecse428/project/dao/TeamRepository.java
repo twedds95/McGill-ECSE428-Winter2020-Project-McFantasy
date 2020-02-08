@@ -9,4 +9,5 @@ public interface TeamRepository extends CrudRepository<Team, String> {
        Team findByTeamID(Integer teamID);
        Team findByName(String name);
        Team findByAppUser(AppUser user);
+
 }
