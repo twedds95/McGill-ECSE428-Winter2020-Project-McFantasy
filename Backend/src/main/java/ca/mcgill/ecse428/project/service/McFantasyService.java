@@ -1,3 +1,4 @@
+
 package ca.mcgill.ecse428.project.service;
 
 
@@ -63,6 +64,73 @@ public class McFantasyService {
 		return user;
 		
 	}
+	
+	/**
+	 * <p>
+	 * Create a Team
+	 * <p>
+	 * <p>
+	 * Initialize a team with no players, no league and no games
+	 * <p>
+	 * 
+	 * @param teamID, name, user
+	 * @return Team object
+	 * 
+	 * @author Ali Tapan
+	 * @version 1.0
+	 */
+	@Transactional 
+	public Team createTeam(Integer teamID, String name, AppUser user) {
+		// Check if the inputs are wrong
+		String error ="";
+		if (name == null || name.trim().length() == 0) {
+			terror += "Team name cannot be empty!";
+		} 
+		if (teamID >= 0) {
+			error += "Team ID cannot be zero or less than zero!";
+		}
+		if (teamRepo.existsById(teamID)) {
+			error += "Team with this name has already been created!";
+		} 
+		if (user == null) {
+			error += "Application user is null!";
+		}
+		if (error.length() > 0 ){
+			throw new IllegalArgumentException(error);
+		}
+		// Initialize the team
+		Team team = new Team();
+		team.setTeamID(teamID);
+		team.setName(name);
+		team.setWins(0);
+		team.setLoses(0);
+		team.setTies(0);
+		team.setPoints(0);
+		team.setTotalRating(0);
+		// team.setMaxRating(0); // Did not initialize max rating
+		team.setUser(user);
+		teamRepo.save(team);
+		return team;
+	}	
 		
-
+	/**
+	 * <p>
+	 * Get Team
+	 * <p>
+	 * <p>
+	 * Get a team with a given teamID
+	 * <p>
+	 * 
+	 * @param teamID
+	 * @return Team object
+	 * 
+	 * @author Ali Tapan
+	 * @version 1.0
+	 */	
+	@Transactional 
+	public Team getTeam(Integer teamID) {
+		Team team = teamRepo.findByTeamID(teamID);
+		return team;
+	}
+	
 }
