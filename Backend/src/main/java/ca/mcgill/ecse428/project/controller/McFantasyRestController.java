@@ -2,6 +2,8 @@ package ca.mcgill.ecse428.project.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Set;
+
 import javax.sql.rowset.serial.SerialException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -88,7 +90,11 @@ public class McFantasyRestController {
 		Player player = service.getPlayer(name);
 		return player;
 	}
-//	
-//	@PostMapping(value = {"/team")
+	
+	@PostMapping(value = {"/team/{players}", "/team/{players}/"})
+	public Team addPlayers(@PathVariable("players") Set<Player> players,
+			@RequestParam(name = "teamID") Integer teamID) throws IllegalArgumentException, SerialException, SQLException, IOException{
+		return service.addPlayer(players, service.getTeam(teamID));
+	}
 	
 }
