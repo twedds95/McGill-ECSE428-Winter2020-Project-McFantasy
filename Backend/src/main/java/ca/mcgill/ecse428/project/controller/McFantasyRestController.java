@@ -83,10 +83,12 @@ public class McFantasyRestController {
 	/**
 	 * @author Ali Tapan
 	 */
-	@GetMapping(value = {"/team/{id}", "/team/{id}/"})
+	@GetMapping(value = {"/player/{name}", "/player/{name}/"})
 	public Player getPlayer(@PathVariable("name") String name) {
 		Player player = service.getPlayer(name);
 		return player;
 	}
+//	
+//	@PostMapping(value = {"/team")
 	
 }
