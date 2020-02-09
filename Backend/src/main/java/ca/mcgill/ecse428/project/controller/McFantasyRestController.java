@@ -96,5 +96,15 @@ public class McFantasyRestController {
 			@RequestParam(name = "teamID") Integer teamID) throws IllegalArgumentException, SerialException, SQLException, IOException{
 		return service.addPlayer(players, service.getTeam(teamID));
 	}
+
+	/**
+	 * @author Raphael Di Piazza
+	 */
+	@PostMapping(value = {"/league/{name}", "/league/{name}/"})
+	public League createLeague(@PathVariable("name") String name,
+						   @RequestParam(name = "user") AppUser user) throws IllegalArgumentException, SerialException, SQLException, IOException {
+		League league = service.createLeague(name, user);
+		return league;
+	}
 	
 }
