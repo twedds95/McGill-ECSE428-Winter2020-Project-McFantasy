@@ -92,6 +92,10 @@ public class McFantasyRestController {
 		return player;
 	}
 	
+	/**
+	 * 
+	 * @author Ali Tapan
+	 */
 	@PostMapping(value = {"/team/{players}", "/team/{players}/"})
 	public Team addPlayers(@PathVariable("players") Set<Player> players,
 			@RequestParam(name = "teamID") Integer teamID) throws IllegalArgumentException, SerialException, SQLException, IOException{
@@ -104,6 +108,16 @@ public class McFantasyRestController {
 	@GetMapping(value = {"/league/{name}", "/league/{name}/"})
 	public League getLeague(@PathVariable("name") String name) {
 		League league = service.getLeague(name);
+		return league;
+	}
+
+	/**
+	 * @author Raphael Di Piazza
+	 */
+	@PostMapping(value = {"/league/{name}", "/league/{name}/"})
+	public League createLeague(@PathVariable("name") String name,
+							   @RequestParam(name = "user") AppUser user) throws IllegalArgumentException, SerialException, SQLException, IOException {
+		League league = service.createLeague(name, user);
 		return league;
 	}
 	
