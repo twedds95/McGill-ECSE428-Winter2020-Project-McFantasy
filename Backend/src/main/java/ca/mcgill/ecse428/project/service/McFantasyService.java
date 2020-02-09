@@ -167,34 +167,6 @@ public class McFantasyService {
 		teamRepo.save(t);
 		return t;
 	}
-
-	/**
-	 * @author Raphael Di Piazza
-	 */
-	@Transactional
-	public League createLeague(String name, AppUser user) {
-		String error ="";
-		if (name == null || name.trim().length() == 0) {
-			error += "League name cannot be empty!";
-		}
-
-		//need to check if league name already exists
-		//will fix this later
-
-		if (leagueID >= 0) {
-			error += "League ID cannot be zero or less!";
-		}
-		if (user == null) {
-			error += "Application user is null!";
-		}
-		if (error.length() > 0 ){
-			throw new IllegalArgumentException(error);
-		}
-		League league = new League();
-		league.setName(name);
-		league.setUser(user);
-		leagueRepo.save(league);
-		return league;
-	}
+	
 	
 }

@@ -5,6 +5,4 @@ import ca.mcgill.ecse428.project.model.League;
 
 public interface LeagueRepository extends CrudRepository<League, String> {
 
-    League findByName(String name);
-
 }
