@@ -16,6 +16,7 @@ import ca.mcgill.ecse428.project.dao.PlayerRepository;
 import ca.mcgill.ecse428.project.dao.SeasonStatsRepository;
 import ca.mcgill.ecse428.project.dao.TeamRepository;
 import ca.mcgill.ecse428.project.model.AppUser;
+import ca.mcgill.ecse428.project.model.League;
 import ca.mcgill.ecse428.project.model.Player;
 import ca.mcgill.ecse428.project.model.Team;
 @Service
@@ -166,6 +167,22 @@ public class McFantasyService {
 		// Will also update player's team in the future
 		teamRepo.save(t);
 		return t;
+	}
+	
+	/**
+	 * @author Brad McBain
+	 */
+	@Transactional
+	public League getLeague(String name) {
+		String error ="";
+		if (name == null || name.trim().length() == 0) {
+			error += "League name cannot be empty!";
+		}
+		if (error.length() > 0 ){
+			throw new IllegalArgumentException(error);
+		}
+		League league =	leagueRepo.findByName(name);
+		return league;
 	}
 	
 	
