@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import ca.mcgill.ecse428.project.model.AppUser;
+import ca.mcgill.ecse428.project.model.League;
 import ca.mcgill.ecse428.project.model.Team;
 import ca.mcgill.ecse428.project.model.Player;
 import ca.mcgill.ecse428.project.service.McFantasyService;
@@ -95,6 +96,15 @@ public class McFantasyRestController {
 	public Team addPlayers(@PathVariable("players") Set<Player> players,
 			@RequestParam(name = "teamID") Integer teamID) throws IllegalArgumentException, SerialException, SQLException, IOException{
 		return service.addPlayer(players, service.getTeam(teamID));
+	}
+	
+	/**
+	 * @author Brad McBain
+	 */
+	@GetMapping(value = {"/league/{name}", "/league/{name}/"})
+	public League getLeague(@PathVariable("name") String name) {
+		League league = service.getLeague(name);
+		return league;
 	}
 	
 }
