@@ -61,6 +61,31 @@ public class McFantasyService {
 		
 	}
 	
+	/**
+	 * @author David Whiteside
+	 */
+	
+	@Transactional
+	public AppUser updateUser(String email, String name, String password, byte[] bytes) {
+		
+		if (email == null || email.trim().length() == 0) {
+			throw new IllegalArgumentException("User email cannot be empty!");
+		} else if (!userRepo.existsById(email)) {
+			throw new IllegalArgumentException("No user with this email exists!");
+		}
+		
+
+		AppUser user = userRepo.findByEmail(email);
+		user.updateEmail(email);
+		user.updateName(name);
+		user.updatePassword(password);
+		user.updateProfilePicture(bytes);
+		userRepo.save(user);
+		
+		return user;
+		
+	}
+	
 	@Transactional
 	public AppUser getUser(String email) {
 		AppUser user = userRepo.findByEmail(email);

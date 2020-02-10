@@ -14,6 +14,9 @@ private Blob picture;
 public void setPicture(Blob value) {
 this.picture = value;
 }
+public void updatePicture(Blob value) {
+setPicture(value);
+}
 public Blob getPicture() {
 return this.picture;
 }
@@ -21,6 +24,9 @@ return this.picture;
 
 public void setEmail(String value) {
     this.email = value;
+}
+public void updateEmail(String value) {
+	setEmail(value);
 }
 @Id
 public String getEmail() {
@@ -31,6 +37,9 @@ private String name;
 public void setName(String value) {
     this.name = value;
 }
+public void updateName(String value) {
+	setName(value);
+}
 public String getName() {
     return this.name;
 }
@@ -38,6 +47,9 @@ private String password;
 
 public void setPassword(String value) {
     this.password = value;
+}
+public void updatePassword(String value) {
+	setPassword(value);
 }
 public String getPassword() {
     return this.password;

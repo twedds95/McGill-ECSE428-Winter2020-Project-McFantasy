@@ -46,6 +46,24 @@ public class McFantasyRestController {
 		return user;
 	}
 	
+	@PostMapping(value = { "/userupdate/{email}", "/userupdate/{email}/" })
+	public AppUser updateUser(@PathVariable("email") String email, 
+			@RequestParam(name = "name") String name, 
+			@RequestParam(name = "password") String password,
+			@RequestParam(name = "picture") MultipartFile picfile) throws IllegalArgumentException, SerialException, SQLException, IOException {
+		
+		byte[] bytes;
+		if (picfile.getSize() > 0) {
+			bytes = picfile.getBytes();
+		} else {
+			bytes = null;
+		}
+	
+		
+		AppUser user = service.updateUser(email, name, password, bytes);
+		return user;
+	}
+	
 	
 	@GetMapping(value = { "/user/{email}", "/user/{email}/" })
 	public AppUser getUser(@PathVariable("email") String email) {
