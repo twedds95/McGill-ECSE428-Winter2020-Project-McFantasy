@@ -2,6 +2,8 @@
 package ca.mcgill.ecse428.project.service;
 
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -239,6 +241,33 @@ public class McFantasyService {
 		leagueRepo.save(league);
 		return league;
 	}
-	
+
+	/**
+	 * @author Patrick Tweddell
+	 */
+	@Transactional
+	public List<Team> updateStandings(League league) {
+		String error = "";
+		List<Team> teamsInLeague = teamRepo.findByLeague(league);
+		if (teamsInLeague.size()==1) {
+			return teamsInLeague;
+		}
+		if (teamsInLeague.size()==0) {
+			error += "League has no Teams!";
+		}
+		if (error.length() > 0 ){
+			throw new IllegalArgumentException(error);
+		}
+		int n = teamsInLeague.size(); 
+        for (int i = 0; i < n-1; i++) 
+            for (int j = 0; j < n-i-1; j++) 
+                if (teamsInLeague.get(j).getPoints() > teamsInLeague.get(j+1).getPoints()) { 
+                    Team temp = teamsInLeague.get(j); 
+                    teamsInLeague.set(j,teamsInLeague.get(j+1)); 
+                    teamsInLeague.set(j+1,temp);
+                } 		
+		
+		return teamsInLeague;
+	}
 	
 }
