@@ -7,8 +7,11 @@ import static org.junit.Assert.fail;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.Calendar;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import org.assertj.core.util.Arrays;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -44,6 +47,12 @@ public class TestMcFantasyService {
 	private static byte[] USER_PICTURE = {'1'};
 	private static String NON_EXISTING_EMAIL = "nonexist@mail.com";
 	
+	private static String TEAM_NAME ="Real Madrid";
+	private static int TEAM_ID = 200; 
+	
+	private static String PLAYER_NAME = "Burak Yilmaz";
+	private static String PLAYER_POSITION = "ST";
+	
 	@After
 	public void clearDatabase() {
 		appUserRepo.deleteAll();
@@ -67,7 +76,7 @@ public class TestMcFantasyService {
 	
 	@Test
 	public void testCreateUserNullEmail() {
-		String error = null;
+		String error = "";
 		try {
 			service.createUser(null, USER_NAME, USER_PASSWORD, USER_PICTURE);
 		} catch (IllegalArgumentException e) {
@@ -78,7 +87,7 @@ public class TestMcFantasyService {
 	
 	@Test
 	public void testCreateUserExistingEmail() {
-		String error = null;
+		String error = "";
 		try {
 			service.createUser(USER_EMAIL, USER_NAME, USER_PASSWORD, USER_PICTURE);
 			service.createUser(USER_EMAIL, USER_NAME, USER_PASSWORD, USER_PICTURE);
@@ -100,6 +109,64 @@ public class TestMcFantasyService {
 		AppUser user = service.getUser(NON_EXISTING_EMAIL);
 		assertNull(user);
 	}
+	
+	
+	@Test
+	public void testCreateTeam() {
+		assertEquals(0, service.getAllTeams().size());
+		AppUser user = service.createUser(USER_EMAIL, USER_NAME, USER_PASSWORD, USER_PICTURE);
+		service.createTeam(TEAM_ID, TEAM_NAME, user);
+		assertEquals(TEAM_NAME, service.getTeam(TEAM_ID).getName());
+	}
+	
+	@Test
+	public void testCreateNullNameTeam() {
+		String error = "";
+		assertEquals(0, service.getAllTeams().size());
+		AppUser user = service.createUser(USER_EMAIL, USER_NAME, USER_PASSWORD, USER_PICTURE);
+		try {
+			Team t = service.createTeam(TEAM_ID, null, user);
+		}
+		catch (IllegalArgumentException e) {
+			error = e.getMessage();
+		}
+		assertEquals("Team name cannot be empty!", error);
+	}
+	
+	@Test
+	public void testCreatePlayer() {
+		assertEquals(0, service.getAllPlayers().size());
+		Player player = service.createPlayer(PLAYER_NAME, PLAYER_POSITION);
+		assertEquals(PLAYER_POSITION, service.getPlayer(PLAYER_NAME).getPosition());
+		
+	}
+	
+	@Test
+	public void testCreateInvalidPlayer() {
+		String error = null;
+		assertEquals(0, service.getAllPlayers().size());
+		try {
+			Player player = service.createPlayer("", PLAYER_POSITION);
+		}
+		catch (IllegalArgumentException e) {
+			error = e.getMessage();
+		}
+		assertEquals("Player name cannot be empty!", error);
+	}
+	
+	@Test
+	public void addPlayersToATeam() {
+		Player p1 = service.createPlayer(PLAYER_NAME, PLAYER_POSITION);
+		Set<Player> players = new HashSet<Player>();
+		players.add(p1);
+		AppUser user = service.createUser(USER_EMAIL, USER_NAME, USER_PASSWORD, USER_PICTURE);
+		Team team = service.createTeam(TEAM_ID, TEAM_NAME, user);
+		service.addPlayer(players, team);
+		assertEquals(0, service.getTeam(TEAM_ID).getPlayer().size());
+	}
+	
+	
+	
 	
 	/*
 	 * Limitations of testing include: not testing the REST API, and limited testing due to the nature of the update methods

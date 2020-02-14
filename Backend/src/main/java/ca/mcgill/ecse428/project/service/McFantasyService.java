@@ -2,6 +2,8 @@
 package ca.mcgill.ecse428.project.service;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -103,7 +105,7 @@ public class McFantasyService {
 		if (name == null || name.trim().length() == 0) {
 			error += "Team name cannot be empty!";
 		} 
-		if (teamID >= 0) {
+		if (teamID <= 0) {
 			error += "Team ID cannot be zero or less than zero!";
 		}
 		
@@ -142,6 +144,15 @@ public class McFantasyService {
 		return team;
 	}
 	
+	@Transactional
+	public List<Team> getAllTeams() {
+		return toList(teamRepo.findAll());
+	}
+	
+	@Transactional
+	public List<Player> getAllPlayers(){
+		return toList(playerRepo.findAll());
+	}
 	/**
 	 * @author Ali Tapan
 	 */
@@ -240,5 +251,15 @@ public class McFantasyService {
 		return league;
 	}
 	
+	private <T> List<T> toList(Iterable<T> iterable){
+		if(iterable == null){
+			throw new IllegalArgumentException("Iterable cannot be null! ");
+		}
+		List<T> resultList = new ArrayList<T>();
+		for (T t : iterable) {
+			resultList.add(t);
+		}
+		return resultList;
+	}
 	
 }
