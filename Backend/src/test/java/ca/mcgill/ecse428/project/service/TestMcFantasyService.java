@@ -1,34 +1,42 @@
 package ca.mcgill.ecse428.project.service;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.fail;
-import org.junit.Before;
+
+import java.sql.Date;
+import java.sql.Time;
+import java.util.Calendar;
+import java.util.List;
+
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.mockito.invocation.InvocationOnMock;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.mockito.junit.MockitoJUnitRunner;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertNotNull;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
-import ca.mcgill.ecse428.project.dao.AppUserRepository;
-import ca.mcgill.ecse428.project.model.AppUser;
+import ca.mcgill.ecse428.project.model.*;
+import ca.mcgill.ecse428.project.dao.*;
 
-
-@RunWith(MockitoJUnitRunner.class)
-public class McFantasyApplicationTests {
-
-	@Mock
-	private AppUserRepository userDao;
-	
-	@InjectMocks
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class TestMcFantasyService {
+	@Autowired
 	private McFantasyService service;
+	
+	@Autowired
+	private AppUserRepository appUserRepo;
+	@Autowired
+	private GameRepository gameRepo;
+	@Autowired
+	private LeagueRepository leagueRepo;
+	@Autowired
+	private PlayerRepository playerRepo;
+	@Autowired
+	private SeasonStatsRepository seasonStatsRepo;
+	@Autowired
+	private TeamRepository teamRepo;
 	
 	private static String USER_NAME = "test_user";
 	private static String USER_EMAIL = "test@mail.com";
@@ -36,23 +44,14 @@ public class McFantasyApplicationTests {
 	private static byte[] USER_PICTURE = {'1'};
 	private static String NON_EXISTING_EMAIL = "nonexist@mail.com";
 	
-	
-	
-	
-	@Before
-	public void setMockOutput() {
-		when(userDao.findByEmail(anyString())).thenAnswer( (InvocationOnMock invocation) -> {
-			if(invocation.getArgument(0).equals(USER_EMAIL)) {
-				AppUser user = new AppUser();
-				user.setName(USER_NAME);
-				user.setEmail(USER_EMAIL);
-				user.setPassword(USER_PASSWORD);
-				user.setProfilePicture(USER_PICTURE);
-				return user;
-			} else {
-				return null;
-			}
-		});
+	@After
+	public void clearDatabase() {
+		appUserRepo.deleteAll();
+		leagueRepo.deleteAll();
+		gameRepo.deleteAll();
+		playerRepo.deleteAll();
+		seasonStatsRepo.deleteAll();
+		teamRepo.deleteAll();
 	}
 	
 	@Test
@@ -70,8 +69,7 @@ public class McFantasyApplicationTests {
 	public void testCreateUserNullEmail() {
 		String error = null;
 		try {
-			@SuppressWarnings("unused")
-			AppUser user = service.createUser(null, USER_NAME, USER_PASSWORD, USER_PICTURE);
+			service.createUser(null, USER_NAME, USER_PASSWORD, USER_PICTURE);
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
@@ -79,7 +77,20 @@ public class McFantasyApplicationTests {
 	}
 	
 	@Test
+	public void testCreateUserExistingEmail() {
+		String error = null;
+		try {
+			service.createUser(USER_EMAIL, USER_NAME, USER_PASSWORD, USER_PICTURE);
+			service.createUser(USER_EMAIL, USER_NAME, USER_PASSWORD, USER_PICTURE);
+		} catch (IllegalArgumentException e) {
+			error = e.getMessage();
+		}
+		assertEquals(error, "User with this email has already been created!");
+	}
+	
+	@Test
 	public void testGetUserByExistingName() {
+		service.createUser(USER_EMAIL, USER_NAME, USER_PASSWORD, USER_PICTURE);
 		AppUser user = service.getUser(USER_EMAIL);
 		assertEquals(USER_EMAIL, user.getEmail());
 	}
@@ -89,6 +100,7 @@ public class McFantasyApplicationTests {
 		AppUser user = service.getUser(NON_EXISTING_EMAIL);
 		assertNull(user);
 	}
+	
 	/*
 	 * Limitations of testing include: not testing the REST API, and limited testing due to the nature of the update methods
 	 * Additionally, this is commented out as it seems that the testing class doesn't have visibility to the other classes
@@ -111,4 +123,6 @@ public class McFantasyApplicationTests {
 				}
 	        assertEquals("No user with this email exists!",error1);
 	    }*/
+	
+	
 }
