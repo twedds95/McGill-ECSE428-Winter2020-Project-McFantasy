@@ -2,6 +2,7 @@ package ca.mcgill.ecse428.project.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Set;
 
 import javax.sql.rowset.serial.SerialException;
@@ -137,6 +138,18 @@ public class McFantasyRestController {
 							   @RequestParam(name = "user") AppUser user) throws IllegalArgumentException, SerialException, SQLException, IOException {
 		League league = service.createLeague(name, user);
 		return league;
+	}
+	
+	/**
+	 * @author Patrick Tweddell
+	 */
+//	returns Ordered ArrayList of Team Standings
+	@GetMapping(value = {"/leagueStandings/{name}", "/leagueStandings/{name}/"})
+	public List<Team> getLeagueStandings(@PathVariable("name") String name) 
+			throws IllegalArgumentException, SerialException, SQLException, IOException {
+		League league = service.getLeague(name);
+		List<Team> teamStandings = service.updateStandings(league);
+		return teamStandings;
 	}
 	
 }

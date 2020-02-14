@@ -261,7 +261,12 @@ public class McFantasyService {
 		int n = teamsInLeague.size(); 
         for (int i = 0; i < n-1; i++) 
             for (int j = 0; j < n-i-1; j++) 
-                if (teamsInLeague.get(j).getPoints() > teamsInLeague.get(j+1).getPoints()) { 
+                if (teamsInLeague.get(j).getPoints() <= teamsInLeague.get(j+1).getPoints()) { 
+                	if (teamsInLeague.get(j).getPoints() == teamsInLeague.get(j+1).getPoints()) {
+                		if (teamsInLeague.get(j).getWins() > teamsInLeague.get(j+1).getWins()) {
+                			break;
+                		}
+                	}
                     Team temp = teamsInLeague.get(j); 
                     teamsInLeague.set(j,teamsInLeague.get(j+1)); 
                     teamsInLeague.set(j+1,temp);
