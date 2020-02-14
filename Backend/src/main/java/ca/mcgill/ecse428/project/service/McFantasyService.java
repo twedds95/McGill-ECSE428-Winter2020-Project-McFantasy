@@ -261,6 +261,7 @@ public class McFantasyService {
 			resultList.add(t);
 		}
 		return resultList;
+	}
 
 	/**
 	 * @author Patrick Tweddell
