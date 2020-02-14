@@ -47,8 +47,19 @@ public class TestMcFantasyService {
 	private static byte[] USER_PICTURE = {'1'};
 	private static String NON_EXISTING_EMAIL = "nonexist@mail.com";
 	
+	private static String LEAGUE_NAME ="LEAGUE";
 	private static String TEAM_NAME ="Real Madrid";
 	private static int TEAM_ID = 200; 
+	private static int TEAM_PTS = 2;
+	private static int TEAM_STANDING = 3;
+	private static String TEAM1_NAME ="Arsenal";
+	private static int TEAM1_ID = 300;
+	private static int TEAM1_PTS = 4;
+	private static int TEAM1_STANDING = 2;
+	private static String TEAM2_NAME ="Impact";
+	private static int TEAM2_ID = 400;
+	private static int TEAM2_PTS = 10;
+	private static int TEAM2_STANDING = 1;
 	
 	private static String PLAYER_NAME = "Burak Yilmaz";
 	private static String PLAYER_POSITION = "ST";
@@ -184,6 +195,25 @@ public class TestMcFantasyService {
 		assertEquals(0, service.getTeam(TEAM_ID).getPlayer().size());
 	}
 	
+	@Test
+	public void updateStandings() {
+		AppUser user = service.createUser(USER_EMAIL, USER_NAME, USER_PASSWORD, USER_PICTURE);
+		League LEAGUE = service.createLeague(LEAGUE_NAME, user);
+		Team TEAM = service.createTeam(TEAM_ID, TEAM_NAME, user);
+		Team TEAM1 = service.createTeam(TEAM1_ID, TEAM1_NAME, user);
+		Team TEAM2 = service.createTeam(TEAM2_ID, TEAM2_NAME, user);
+		service.getTeam(TEAM_ID).setPoints(TEAM_PTS);
+		service.getTeam(TEAM1_ID).setPoints(TEAM1_PTS);
+		service.getTeam(TEAM2_ID).setPoints(TEAM2_PTS);
+		service.addTeam(TEAM, LEAGUE);
+		service.addTeam(TEAM1, LEAGUE);
+		service.addTeam(TEAM2, LEAGUE);
+		List<Team> STANDINGS = service.updateStandings(LEAGUE);
+		assertEquals(STANDINGS.get(TEAM_STANDING-1).getName(), TEAM.getName());
+		assertEquals(STANDINGS.get(TEAM1_STANDING-1).getName(), TEAM1.getName());
+		assertEquals(STANDINGS.get(TEAM2_STANDING-1).getName(), TEAM2.getName());
+		
+	}
 	
 	
 	

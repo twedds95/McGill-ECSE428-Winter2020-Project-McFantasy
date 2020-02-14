@@ -285,6 +285,23 @@ public class McFantasyService {
 	 * @author Patrick Tweddell
 	 */
 	@Transactional
+	public League addTeam(Team team, League league){
+		League l = leagueRepo.findByName(league.getName());
+		Team t = teamRepo.findByName(team.getName());
+		
+		Set<Team> teams = l.getTeam();
+		teams.add(t);
+		l.setTeam(teams);
+		leagueRepo.save(l);
+		
+		Set<League> leagues = t.getLeague();
+		leagues.add(l);
+		t.setLeague(leagues);
+		teamRepo.save(t);
+		return l;
+	}
+	
+	@Transactional
 	public List<Team> updateStandings(League league) {
 		String error = "";
 		List<Team> teamsInLeague = teamRepo.findByLeague(league);
