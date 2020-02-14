@@ -3,6 +3,7 @@ package ca.mcgill.ecse428.project.service;
 
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -23,59 +24,59 @@ import ca.mcgill.ecse428.project.model.Player;
 import ca.mcgill.ecse428.project.model.Team;
 @Service
 public class McFantasyService {
-	
+
 	@Autowired
 	AppUserRepository userRepo;
-	
+
 	@Autowired
 	GameRepository gameRepo;
-	
+
 	@Autowired
 	LeagueRepository leagueRepo;
-	
+
 	@Autowired
 	PlayerRepository playerRepo;
-	
+
 	@Autowired
 	SeasonStatsRepository seasonStatsRepo;
-	
+
 	@Autowired
 	TeamRepository teamRepo;
-	
-	
+
+
 	@Transactional
 	public AppUser createUser(String email, String name, String password, byte[] bytes) {
-		
+
 		if (email == null || email.trim().length() == 0) {
 			throw new IllegalArgumentException("User email cannot be empty!");
 		} else if (userRepo.existsById(email)) {
 			throw new IllegalArgumentException("User with this email has already been created!");
 		}
-		
+
 		AppUser user = new AppUser();
 		user.setEmail(email);
 		user.setName(name);
 		user.setPassword(password);
 		user.setProfilePicture(bytes);
 		userRepo.save(user);
-		
+
 		return user;
-		
+
 	}
-	
+
 	/**
 	 * @author David Whiteside
 	 */
-	
+
 	@Transactional
 	public AppUser updateUser(String email, String name, String password, byte[] bytes) {
-		
+
 		if (email == null || email.trim().length() == 0) {
 			throw new IllegalArgumentException("User email cannot be empty!");
 		} else if (!userRepo.existsById(email)) {
 			throw new IllegalArgumentException("No user with this email exists!");
 		}
-		
+
 
 		AppUser user = userRepo.findByEmail(email);
 		user.updateEmail(email);
@@ -83,37 +84,37 @@ public class McFantasyService {
 		user.updatePassword(password);
 		user.updateProfilePicture(bytes);
 		userRepo.save(user);
-		
+
 		return user;
-		
+
 	}
-	
+
 	@Transactional
 	public AppUser getUser(String email) {
 		AppUser user = userRepo.findByEmail(email);
 		return user;
-		
+
 	}
-	
+
 	/**
 	 * @author Ali Tapan
 	 */
-	@Transactional 
+	@Transactional
 	public Team createTeam(Integer teamID, String name, AppUser user) {
 		// Check if the inputs are wrong
 		String error ="";
 		if (name == null || name.trim().length() == 0) {
 			error += "Team name cannot be empty!";
-		} 
+		}
 		if (teamID <= 0) {
 			error += "Team ID cannot be zero or less than zero!";
 		}
-		
+
 		// Need to fix this at some point:
 //		if (teamRepo.existsById(teamID) {
 //			error += "Team with this name has already been created!";
-//		} 
-		
+//		}
+
 		if (user == null) {
 			error += "Application user is null!";
 		}
@@ -133,22 +134,22 @@ public class McFantasyService {
 		team.setUser(user);
 		teamRepo.save(team);
 		return team;
-	}	
-		
+	}
+
 	/**
 	 * @author Ali Tapan
-	 */	
-	@Transactional 
+	 */
+	@Transactional
 	public Team getTeam(Integer teamID) {
 		Team team = teamRepo.findByTeamID(teamID);
 		return team;
 	}
-	
+
 	@Transactional
 	public List<Team> getAllTeams() {
 		return toList(teamRepo.findAll());
 	}
-	
+
 	@Transactional
 	public List<Player> getAllPlayers(){
 		return toList(playerRepo.findAll());
@@ -162,13 +163,13 @@ public class McFantasyService {
 		String error ="";
 		if (name == null || name.trim().length() == 0) {
 			error += "Player name cannot be empty!";
-		} 
+		}
 		if (position == null || position.trim().length() == 0) {
 			error += "Player position cannot be empty!";
 		}
 		if (playerRepo.existsById(name)) {
 			error += "Player with this name has already been created!";
-		} 
+		}
 		if (error.length() > 0 ){
 			throw new IllegalArgumentException(error);
 		}
@@ -185,7 +186,7 @@ public class McFantasyService {
 		playerRepo.save(player);
 		return player;
 	}
-	
+
 	/**
 	 * @author Ali Tapan
 	 */
@@ -194,8 +195,8 @@ public class McFantasyService {
 		Player player = playerRepo.findByName(name);
 		return player;
 	}
-	
-	
+
+
 	@Transactional
 	public Team addPlayer(Set<Player> players, Team team) {
 		Team t = teamRepo.findByName(team.getName());
@@ -204,7 +205,7 @@ public class McFantasyService {
 		teamRepo.save(t);
 		return t;
 	}
-	
+
 	/**
 	 * @author Brad McBain
 	 */
@@ -220,7 +221,7 @@ public class McFantasyService {
 		League league =	leagueRepo.findByName(name);
 		return league;
 	}
-	
+
 
 	/**
 	 * @author Raphael Di Piazza
@@ -250,7 +251,7 @@ public class McFantasyService {
 		leagueRepo.save(league);
 		return league;
 	}
-	
+
 	private <T> List<T> toList(Iterable<T> iterable){
 		if(iterable == null){
 			throw new IllegalArgumentException("Iterable cannot be null! ");
@@ -260,6 +261,38 @@ public class McFantasyService {
 			resultList.add(t);
 		}
 		return resultList;
+
+	/**
+	 * @author Patrick Tweddell
+	 */
+	@Transactional
+	public List<Team> updateStandings(League league) {
+		String error = "";
+		List<Team> teamsInLeague = teamRepo.findByLeague(league);
+		if (teamsInLeague.size()==1) {
+			return teamsInLeague;
+		}
+		if (teamsInLeague.size()==0) {
+			error += "League has no Teams!";
+		}
+		if (error.length() > 0 ){
+			throw new IllegalArgumentException(error);
+		}
+		int n = teamsInLeague.size();
+        for (int i = 0; i < n-1; i++)
+            for (int j = 0; j < n-i-1; j++)
+                if (teamsInLeague.get(j).getPoints() <= teamsInLeague.get(j+1).getPoints()) {
+                	if (teamsInLeague.get(j).getPoints() == teamsInLeague.get(j+1).getPoints()) {
+                		if (teamsInLeague.get(j).getWins() > teamsInLeague.get(j+1).getWins()) {
+                			break;
+                		}
+                	}
+                    Team temp = teamsInLeague.get(j);
+                    teamsInLeague.set(j,teamsInLeague.get(j+1));
+                    teamsInLeague.set(j+1,temp);
+                }
+
+		return teamsInLeague;
 	}
-	
+
 }
