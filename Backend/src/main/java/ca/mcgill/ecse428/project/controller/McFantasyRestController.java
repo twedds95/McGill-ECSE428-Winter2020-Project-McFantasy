@@ -2,6 +2,7 @@ package ca.mcgill.ecse428.project.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -71,6 +72,29 @@ public class McFantasyRestController {
 		AppUser user = service.getUser(email);
 	    return user;
 	}
+	
+	/**
+	 * @author Ali Tapan
+	 */
+	@GetMapping(value = { "/login/{email}", "/login/{email}/" })
+	public AppUser login(@PathVariable("email") String email, @RequestParam("password") String password) {
+		List<AppUser> users = new ArrayList<>();
+		for(AppUser user : service.getAllUsers()) {
+			if(user.getEmail().equals(email)) {
+				if(user.getPassword().equals(password)) {
+					//users.add(convertToDto(user));
+				} else {
+					throw new IllegalArgumentException("Incorrect password! Try again!");
+				}
+			}
+		}
+		
+		if(users.isEmpty()) {
+			throw new IllegalArgumentException("This email is not registered! Please use our web browser to sign up!");
+			}
+		
+		return users.get(0);
+		}
 	
 	/**
 	 * @author Ali Tapan

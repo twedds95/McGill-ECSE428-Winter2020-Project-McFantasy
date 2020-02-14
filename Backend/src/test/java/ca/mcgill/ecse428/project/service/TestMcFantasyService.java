@@ -110,7 +110,26 @@ public class TestMcFantasyService {
 		assertNull(user);
 	}
 	
+	@Test
+	public void testLogin() {
+		service.createUser(USER_EMAIL, USER_NAME, USER_PASSWORD, USER_PICTURE);
+		AppUser user = service.login(USER_EMAIL, USER_PASSWORD);
+		assertEquals(USER_NAME, user.getName());
+	}
 	
+	@Test
+	public void failedLogin() {
+		String error = "";
+		service.createUser(USER_EMAIL, USER_NAME, USER_PASSWORD, USER_PICTURE);
+		
+		try {
+			AppUser user = service.login(USER_EMAIL, "ggg");
+		}
+		catch (NullPointerException e) {
+			error = e.getMessage();
+		}
+		assertEquals("Invalid Login Credidentials!", error);
+	}
 	@Test
 	public void testCreateTeam() {
 		assertEquals(0, service.getAllTeams().size());

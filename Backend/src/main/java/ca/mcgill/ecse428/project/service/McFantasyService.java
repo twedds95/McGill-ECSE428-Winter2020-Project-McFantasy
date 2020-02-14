@@ -95,6 +95,24 @@ public class McFantasyService {
 		return user;
 
 	}
+	
+	@Transactional
+	public List<AppUser> getAllUsers() {
+		return toList(userRepo.findAll());
+	}
+	
+	/**
+	 * @author Ali Tapan
+	 */
+    @Transactional
+    public AppUser login(String email, String password) {
+    	AppUser user = userRepo.findByEmail(email);
+        if (user != null && user.getPassword().equals(password)) {
+            return user;
+        }
+        throw new NullPointerException("Invalid Login Credidentials!");
+    }
+	
 
 	/**
 	 * @author Ali Tapan
