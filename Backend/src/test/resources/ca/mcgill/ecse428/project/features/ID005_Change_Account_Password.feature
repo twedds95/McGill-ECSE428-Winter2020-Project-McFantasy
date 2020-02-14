@@ -38,7 +38,7 @@
      And they enter in $<repeatedPassword>
      Then they should receive $<message>
      And their password will be $<password> 
-     Examples: 
+     
       | currentPassword | repeatedPassword | message                                                                 | password     | 
       | CoolCat_123     | CoolCat_123      | Password Changed Successfully!                                          | CoolCat_123  | 
       | Cool123         | Cool123          | Password should be at least 8 characters!                               | oldPassword1 |
