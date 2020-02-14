@@ -21,7 +21,6 @@ import ca.mcgill.ecse428.project.dao.AppUserRepository;
 import ca.mcgill.ecse428.project.model.AppUser;
 
 
-
 @RunWith(MockitoJUnitRunner.class)
 public class McFantasyApplicationTests {
 
