@@ -330,5 +330,42 @@ public class McFantasyService {
 
 		return teamsInLeague;
 	}
+	
+	/**
+	 * @author Ryan Arndtsen
+	 */
+	
+	@Transactional
+	public League joinLeague(League league, AppUser appUser, int teamId) {
+		String error = "";
+		
+		if (league == null) {
+			error += "League is null!";
+		}
+		if (appUser == null) {
+			error += "User is null!";
+		}
+		if (error.length() > 0 ){
+			throw new IllegalArgumentException(error);
+		}
+		
+		League l = leagueRepo.findByName(league.getName());
+		AppUser au = userRepo.findByEmail(appUser.getEmail());
+		
+		Team t = new Team();
+		Set<League> sl = t.getLeague();
+		sl.add(l);
+		t.setTeamID(teamId);
+		t.setUser(au);
+		t.setLeague(sl);
+		teamRepo.save(t);
+		
+		Set<Team> teams = l.getTeam();
+		teams.add(t);
+		l.setTeam(teams);
+		leagueRepo.save(l);
+		
+		return l;
+	}
 
 }
