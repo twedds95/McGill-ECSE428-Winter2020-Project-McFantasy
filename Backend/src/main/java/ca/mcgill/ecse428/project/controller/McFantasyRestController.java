@@ -9,6 +9,7 @@ import java.util.Set;
 import javax.sql.rowset.serial.SerialException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -163,6 +164,16 @@ public class McFantasyRestController {
 		League league = service.createLeague(name, user);
 		return league;
 	}
+	
+	/**
+	 * @author Caleb Lim
+	 */
+	@DeleteMapping(value = {"/league/{team}", "/league/{team}/"})
+	public League leaveLeague(@PathVariable("team") Team team, @RequestParam(name="leagueName") String leagueName)  throws IllegalArgumentException, SerialException, SQLException, IOException {
+		League league = service.getLeague(leagueName);
+		return service.leaveLeague(team, league);
+	}
+	
 	
 	/**
 	 * @author Patrick Tweddell

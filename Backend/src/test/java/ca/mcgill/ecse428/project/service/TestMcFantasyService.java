@@ -207,6 +207,19 @@ public class TestMcFantasyService {
 	}
 	
 	@Test
+	public void testLeaveLeague() {
+		AppUser user = service.createUser(USER_EMAIL, USER_NAME, USER_PASSWORD, USER_PICTURE);
+		League league = service.createLeague(LEAGUE_NAME, user);
+		Team team = service.createTeam(TEAM_ID, TEAM_NAME, user);
+		service.addTeam(team, league);
+		assertEquals(1, service.getLeague(LEAGUE_NAME).getTeam().size());
+		assertEquals(1, service.getUser(user.getEmail()).getTeam().size());
+		service.leaveLeague(team, league);
+		assertEquals(0, service.getLeague(LEAGUE_NAME).getTeam().size());
+		assertEquals(0, service.getUser(user.getEmail()).getTeam().size());
+	}
+	
+	@Test
 	public void updateStandings() {
 		AppUser user = service.createUser(USER_EMAIL, USER_NAME, USER_PASSWORD, USER_PICTURE);
 		League LEAGUE = service.createLeague(LEAGUE_NAME, user);
