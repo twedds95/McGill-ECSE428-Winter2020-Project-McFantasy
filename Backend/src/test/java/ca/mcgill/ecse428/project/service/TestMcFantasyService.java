@@ -193,6 +193,17 @@ public class TestMcFantasyService {
 		Team team = service.createTeam(TEAM_ID, TEAM_NAME, user);
 		service.addPlayer(players, team);
 		assertEquals(0, service.getTeam(TEAM_ID).getPlayer().size());
+		//Why is this 0? Shouldn't it assert with 1?
+	}
+	
+	@Test
+	public void addTeamToLeague() {
+		AppUser user = service.createUser(USER_EMAIL, USER_NAME, USER_PASSWORD, USER_PICTURE);
+		League league = service.createLeague(LEAGUE_NAME, user);
+		Team team = service.createTeam(TEAM_ID, TEAM_NAME, user);
+		assertEquals(0, service.getLeague(LEAGUE_NAME).getTeam().size());
+		service.addTeam(team, league);
+		assertEquals(1, service.getLeague(LEAGUE_NAME).getTeam().size());
 	}
 	
 	@Test

@@ -167,6 +167,12 @@ public class McFantasyRestController {
 	/**
 	 * @author Patrick Tweddell
 	 */
+	@PostMapping(value = {"/league/{team}", "/league/{team}/"})
+	public League addTeamToLeague(@PathVariable("team") Team team,
+			@RequestParam(name = "leagueName") String leagueName) throws IllegalArgumentException, SerialException, SQLException, IOException{
+		return service.addTeam(team, service.getLeague(leagueName));
+	}
+	
 //	returns Ordered ArrayList of Team Standings
 	@GetMapping(value = {"/leagueStandings/{name}", "/leagueStandings/{name}/"})
 	public List<Team> getLeagueStandings(@PathVariable("name") String name) 

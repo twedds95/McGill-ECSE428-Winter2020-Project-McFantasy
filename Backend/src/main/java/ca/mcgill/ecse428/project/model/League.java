@@ -2,6 +2,7 @@ package ca.mcgill.ecse428.project.model;
 
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import java.util.Set;
@@ -33,7 +34,7 @@ public String getName() {
    
    private Set<Team> team;
    
-   @ManyToMany(mappedBy="league" )
+   @ManyToMany(mappedBy="league", fetch=FetchType.EAGER)
    public Set<Team> getTeam() {
       return this.team;
    }
