@@ -69,7 +69,7 @@ public class McFantasyService {
 	 */
 
 	@Transactional
-	public AppUser updateUser(String email, String name, String password, byte[] bytes) {
+	public AppUser updateUser(String email, String name, String password, byte[] bytes, String newname, String newpassword, byte[] newbytes) {
 
 		if (email == null || email.trim().length() == 0) {
 			throw new IllegalArgumentException("User email cannot be empty!");
@@ -79,13 +79,15 @@ public class McFantasyService {
 
 
 		AppUser user = userRepo.findByEmail(email);
-		user.updateEmail(email);
-		user.updateName(name);
-		user.updatePassword(password);
-		user.updateProfilePicture(bytes);
-		userRepo.save(user);
-
-		return user;
+		if (newname == null) {throw new IllegalArgumentException("Please input all required parameters");}
+		if (newpassword == null) {throw new IllegalArgumentException("Please input all required parameters");}
+		if (newbytes == null) {throw new IllegalArgumentException("Please input all required parameters");}
+		
+		userRepo.delete(user);
+		AppUser updateduser = createUser(email,newname,newpassword,newbytes);
+		userRepo.save(updateduser);
+		
+		return updateduser;
 
 	}
 
