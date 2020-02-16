@@ -50,6 +50,7 @@ public class TestMcFantasyService {
 	private static byte[] USER_PICTURE = {'1'};
 	private static byte[] USER_PICTURE_2 = {'2'};
 	private static String NON_EXISTING_EMAIL = "nonexist@mail.com";
+	private static String NON_EXISTING_LEAGUE = "FakeLeague";
 	
 	private static String LEAGUE_NAME ="LEAGUE";
 	private static String TEAM_NAME ="Real Madrid";
@@ -218,6 +219,20 @@ public class TestMcFantasyService {
 			error = e.getMessage();
 		}
 		assertEquals("Team name cannot be empty!", error);
+	}
+	
+	@Test
+	public void testGetLeagueByExistingName() {
+		AppUser user = service.createUser(USER_EMAIL, USER_NAME, USER_PASSWORD, USER_PICTURE);
+		service.createLeague(LEAGUE_NAME, user);
+		League league = service.getLeague(LEAGUE_NAME);
+		assertEquals(LEAGUE_NAME, league.getName());
+	}
+	
+	@Test
+	public void testGetLeagueByNonExistingName() {
+		League league = service.getLeague(NON_EXISTING_LEAGUE);
+		assertNull(league);
 	}
 	
 	@Test
