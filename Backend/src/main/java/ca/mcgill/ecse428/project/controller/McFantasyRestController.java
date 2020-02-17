@@ -53,7 +53,10 @@ public class McFantasyRestController {
 	public AppUser updateUser(@PathVariable("email") String email, 
 			@RequestParam(name = "name") String name, 
 			@RequestParam(name = "password") String password,
-			@RequestParam(name = "picture") MultipartFile picfile) throws IllegalArgumentException, SerialException, SQLException, IOException {
+			@RequestParam(name = "picture") MultipartFile picfile,
+			@RequestParam(name = "newname") String newname, 
+			@RequestParam(name = "newpassword") String newpassword,
+			@RequestParam(name = "newpicture") MultipartFile newpicfile) throws IllegalArgumentException, SerialException, SQLException, IOException {
 		
 		byte[] bytes;
 		if (picfile.getSize() > 0) {
@@ -61,9 +64,16 @@ public class McFantasyRestController {
 		} else {
 			bytes = null;
 		}
-	
 		
-		AppUser user = service.updateUser(email, name, password, bytes);
+		byte[] newbytes;
+		if (picfile.getSize() > 0) {
+			newbytes = picfile.getBytes();
+		} else {
+			newbytes = null;
+		}
+	
+		AppUser user = service.getUser(email);
+		user = service.updateUser(email, name, password, bytes, newname, newpassword, newbytes);
 		return user;
 	}
 	
@@ -193,4 +203,13 @@ public class McFantasyRestController {
 		return teamStandings;
 	}
 	
+	/*
+	 * @author Ryan Arndtsen
+	 */
+	@PostMapping(value= {"/league/{teamID}", "/league/{teamID}/"})
+	public League joinLeague(@PathVariable("teamID") int teamID, 
+			@RequestParam(name="leagueName") String leagueName, 
+			@RequestParam(name="user") AppUser user) throws IllegalArgumentException, SerialException, SQLException, IOException {
+		return service.joinLeague(service.getLeague(leagueName),user,teamID);
+	}
 }

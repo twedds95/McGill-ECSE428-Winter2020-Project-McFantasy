@@ -70,7 +70,7 @@ public class McFantasyService {
 	 */
 
 	@Transactional
-	public AppUser updateUser(String email, String name, String password, byte[] bytes) {
+	public AppUser updateUser(String email, String name, String password, byte[] bytes, String newname, String newpassword, byte[] newbytes) {
 
 		if (email == null || email.trim().length() == 0) {
 			throw new IllegalArgumentException("User email cannot be empty!");
@@ -80,13 +80,15 @@ public class McFantasyService {
 
 
 		AppUser user = userRepo.findByEmail(email);
-		user.updateEmail(email);
-		user.updateName(name);
-		user.updatePassword(password);
-		user.updateProfilePicture(bytes);
-		userRepo.save(user);
-
-		return user;
+		if (newname == null) {throw new IllegalArgumentException("Please input all required parameters");}
+		if (newpassword == null) {throw new IllegalArgumentException("Please input all required parameters");}
+		if (newbytes == null) {throw new IllegalArgumentException("Please input all required parameters");}
+		
+		userRepo.delete(user);
+		AppUser updateduser = createUser(email,newname,newpassword,newbytes);
+		userRepo.save(updateduser);
+		
+		return updateduser;
 
 	}
 
@@ -173,6 +175,12 @@ public class McFantasyService {
 	public List<Player> getAllPlayers(){
 		return toList(playerRepo.findAll());
 	}
+	
+	@Transactional
+	public List<Team> getAllLeagues() {
+		return toList(teamRepo.findAll());
+	}
+	
 	/**
 	 * @author Ali Tapan
 	 */
@@ -368,6 +376,46 @@ public class McFantasyService {
                 }
 
 		return teamsInLeague;
+	}
+	
+	/**
+	 * @author Ryan Arndtsen
+	 */
+	
+	@Transactional
+	public League joinLeague(League league, AppUser appUser, int teamId) {
+		String error = "";
+		
+		if (league == null) {
+			error += "League is null!";
+		}
+		if (appUser == null) {
+			error += "User is null!";
+		}
+		if (teamId == 0) {
+			error += "TeamID cannot have value 0!";
+		}
+		if (error.length() > 0 ){
+			throw new IllegalArgumentException(error);
+		}
+		
+		League l = leagueRepo.findByName(league.getName());
+		AppUser au = userRepo.findByEmail(appUser.getEmail());
+		
+		Team t = new Team();
+		Set<League> sl = t.getLeague();
+		sl.add(l);
+		t.setTeamID(teamId);
+		t.setUser(au);
+		t.setLeague(sl);
+		teamRepo.save(t);
+		
+		Set<Team> teams = l.getTeam();
+		teams.add(t);
+		l.setTeam(teams);
+		leagueRepo.save(l);
+		
+		return l;
 	}
 
 }

@@ -42,10 +42,15 @@ public class TestMcFantasyService {
 	private TeamRepository teamRepo;
 	
 	private static String USER_NAME = "test_user";
+	private static String USER_NAME_2 = "newtest_user";
 	private static String USER_EMAIL = "test@mail.com";
+	private static String USER_EMAIL_2 = "newtest@mail.com";
 	private static String USER_PASSWORD = "password123";
+	private static String USER_PASSWORD_2 = "newpassword123";
 	private static byte[] USER_PICTURE = {'1'};
+	private static byte[] USER_PICTURE_2 = {'2'};
 	private static String NON_EXISTING_EMAIL = "nonexist@mail.com";
+	private static String NON_EXISTING_LEAGUE = "FakeLeague";
 	
 	private static String LEAGUE_NAME ="LEAGUE";
 	private static String TEAM_NAME ="Real Madrid";
@@ -108,6 +113,59 @@ public class TestMcFantasyService {
 		assertEquals(error, "User with this email has already been created!");
 	}
 	
+
+	
+	@Test
+	public void testUpdateUser() {
+		AppUser user = new AppUser();
+		try {
+			user = service.createUser(USER_EMAIL, USER_NAME, USER_PASSWORD, USER_PICTURE);
+			user = service.updateUser(USER_EMAIL, USER_NAME, USER_PASSWORD, USER_PICTURE, USER_NAME_2, USER_PASSWORD_2, USER_PICTURE_2);
+		} catch (IllegalArgumentException e) {
+			fail();
+		}
+		assertEquals(USER_NAME_2, user.getName());
+		assertEquals(USER_PASSWORD_2, user.getPassword());
+		assertEquals(USER_PICTURE_2, user.getProfilePicture());
+	}
+	
+	@Test
+	public void testUpdateInvalidParameters() {
+		AppUser user = new AppUser();
+		String error = "";
+		try {
+			user = service.createUser(USER_EMAIL, USER_NAME, USER_PASSWORD, USER_PICTURE);
+			user = service.updateUser(USER_EMAIL, USER_NAME, USER_PASSWORD, USER_PICTURE, null, null, null);
+		} catch (IllegalArgumentException e) {
+			error = e.getMessage();
+		}
+		assertEquals(error, "Please input all required parameters");
+	}
+	
+	@Test
+	public void testUpdateUserNullEmail() {
+		String error = "";
+		try {
+			service.updateUser(null, USER_NAME, USER_PASSWORD, USER_PICTURE, USER_NAME, USER_PASSWORD, USER_PICTURE);
+		} catch (IllegalArgumentException e) {
+			error = e.getMessage();
+		}
+		assertEquals(error, "User email cannot be empty!");
+	}
+	
+	@Test
+	public void testUpdateUserNewUser() {
+		String error = "";
+		AppUser user = new AppUser();
+		try {
+			user = service.createUser(USER_EMAIL, USER_NAME, USER_PASSWORD, USER_PICTURE);
+			service.updateUser(USER_EMAIL_2, USER_NAME, USER_PASSWORD, USER_PICTURE, USER_NAME, USER_PASSWORD, USER_PICTURE);
+		} catch (IllegalArgumentException e) {
+			error = e.getMessage();
+		}
+		assertEquals(error,"No user with this email exists!");
+	}
+	
 	@Test
 	public void testGetUserByExistingName() {
 		service.createUser(USER_EMAIL, USER_NAME, USER_PASSWORD, USER_PICTURE);
@@ -164,6 +222,20 @@ public class TestMcFantasyService {
 	}
 	
 	@Test
+	public void testGetLeagueByExistingName() {
+		AppUser user = service.createUser(USER_EMAIL, USER_NAME, USER_PASSWORD, USER_PICTURE);
+		service.createLeague(LEAGUE_NAME, user);
+		League league = service.getLeague(LEAGUE_NAME);
+		assertEquals(LEAGUE_NAME, league.getName());
+	}
+	
+	@Test
+	public void testGetLeagueByNonExistingName() {
+		League league = service.getLeague(NON_EXISTING_LEAGUE);
+		assertNull(league);
+	}
+	
+	@Test
 	public void testCreatePlayer() {
 		assertEquals(0, service.getAllPlayers().size());
 		Player player = service.createPlayer(PLAYER_NAME, PLAYER_POSITION);
@@ -217,6 +289,18 @@ public class TestMcFantasyService {
 		service.leaveLeague(team, league);
 		assertEquals(0, service.getLeague(LEAGUE_NAME).getTeam().size());
 		assertEquals(0, service.getUser(user.getEmail()).getTeam().size());
+  }
+  
+  @Test
+	public void testJoinLeague() {
+		AppUser user = service.createUser(USER_EMAIL, USER_NAME, USER_PASSWORD, USER_PICTURE);
+		League league = service.createLeague(LEAGUE_NAME, user);
+		
+		assertEquals(0,service.getLeague(LEAGUE_NAME).getTeam().size());
+		assertEquals(0,service.getUser(user.getEmail()).getTeam().size());
+		service.joinLeague(league, user, TEAM_ID);
+		assertEquals(1,service.getLeague(LEAGUE_NAME).getTeam().size());
+		assertEquals(1,service.getUser(user.getEmail()).getTeam().size());
 	}
 	
 	@Test
@@ -239,7 +323,13 @@ public class TestMcFantasyService {
 		
 	}
 	
-	
+	@Test
+	public void testCreateLeague(){
+		assertEquals(0, service.getAllLeagues().size());
+		AppUser user = service.createUser(USER_EMAIL, USER_NAME, USER_PASSWORD, USER_PICTURE);
+		service.createLeague(LEAGUE_NAME, user);
+		assertEquals(LEAGUE_NAME, service.getLeague(LEAGUE_NAME).getName());
+	}
 	
 	/*
 	 * Limitations of testing include: not testing the REST API, and limited testing due to the nature of the update methods

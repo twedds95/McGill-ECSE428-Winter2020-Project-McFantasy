@@ -16,9 +16,9 @@ public class AppUser{
 	public void setEmail(String value) {
 		this.email = value;
 	}
-	public void updateEmail(String value) {
-		setEmail(value);
-	}
+	//public void updateEmail(String value) {
+	//	setEmail(value);
+	//}
 	@Id
 	public String getEmail() {
 		return this.email;
@@ -28,9 +28,6 @@ public class AppUser{
 	public void setName(String value) {
 		this.name = value;
 	}
-	public void updateName(String value) {
-		setName(value);
-	}
 	public String getName() {
 		return this.name;
 	}
@@ -39,9 +36,6 @@ public class AppUser{
 	public void setPassword(String value) {
 		this.password = value;
 	}
-	public void updatePassword(String value) {
-		setPassword(value);
-	}
 	public String getPassword() {
 		return this.password;
 	}
@@ -49,9 +43,6 @@ public class AppUser{
 
 	public void setProfilePicture(byte[] value) {
 		this.profilePicture = value;
-	}
-	public void updateProfilePicture(byte[] value) {
-		setProfilePicture(value);
 	}
 	public byte[] getProfilePicture() {
 		return this.profilePicture;
