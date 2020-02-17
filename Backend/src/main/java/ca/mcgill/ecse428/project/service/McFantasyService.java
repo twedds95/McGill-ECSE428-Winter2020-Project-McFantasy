@@ -174,6 +174,12 @@ public class McFantasyService {
 	public List<Player> getAllPlayers(){
 		return toList(playerRepo.findAll());
 	}
+	
+	@Transactional
+	public List<Team> getAllLeagues() {
+		return toList(teamRepo.findAll());
+	}
+	
 	/**
 	 * @author Ali Tapan
 	 */

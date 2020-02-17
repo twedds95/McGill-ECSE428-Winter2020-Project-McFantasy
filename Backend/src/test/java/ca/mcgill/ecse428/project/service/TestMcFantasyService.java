@@ -298,7 +298,13 @@ public class TestMcFantasyService {
 		
 	}
 	
-	
+	@Test
+	public void testCreateLeague(){
+		assertEquals(0, service.getAllLeagues().size());
+		AppUser user = service.createUser(USER_EMAIL, USER_NAME, USER_PASSWORD, USER_PICTURE);
+		service.createLeague(LEAGUE_NAME, user);
+		assertEquals(LEAGUE_NAME, service.getLeague(LEAGUE_NAME).getName());
+	}
 	
 	/*
 	 * Limitations of testing include: not testing the REST API, and limited testing due to the nature of the update methods
