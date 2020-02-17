@@ -401,15 +401,11 @@ public class McFantasyService {
 		
 		League l = leagueRepo.findByName(league.getName());
 		AppUser au = userRepo.findByEmail(appUser.getEmail());
+		Team t = teamRepo.findByTeamID(teamId);
 		
-		Team t = new Team();
-		Set<League> sl = t.getLeague();
-		sl.add(l);
-		t.setTeamID(teamId);
+		t.getLeague().add(l);
 		t.setUser(au);
-		t.setLeague(sl);
 		teamRepo.save(t);
-		
 		Set<Team> teams = l.getTeam();
 		teams.add(t);
 		l.setTeam(teams);

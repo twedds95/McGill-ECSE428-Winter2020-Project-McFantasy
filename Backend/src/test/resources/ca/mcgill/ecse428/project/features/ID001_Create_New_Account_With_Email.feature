@@ -9,11 +9,11 @@ Given person <name> with email <email> and password <password> and matching conf
 When person <name> requests to create a new account on McFantasy Sports
 Then a new account with <email> and <password> is generated
 
-| name                  | email         	     | password      | confirmedPassword |
-| Archie Andrews  | arch@gmail.com	     |Operator        |Operator       	    |
-| Betty Cooper      | betty@hotmail.com  |12345abcde   |12345abcde    	    |
-| Jughead Jones   | jonesy@mail.com    |67890$asdf    |67890$asdf    	    |
-| Veronica Lodge  | vLodge@gmail.com |zxcvb1234      |zxcvb1234    	    |
+| name              | email         	     | password       | confirmedPassword |
+| Archie Andrews    | arch@gmail.com	     |Operator        |Operator       	  |
+| Betty Cooper      | betty@hotmail.com    |12345abcde      |12345abcde    	    |
+| Jughead Jones     | jonesy@mail.com      |67890$asdf      |67890$asdf    	    |
+| Veronica Lodge    | vLodge@gmail.com     |zxcvb1234       |zxcvb1234    	    |
 
 Scenario Outline: Existing user attempts to become a user (Error Flow)
 
