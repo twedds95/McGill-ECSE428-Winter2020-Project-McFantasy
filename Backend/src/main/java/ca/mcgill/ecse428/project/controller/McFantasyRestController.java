@@ -192,4 +192,13 @@ public class McFantasyRestController {
 		return teamStandings;
 	}
 	
+	/*
+	 * @author Ryan Arndtsen
+	 */
+	@PostMapping(value= {"/league/{teamID}", "/league/{teamID}/"})
+	public League joinLeague(@PathVariable("teamID") int teamID, 
+			@RequestParam(name="leagueName") String leagueName, 
+			@RequestParam(name="user") AppUser user) throws IllegalArgumentException, SerialException, SQLException, IOException {
+		return service.joinLeague(service.getLeague(leagueName),user,teamID);
+	}
 }
