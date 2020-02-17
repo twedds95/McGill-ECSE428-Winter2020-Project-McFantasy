@@ -9,6 +9,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -287,6 +288,44 @@ public class McFantasyService {
 			resultList.add(t);
 		}
 		return resultList;
+	}
+	
+	/**
+	 * @author Caleb Lim
+	 */
+	@Transactional
+	public League leaveLeague(Team team, League league) {
+		
+		String error = "";
+		if (team == null) {
+			error += "Team is null!";
+		} else if (league == null) {
+			error += "League is null!";
+		}
+		if (error.length()>0) {
+			throw new IllegalArgumentException(error);
+		}
+		
+		League l = leagueRepo.findByName(league.getName());
+		Team t = teamRepo.findByName(team.getName());
+		AppUser u = t.getUser();
+		
+		Set<Team> lTeams = l.getTeam();
+		lTeams.remove(t);
+		l.setTeam(lTeams);
+		leagueRepo.save(l);
+		
+		Set<Team> uTeams = u.getTeam();
+		uTeams.remove(t);
+		u.setTeam(uTeams);
+		Set<League> uLeagues = u.getLeague();
+		uLeagues.remove(l);
+		u.setLeague(uLeagues);
+		userRepo.save(u);
+		
+		teamRepo.delete(t);
+		
+		return l;
 	}
 
 	/**
