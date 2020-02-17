@@ -345,6 +345,9 @@ public class McFantasyService {
 		if (appUser == null) {
 			error += "User is null!";
 		}
+		if (teamId == 0) {
+			error += "TeamID cannot have value 0!";
+		}
 		if (error.length() > 0 ){
 			throw new IllegalArgumentException(error);
 		}
