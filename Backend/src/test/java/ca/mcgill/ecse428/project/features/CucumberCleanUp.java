@@ -25,17 +25,17 @@ public class CucumberCleanUp {
 	@Autowired
 	private TeamRepository teamRepo;
 	
-	/**
-	 * Tear Down
-	 * 
-	 */
-	@After
-	public void tearDown() {
-		appUserRepo.deleteAll();
-		leagueRepo.deleteAll();
-		gameRepo.deleteAll();
-		playerRepo.deleteAll();
-		seasonStatsRepo.deleteAll();
-		teamRepo.deleteAll();
-	}
+//	/**
+//	 * Tear Down
+//	 * 
+//	 */
+//	@After
+//	public void tearDown() {
+//		appUserRepo.deleteAll();
+//		leagueRepo.deleteAll();
+//		gameRepo.deleteAll();
+//		playerRepo.deleteAll();
+//		seasonStatsRepo.deleteAll();
+//		teamRepo.deleteAll();
+//	}
 }

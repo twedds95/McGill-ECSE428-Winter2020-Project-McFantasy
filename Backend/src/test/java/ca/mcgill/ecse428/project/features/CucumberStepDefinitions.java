@@ -35,9 +35,10 @@ public class CucumberStepDefinitions {
 	
 	@Given("person {string} with email {string}")
 	public void person_with_email(String string, String string2) {
-		String password = "Qwert1234!";
-		 byte[] picture = {'1'};
-	    service.createUser(string2, string, password, picture);
+//		String password = "Qwert1234!";
+//		 byte[] picture = {'1'};
+//	    service.createUser(string2, string, password, picture);
+	    throw new cucumber.api.PendingException();
 	}
 	
 	@Then("an {string} message is issued")
@@ -224,6 +225,36 @@ public class CucumberStepDefinitions {
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new cucumber.api.PendingException();
 	}
+	
+	@Given("user {string} is logged in")
+	public void user_is_logged_in(String string) {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+
+	@When("the user inputs a valid league name {string} and clicks Create League button")
+	public void the_user_inputs_a_valid_league_name_and_clicks_Create_League_button(String string) {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+
+	@Then("the new league with name {string} will be created")
+	public void the_new_league_with_name_will_be_created(String string) {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+
+	@When("the user inputs an invalid league name {string}{string} and clicks Create League button")
+	public void the_user_inputs_an_invalid_league_name_and_clicks_Create_League_button(String string, String string2) {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
+
+	@When("the user inputs an invalid league name {string} and clicks Create League button")
+	public void the_user_inputs_an_invalid_league_name_and_clicks_Create_League_button(String string) {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
 
 	@When("the user attemps to join League {string} with their team {string}")
 	public void the_user_attemps_to_join_League_with_their_team(String string, String string2) {
@@ -278,8 +309,6 @@ public class CucumberStepDefinitions {
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new cucumber.api.PendingException();
 	}
-
-
 
 	
 }
