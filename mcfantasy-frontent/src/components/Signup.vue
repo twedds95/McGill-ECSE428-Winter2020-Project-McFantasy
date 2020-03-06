@@ -27,23 +27,22 @@
       <div class="stuff">  
         <table class="container-table">
             <tr class="item">
-            <input class="item" type="text" placeholder="Name" v-model="name" />
+            <input class="item" type="text" placeholder="Email" v-model="email" />
             </tr>
             <tr class="item">
-            <input class="item" type="text" placeholder="Username" v-model="username" />
+            <input class="item" type="text" placeholder="Name" v-model="name" />
             </tr>
-            <input class="item" type="text" placeholder="Email" v-model="email" />
             <tr class="item">
             <input class="item" type="password" placeholder="Password" v-model="password" />
             </tr>
             <tr class="item">
-                <input type="file" class="special"
+                <input type="file" ref="pic" class="special"
                     id="pic" name="pic"
-                    accept="image/png, image/jpeg, image/pdf"> 
+                    accept="image/png, image/jpeg, image/pdf" v-on:change="handleFile()"> 
             </tr>
             <tr class="item">
             <input
-                @click="signup(name, username, userId, email, password)"
+                @click="signup(email, name, password)"
                 type="submit"
                 value="Sign Up"
                 class="btn btn-diff py-2 px-4 text-white"

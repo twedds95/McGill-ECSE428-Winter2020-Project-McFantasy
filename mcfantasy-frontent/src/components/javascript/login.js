@@ -31,7 +31,7 @@ export default {
     name: 'login',
     data() {
         return {
-            username: '',
+            email: '',
             password: '',
             errorLogin: '',
             response: '',
@@ -41,36 +41,41 @@ export default {
         signup() {
             this.$router.push('SignUp');
         },
-        login(username, password) {
-            if (username == '') {
-                var errorMsg = "Invalid username"
+        login(email, password) {
+            var errorMsg = "";
+            if (email == '') {
+                errorMsg = "Invalid email"
                 //alert("a");
                 console.log(errorMsg)
                 this.errorLogin = errorMsg
                 return
             }
             if (password == '') {
-                var errorMsg = "Invalid password"
+                errorMsg = "Invalid password"
                 console.log(errorMsg)
                 this.errorLogin = errorMsg
                 return
             }
-            AXIOS.get(`/students/` + username + '/' + password)
+            let params = {
+                password: password
+            }
+            AXIOS.post(`/login/` + email, {}, {params: params})
                 .then(response => {
+                    console.log(this.response)
                     // JSON responses are automatically parsed.
                     this.response = response.data
-                    window.sessionStorage.setItem("username", username)
+                    window.sessionStorage.setItem("email", email)
                     this.errorLogin = ''
                     // PROBLEMS HERE
-                    if (response.data !== 200) {
+                    if (response.status !== 200) {
                         this.errorLogin = response.data
                         console.log(this.response)
                     } else {
-                        this.$router.push('Hello');
+                        this.$router.push('Home');
                     }
                 })
                 .catch(e => {
-                    var errorMsg = e.message
+                    errorMsg = e.message
                     console.log(errorMsg)
                     this.errorLogin = errorMsg
                 });

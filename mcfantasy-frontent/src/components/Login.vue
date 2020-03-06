@@ -29,10 +29,10 @@
       <div class="half right" data-aos="fade-up">
         <div class="container" align="center">
           <div class="login-grid" style="padding-right:0%">
-            <input class="login-text" type="text" placeholder="Username" v-model="username" />
+            <input class="login-text" type="text" placeholder="Email" v-model="email" />
             <input class="login-text" type="password" placeholder="Password" v-model="password" />
             <input
-              @click="login(username, password)"
+              @click="login(email, password)"
               type="submit"
               value="Login"
               class="btn btn-primary py-2 px-4 text-white"

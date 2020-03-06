@@ -29,11 +29,11 @@ export default {
     name: 'signup',
     data() {
         return {
-            name: '',
-            username: '',
-            userId: '',
             email: '',
+            name: '',
+            userId: '',
             password: '',
+            pic: '',
             errorSignup: '',
             response: '',
         }
@@ -45,51 +45,36 @@ export default {
         login() {
             this.$router.push('/');
         },
-        signup(name, username, userId, email, password) {
-            if (name == '') {
-                var errorMsg = "Invalid name"
-                console.log(errorMsg)
-                this.errorSignup = errorMsg
-                return
+        handleFile(){
+            this.pic = this.$refs.pic.files[0];
+        },
+        signup(email, name, password) {
+            var errorMsg = "";
+            let params = {
+                name: name,
+                password: password,
             }
-            if (username == '') {
-                var errorMsg = "Invalid username "
-                console.log(errorMsg)
-                this.errorSignup = errorMsg
-                return
-            }
-            if (email == '') {
-                var errorMsg = "Invalid email "
-                console.log(errorMsg)
-                this.errorSignup = errorMsg
-                return
-            }
-            if (password == '') {
-                var errorMsg = "Invalid password "
-                console.log(errorMsg)
-                this.errorSignup = errorMsg
-                return
-            }
+            let formData = new FormData();
+            formData.append("picture", this.pic);
 
-            AXIOS.post(`/students/` + name + '?' + "email=" + email + "&username=" + username + "&password=" + password, {}, {})
+            AXIOS.post(`/user/` + email, formData, {headers: {'Content-Type': 'multipart/form-data'}, params: params})
                 .then(response => {
                     // JSON responses are automatically parsed.
                     this.response = response.data
                     console.log(this.response)
                     if (this.response.name == null) {
-                        this.errorSignup = 'UserID is not a Valid Student ID!'
+                        this.errorSignup = 'Email is not valid!'
                         this.response = ''
                     } else {
-                        this.response = 'Student Created!'
+                        this.response = 'User Created!'
                         this.errorSignup = ''
                     }
                     this.name = ''
-                    this.username = ''
                     this.email = ''
                     this.password = ''
                 })
                 .catch(e => {
-                    var errorMsg = e.message
+                    errorMsg = e.message
                     console.log(errorMsg)
                     this.errorSignup = errorMsg
                     this.response = ''
