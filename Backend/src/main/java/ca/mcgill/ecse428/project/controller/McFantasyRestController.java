@@ -87,13 +87,14 @@ public class McFantasyRestController {
 	/**
 	 * @author Ali Tapan
 	 */
-	@GetMapping(value = { "/login/{email}", "/login/{email}/" })
+	@PostMapping(value = { "/login/{email}", "/login/{email}/" })
 	public AppUser login(@PathVariable("email") String email, @RequestParam("password") String password) {
 		List<AppUser> users = new ArrayList<>();
 		for(AppUser user : service.getAllUsers()) {
 			if(user.getEmail().equals(email)) {
 				if(user.getPassword().equals(password)) {
 					//users.add(convertToDto(user));
+					return user;
 				} else {
 					throw new IllegalArgumentException("Incorrect password! Try again!");
 				}
