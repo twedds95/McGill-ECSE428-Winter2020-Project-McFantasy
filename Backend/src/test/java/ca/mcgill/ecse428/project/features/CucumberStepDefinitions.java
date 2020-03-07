@@ -1,22 +1,40 @@
 package ca.mcgill.ecse428.project.features;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
+import java.io.File;
+import java.io.IOException;
+import java.sql.SQLException;
+
+import javax.sql.rowset.serial.SerialException;
+
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.web.multipart.MultipartFile;
+
+import ca.mcgill.ecse428.project.controller.McFantasyRestController;
 import ca.mcgill.ecse428.project.dao.AppUserRepository;
 import ca.mcgill.ecse428.project.dao.GameRepository;
 import ca.mcgill.ecse428.project.dao.LeagueRepository;
 import ca.mcgill.ecse428.project.dao.PlayerRepository;
 import ca.mcgill.ecse428.project.dao.SeasonStatsRepository;
 import ca.mcgill.ecse428.project.dao.TeamRepository;
+import ca.mcgill.ecse428.project.model.AppUser;
 import ca.mcgill.ecse428.project.service.McFantasyService;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class CucumberStepDefinitions {
 	
 	@Autowired
 	private McFantasyService service;
+	
 	@Autowired
 	private AppUserRepository appUserRepo;
 	@Autowired
@@ -30,69 +48,60 @@ public class CucumberStepDefinitions {
 	@Autowired
 	private TeamRepository teamRepo;
 	
-	String error = "";
+	public static String error = "";
 	
-	
-	@Given("person {string} with email {string}")
-	public void person_with_email(String string, String string2) {
-//		String password = "Qwert1234!";
-//		 byte[] picture = {'1'};
-//	    service.createUser(string2, string, password, picture);
-	    throw new cucumber.api.PendingException();
-	}
-	
-	@Then("an {string} message is issued")
-	public void an_message_is_issued(String string) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new cucumber.api.PendingException();
-	}
-	@Then("a {string} message is issued")
-	public void a_message_is_issued(String string) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new cucumber.api.PendingException();
+	public static String name;
+	public static String email;
+	public static String password;
+	public static byte[] picture = {'1'};
+	@Given("person {string} with email {string} and password {string}")
+	public void person_with_email(String n, String e, String p) {
+		name = n;
+		email = e;
+		password = p;
 	}
 	
-	@Given("person {string} with email {string} and password {string} and matching confirmed password {string}")
-	public void person_with_email_and_password_and_matching_confirmed_password(String string, String string2, String string3, String string4) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new cucumber.api.PendingException();
+	@When("they request to create a new account on McFantasy Sports")
+	public void person_requests_create_account() throws IllegalArgumentException, SerialException, SQLException, IOException {
+		System.out.println(service);
+		service.createUser(email, name, password, picture);
 	}
-
-	@When("person {string} with email {string} requests to create a new account on McFantasy Sports")
-	public void person_with_email_requests_to_create_a_new_account_on_McFantasy_Sports(String string, String string2) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new cucumber.api.PendingException();
+	
+	@Then("a new user with email {string} and password {string} is generated")
+	public void a_new_account_with_email_and_password_is_generated(String email, String password) {
+		AppUser user = new AppUser();
+		try {
+			user = service.getUser(email);
+		} catch (IllegalArgumentException e) {
+			fail();
+		}
+		assertEquals(email, user.getEmail());
+		assertEquals(password, user.getPassword());
 	}
-
-	@Then("a new account with email {string} and password {string} is generated")
-	public void a_new_account_with_email_and_password_is_generated(String string, String string2) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new cucumber.api.PendingException();
-	}
+	
 
 	@Given("person {string} with email {string} is user of McFantasy Sports")
-	public void person_with_email_is_user_of_McFantasy_Sports(String string, String string2) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new cucumber.api.PendingException();
+	public void person_with_email_is_user_of_McFantasy_Sports(String n, String e) {
+		name = n;
+		email = e;
 	}
 
-	@When("person {string} requests to create a new account with username {string}")
-	public void person_requests_to_create_a_new_account_with_username(String string, String string2) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new cucumber.api.PendingException();
+	@When("person requests to create a new account on McFantasy Sports")
+	public void person_requests_to_create_a_new_account_with_username() {
+		try {
+			service.createUser(email, name, password, picture);
+			service.createUser(email, name, password, picture);
+		} catch (IllegalArgumentException e) {
+			error = e.getMessage();
+		}
 	}
 
-	@Then("a new account with {string} and {string} is generated")
-	public void a_new_account_with_and_is_generated(String string, String string2) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new cucumber.api.PendingException();
+	@Then("a {string} message is issued")
+	public void an_message_is_issued(String string) {
+		assertEquals(error, "User with this email has already been created!");
 	}
 
-	@When("person {string} requests to create a valid {string} and confirmation {string} when creating a new account")
-	public void person_requests_to_create_a_valid_and_confirmation_when_creating_a_new_account(String string, String string2, String string3) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new cucumber.api.PendingException();
-	}
+	
 
 	@Given("user with email {string} is logged in")
 	public void user_with_email_is_logged_in(String string) {

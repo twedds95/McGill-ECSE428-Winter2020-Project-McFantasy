@@ -37,13 +37,10 @@ public class McFantasyRestController {
 			@RequestParam(name = "password") String password,
 			@RequestParam(name = "picture") MultipartFile picfile) throws IllegalArgumentException, SerialException, SQLException, IOException {
 		
-		byte[] bytes;
-		if (picfile.getSize() > 0) {
+		byte[] bytes = {'1'};
+		if (picfile != null && picfile.getSize() > 0) {
 			bytes = picfile.getBytes();
-		} else {
-			bytes = null;
 		}
-	
 		
 		AppUser user = service.createUser(email, name, password, bytes);
 		return user;

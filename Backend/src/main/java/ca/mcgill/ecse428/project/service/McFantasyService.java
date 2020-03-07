@@ -48,7 +48,6 @@ public class McFantasyService {
 
 	@Transactional
 	public AppUser createUser(String email, String name, String password, byte[] bytes) {
-
 		if (email == null || email.trim().length() == 0) {
 			throw new IllegalArgumentException("User email cannot be empty!");
 		} else if (userRepo.existsById(email)) {

@@ -5,9 +5,9 @@ So that I can create or join fantasy sports leagues
 
 Scenario Outline: People with different unique emails (Normal Flow)
 
-Given person "<name>" with email "<email>" and password "<password>" and matching confirmed password "<confirmedPassword>"
-When person "<name>" with email "<email>" requests to create a new account on McFantasy Sports
-Then a new account with email "<email>" and password "<password>" is generated
+Given person "<name>" with email "<email>" and password "<password>"
+When they request to create a new account on McFantasy Sports
+Then a new user with email "<email>" and password "<password>" is generated
 
 Examples:
 
@@ -20,8 +20,8 @@ Examples:
 Scenario Outline: Existing user attempts to become a user (Error Flow)
 
 Given person "<name>" with email "<email>" is user of McFantasy Sports
-When person "<name>" with email "<email>" requests to create a new account on McFantasy Sports
-Then an "Already registered" message is issued
+When person requests to create a new account on McFantasy Sports
+Then a "User with this email has already been created!" message is issued
 
 Examples:
 
