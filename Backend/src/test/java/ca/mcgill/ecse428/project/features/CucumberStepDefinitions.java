@@ -33,20 +33,8 @@ import io.cucumber.java.en.When;
 public class CucumberStepDefinitions {
 	
 	@Autowired
-	private McFantasyService service;
+	private McFantasyRestController api;
 	
-	@Autowired
-	private AppUserRepository appUserRepo;
-	@Autowired
-	private GameRepository gameRepo;
-	@Autowired
-	private LeagueRepository leagueRepo;
-	@Autowired
-	private PlayerRepository playerRepo;
-	@Autowired
-	private SeasonStatsRepository seasonStatsRepo;
-	@Autowired
-	private TeamRepository teamRepo;
 	
 	public static String error = "";
 	
@@ -63,15 +51,14 @@ public class CucumberStepDefinitions {
 	
 	@When("they request to create a new account on McFantasy Sports")
 	public void person_requests_create_account() throws IllegalArgumentException, SerialException, SQLException, IOException {
-		System.out.println(service);
-		service.createUser(email, name, password, picture);
+		api.createUser(email, name, password, null);
 	}
 	
 	@Then("a new user with email {string} and password {string} is generated")
 	public void a_new_account_with_email_and_password_is_generated(String email, String password) {
 		AppUser user = new AppUser();
 		try {
-			user = service.getUser(email);
+			user = api.getUser(email);
 		} catch (IllegalArgumentException e) {
 			fail();
 		}
@@ -87,10 +74,10 @@ public class CucumberStepDefinitions {
 	}
 
 	@When("person requests to create a new account on McFantasy Sports")
-	public void person_requests_to_create_a_new_account_with_username() {
+	public void person_requests_to_create_a_new_account_with_username() throws SerialException, SQLException, IOException {
 		try {
-			service.createUser(email, name, password, picture);
-			service.createUser(email, name, password, picture);
+			api.createUser(email, name, password, null);
+			api.createUser(email, name, password, null);
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
