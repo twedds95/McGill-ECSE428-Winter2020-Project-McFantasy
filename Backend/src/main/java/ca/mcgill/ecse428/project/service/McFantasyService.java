@@ -421,4 +421,13 @@ public class McFantasyService {
 		return l;
 	}
 
+	public void deleteUser(AppUser user, String password) {
+		AppUser appUser = userRepo.findByEmail(user.getEmail());
+		if (appUser.getPassword().equals(password)){
+			userRepo.delete(user);
+		}
+		else {
+			throw new IllegalArgumentException("Unauthorized request");
+		}
+	}
 }

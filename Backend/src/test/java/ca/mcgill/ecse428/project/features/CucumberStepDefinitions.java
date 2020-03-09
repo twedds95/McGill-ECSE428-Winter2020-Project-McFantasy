@@ -37,6 +37,8 @@ public class CucumberStepDefinitions {
 
 	@Autowired
 	private TeamRepository teamRepo;
+
+
 	
 	public static String error = "";
 	
@@ -176,25 +178,28 @@ public class CucumberStepDefinitions {
 
 	@Given("person’s email {string} and password {string} is an existing user")
 	public void person_s_email_and_password_is_an_existing_user(String string, String string2) throws IOException, SQLException {
+		email = string;
 		api.createUser(string, name, string2, null);
 	}
 
 	@When("a person {string} requests for their account to be deleted with confirmation password {string}")
-	public void a_person_requests_for_their_account_to_be_deleted_with_confirmation_password(String string, String string2) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new cucumber.api.PendingException();
+	public void a_person_requests_for_their_account_to_be_deleted_with_confirmation_password(String string, String string2) throws IOException, SQLException {
+	    AppUser user = api.getUser(string);
+		try {
+	    	api.deleteUser(user, string2);
+		} catch (IllegalArgumentException e) {
+			error = e.getMessage();
+		}
 	}
 
 	@Then("they’re information will be deleted from the database and their account will become invalid")
 	public void they_re_information_will_be_deleted_from_the_database_and_their_account_will_become_invalid() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new cucumber.api.PendingException();
+	    assertNull(service.getUser(email));
 	}
 
 	@Then("a record of the attempt is recorded in the database to limit requests.")
 	public void a_record_of_the_attempt_is_recorded_in_the_database_to_limit_requests() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new cucumber.api.PendingException();
+
 	}
 
 	@Given("a league with {string} exists")
