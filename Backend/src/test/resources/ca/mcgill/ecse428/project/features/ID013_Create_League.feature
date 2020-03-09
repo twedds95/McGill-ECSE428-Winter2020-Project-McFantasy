@@ -23,7 +23,7 @@ Then an "League name is not valid" message is issued
 Examples: 
 
 |   email      |    league_name  |
-| jo@mail.com  |      ""         |
+| jo@mail.com  |                 |
 | jo@mail.com  |      1          |
 
 Scenario Outline: Attempt to Create League With a Name that is Already Used (Error Flow)

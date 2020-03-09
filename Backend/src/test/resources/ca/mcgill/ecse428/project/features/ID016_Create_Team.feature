@@ -7,7 +7,7 @@ So that this team can be added to the league
 Scenario Outline: Create Team (Normal Flow)
 
 Given user with email "<email>" is logged in
-When the user attemps to create a new team "<teamName>" 
+When the user attemps to create a new team "<team>"
 Then the user's "<team>" will be created 
 
 Examples:
@@ -19,12 +19,12 @@ Examples:
 
 Scenario Outline: Attempt to Create Team With Invalid Name (Error Flow)
 
-Given user with email "<email>" is logged in
-When the user attemps to create a new team "<teamName>"
-Then an "Team name is not valid" message is issued
+  Given user with email "<email>" is logged in
+  When the user attemps to create a new team "<team>"
+  Then an "Team name is not valid" message is issued
 
 Examples:
 
 |     email     |    team      |
-|  doe@mail.com |    ""        |
+|  doe@mail.com |              |
 |  doe@mail.com |     1        |  

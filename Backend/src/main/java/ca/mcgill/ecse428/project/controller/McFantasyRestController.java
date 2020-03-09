@@ -1,26 +1,20 @@
 package ca.mcgill.ecse428.project.controller;
 
+import ca.mcgill.ecse428.project.model.AppUser;
+import ca.mcgill.ecse428.project.model.League;
+import ca.mcgill.ecse428.project.model.Player;
+import ca.mcgill.ecse428.project.model.Team;
+import ca.mcgill.ecse428.project.service.McFantasyService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.sql.rowset.serial.SerialException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-
-import javax.sql.rowset.serial.SerialException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
-import ca.mcgill.ecse428.project.model.AppUser;
-import ca.mcgill.ecse428.project.model.League;
-import ca.mcgill.ecse428.project.model.Team;
-import ca.mcgill.ecse428.project.model.Player;
-import ca.mcgill.ecse428.project.service.McFantasyService;
 
 
 
@@ -54,19 +48,15 @@ public class McFantasyRestController {
 			@RequestParam(name = "newname") String newname, 
 			@RequestParam(name = "newpassword") String newpassword,
 			@RequestParam(name = "newpicture") MultipartFile newpicfile) throws IllegalArgumentException, SerialException, SQLException, IOException {
-		
-		byte[] bytes;
-		if (picfile.getSize() > 0) {
+
+		byte[] bytes = {'1'};
+		if (picfile != null && picfile.getSize() > 0) {
 			bytes = picfile.getBytes();
-		} else {
-			bytes = null;
 		}
 		
-		byte[] newbytes;
-		if (picfile.getSize() > 0) {
-			newbytes = picfile.getBytes();
-		} else {
-			newbytes = null;
+		byte[] newbytes = {'1'};
+		if (newpicfile != null && newpicfile.getSize() > 0) {
+			bytes = newpicfile.getBytes();
 		}
 	
 		AppUser user = service.getUser(email);

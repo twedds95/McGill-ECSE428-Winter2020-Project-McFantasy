@@ -18,18 +18,18 @@ Scenario Outline: The user changes account username to an invalid format usernam
 
 Given user with email "<email>" is logged in
 When the user attempts to change username with username "<username>"
-Then an "Invalid username" message is issued
+Then an "Please input all required parameters" message is issued
 
 Examples:
 |     email  |   username |
-| jd@mail.com|    ""     |
+| jd@mail.com|            |
 
 Scenario Outline: The user changes account username to a pre-existing username (Error Flow)
 
 Given there exists a user with email "<email1>" and username "<username>"
 Given user with email "<email>" is logged in
 When the user attempts to change username with username "<username>"
-Then an "Username not available" message is issued
+Then an "User with this username already exists!" message is issued
 
 Examples:
 |     email  |   username |    email1    |

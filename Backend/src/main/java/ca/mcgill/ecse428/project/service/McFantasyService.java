@@ -2,28 +2,18 @@
 package ca.mcgill.ecse428.project.service;
 
 
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import ca.mcgill.ecse428.project.dao.AppUserRepository;
-import ca.mcgill.ecse428.project.dao.GameRepository;
-import ca.mcgill.ecse428.project.dao.LeagueRepository;
-import ca.mcgill.ecse428.project.dao.PlayerRepository;
-import ca.mcgill.ecse428.project.dao.SeasonStatsRepository;
-import ca.mcgill.ecse428.project.dao.TeamRepository;
+import ca.mcgill.ecse428.project.dao.*;
 import ca.mcgill.ecse428.project.model.AppUser;
 import ca.mcgill.ecse428.project.model.League;
 import ca.mcgill.ecse428.project.model.Player;
 import ca.mcgill.ecse428.project.model.Team;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 @Service
 public class McFantasyService {
 
@@ -76,14 +66,16 @@ public class McFantasyService {
 			throw new IllegalArgumentException("User email cannot be empty!");
 		} else if (!userRepo.existsById(email)) {
 			throw new IllegalArgumentException("No user with this email exists!");
+		} else if (!name.equals(newname) && userRepo.existsAppUserByName(newname)) {
+			throw new IllegalArgumentException("User with this username already exists!");
 		}
 
 
 		AppUser user = userRepo.findByEmail(email);
-		if (newname == null) {throw new IllegalArgumentException("Please input all required parameters");}
-		if (newpassword == null) {throw new IllegalArgumentException("Please input all required parameters");}
-		if (newbytes == null) {throw new IllegalArgumentException("Please input all required parameters");}
-		
+		if (newname == null || newname.length() == 0) {throw new IllegalArgumentException("Please input all required parameters");}
+		if (newpassword == null || newpassword.length() == 0) {throw new IllegalArgumentException("Please input all required parameters");}
+		if (newbytes == null ) {throw new IllegalArgumentException("Please input all required parameters");}
+
 		userRepo.delete(user);
 		AppUser updateduser = createUser(email,newname,newpassword,newbytes);
 		userRepo.save(updateduser);
@@ -125,7 +117,7 @@ public class McFantasyService {
 		// Check if the inputs are wrong
 		String error ="";
 		if (name == null || name.trim().length() == 0) {
-			error += "Team name cannot be empty!";
+			error += "Team name is not valid";
 		}
 		if (teamID <= 0) {
 			error += "Team ID cannot be zero or less than zero!";
@@ -242,6 +234,9 @@ public class McFantasyService {
 		if (name == null || name.trim().length() == 0) {
 			error += "League name cannot be empty!";
 		}
+		if (!leagueRepo.existsById(name)) {
+			error += "League does not exist";
+		}
 		if (error.length() > 0 ){
 			throw new IllegalArgumentException(error);
 		}
@@ -257,7 +252,9 @@ public class McFantasyService {
 	public League createLeague(String name, AppUser user) {
 		String error ="";
 		if (name == null || name.trim().length() == 0) {
-			error += "League name cannot be empty!";
+			error += "League name is not valid";
+		}else if (leagueRepo.existsById(name)) {
+			throw new IllegalArgumentException("League name is already used");
 		}
 
 		//need to check if league name already exists
@@ -333,6 +330,16 @@ public class McFantasyService {
 	 */
 	@Transactional
 	public League addTeam(Team team, League league){
+		String error = "";
+		if (!leagueRepo.existsById(league.getName())){
+			error += "League does not exist";
+		}
+//		if (!teamRepo.existsById(team.getTeamID())){
+//			error += "Team does not exist";
+//		}
+		if (error.length() > 0){
+			throw new IllegalArgumentException(error);
+		}
 		League l = leagueRepo.findByName(league.getName());
 		Team t = teamRepo.findByName(team.getName());
 		

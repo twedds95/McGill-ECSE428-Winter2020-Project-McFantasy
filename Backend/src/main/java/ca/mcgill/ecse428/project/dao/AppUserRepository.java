@@ -7,4 +7,5 @@ import ca.mcgill.ecse428.project.model.AppUser;
 
 public interface AppUserRepository extends CrudRepository<AppUser, String> {
 	AppUser findByEmail(String email);
+	boolean existsAppUserByName(String name);
 }
