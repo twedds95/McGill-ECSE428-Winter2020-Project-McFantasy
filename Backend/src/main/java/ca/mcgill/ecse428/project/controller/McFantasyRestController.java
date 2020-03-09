@@ -181,6 +181,14 @@ public class McFantasyRestController {
 			@RequestParam(name = "leagueName") String leagueName) throws IllegalArgumentException, SerialException, SQLException, IOException{
 		return service.addTeam(team, service.getLeague(leagueName));
 	}
+
+	@DeleteMapping(value = {"/delete/{user}", "/delete/{user}/"})
+	public void deleteUser(@PathVariable("user") AppUser user,
+							   @RequestParam("password")String password
+							  )  throws IllegalArgumentException, SerialException, SQLException, IOException {
+
+		service.deleteUser(user, password);
+	}
 	
 //	returns Ordered ArrayList of Team Standings
 	@GetMapping(value = {"/leagueStandings/{name}", "/leagueStandings/{name}/"})

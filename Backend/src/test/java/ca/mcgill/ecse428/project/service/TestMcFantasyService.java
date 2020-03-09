@@ -1,17 +1,10 @@
 package ca.mcgill.ecse428.project.service;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.fail;
-
-import java.sql.Date;
-import java.sql.Time;
-import java.util.Calendar;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import org.assertj.core.util.Arrays;
+import ca.mcgill.ecse428.project.dao.*;
+import ca.mcgill.ecse428.project.model.AppUser;
+import ca.mcgill.ecse428.project.model.League;
+import ca.mcgill.ecse428.project.model.Player;
+import ca.mcgill.ecse428.project.model.Team;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,8 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import ca.mcgill.ecse428.project.model.*;
-import ca.mcgill.ecse428.project.dao.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -218,7 +214,7 @@ public class TestMcFantasyService {
 		catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
-		assertEquals("Team name cannot be empty!", error);
+		assertEquals("Team name is not valid", error);
 	}
 	
 	@Test
@@ -231,8 +227,13 @@ public class TestMcFantasyService {
 	
 	@Test
 	public void testGetLeagueByNonExistingName() {
-		League league = service.getLeague(NON_EXISTING_LEAGUE);
-		assertNull(league);
+		String err = "";
+		try {
+			League league = service.getLeague(NON_EXISTING_LEAGUE);
+		}catch (IllegalArgumentException e){
+			err = e.getMessage();
+		}
+		assertEquals("League does not exist", err);
 	}
 	
 	@Test
