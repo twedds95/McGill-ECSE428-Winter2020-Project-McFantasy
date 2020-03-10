@@ -18,7 +18,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import javax.sql.rowset.serial.SerialException;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
@@ -335,4 +335,41 @@ public class CucumberStepDefinitions {
 		assertEquals(arg0, error);
 	}
 
+	@Given("the league {string} has the following teams")
+	public void the_league_has_the_following_teams(String string, io.cucumber.datatable.DataTable dataTable) throws IOException, SQLException {
+		List<Map<String, String>> list = dataTable.asMaps(String.class, String.class);
+		for (int i = 0; i < list.size();i++) {
+			AppUser user = api.createUser(list.get(i).get("userEmail"), list.get(i).get("userName"), password, null);
+			api.createTeam(i+1, list.get(i).get("teamName"), user);
+			api.joinLeague(i+1, string, user);
+		}
+	}
+
+	List<String> teams = new ArrayList<>();
+	@When("the user attemps to view the teams in the league {string}")
+	public void the_user_attemps_to_view_the_teams_in_the_league(String string) {
+		try {
+			List<Team> teamsList = api.getTeamsInLeague(string);
+			for (Team x : teamsList)
+				teams.add(x.getName());
+		}
+		catch (Exception e){
+			error = e.getMessage();
+		}
+	}
+
+	@Then("the list of teams {string} in the league {string} is shown")
+	public void the_list_of_teams_in_the_league_is_shown(String string, String string2) {
+		List<String> list = new ArrayList<>();
+		String[] ss = string.split(",");
+		for (int i = 0; i < ss.length; i++) {
+			ss[i] = ss[i].trim();
+			list.add(ss[i]);
+		}
+		for (int i = 0; i < list.size(); i++) {
+			if (!teams.contains(list.get(i))){
+				fail();
+			}
+		}
+	}
 }

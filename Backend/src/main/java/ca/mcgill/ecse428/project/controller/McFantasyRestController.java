@@ -208,4 +208,15 @@ public class McFantasyRestController {
 			@RequestParam(name="user") AppUser user) throws IllegalArgumentException, SerialException, SQLException, IOException {
 		return service.joinLeague(service.getLeague(leagueName),user,teamID);
 	}
+
+	@GetMapping(value= {"/league/teams", "/league/teams/"})
+	public List<Team> getTeamsInLeague(@RequestParam(name="leagueName") String name) {
+		League league = service.getLeague(name);
+		Set<Team> teamsSet = league.getTeam();
+		List<Team> teams = new ArrayList<>();
+		for (Team x:teamsSet) {
+			teams.add(x);
+		}
+		return teams;
+	}
 }
