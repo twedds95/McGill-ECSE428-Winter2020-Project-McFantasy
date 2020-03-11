@@ -1,7 +1,7 @@
 Feature: View Teams in a League
 
 As a user of McFantasy Sports Web App
-I would like to be able to view the teams that are already part of a team
+I would like to be able to view the teams that are already part of a league
 
 Scenario Outline: View Teams of an existing League (Normal Flow)
 

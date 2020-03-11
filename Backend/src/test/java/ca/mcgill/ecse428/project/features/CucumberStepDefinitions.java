@@ -372,4 +372,42 @@ public class CucumberStepDefinitions {
 			}
 		}
 	}
+
+	@Given("the league {string} has the following teams with the the followings statistics")
+	public void the_league_has_the_following_teams_with_the_the_followings_statistics(String string, io.cucumber.datatable.DataTable dataTable) throws IOException, SQLException {
+		List<Map<String, String>> list = dataTable.asMaps(String.class, String.class);
+		for (int i = 0; i < list.size();i++) {
+			AppUser user = api.createUser(list.get(i).get("userEmail"), list.get(i).get("userName"), password, null);
+			api.createTeam(i+1, list.get(i).get("teamName"), user);
+			api.joinLeague(i+1, string, user);
+			Team team = teamRepo.findByName(list.get(i).get("teamName"));
+			team.setPoints(Integer.valueOf(list.get(i).get("points")));
+			if (list.get(i).get("wins") != null) {
+				team.setWins(Integer.valueOf(list.get(i).get("wins")));
+			}
+			teamRepo.save(team);
+		}
+	}
+
+	@When("the user attemps to view the standings of league {string}")
+	public void the_user_attemps_to_view_the_standings_of_league(String string) throws IOException, SQLException {
+		List<Team> teamsList = api.getLeagueStandings(string);
+		for (Team t : teamsList) {
+			teams.add(t.getName());
+		}
+	}
+
+	@Then("the standings in the league {string} are shown to be the following")
+	public void the_standings_in_the_league_are_shown_to_be_the_following(String string, io.cucumber.datatable.DataTable dataTable) {
+		List<Map<String, String>> list = dataTable.asMaps(String.class, String.class);
+		for (int i = 0; i < list.size();i++) {
+			int ranking = Integer.valueOf(list.get(i).get("standing"));
+			for (int j = 0; j < teams.size(); j++) {
+				if (list.get(i).get("teamName").equals(teams.get(j))){
+					assertEquals(ranking, j+1);
+				}
+			}
+		}
+	}
+
 }
