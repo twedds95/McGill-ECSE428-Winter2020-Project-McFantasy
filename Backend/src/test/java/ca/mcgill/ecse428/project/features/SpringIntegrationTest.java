@@ -1,13 +1,15 @@
 package ca.mcgill.ecse428.project.features;
 
+import ca.mcgill.ecse428.project.McFantasyApplication;
+import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpHeaders;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
-import ca.mcgill.ecse428.project.McFantasyApplication;
 
-@RunWith(SpringJUnit4ClassRunner.class)
+@Ignore
+@RunWith(SpringRunner.class)
 @SpringBootTest(
         classes = McFantasyApplication.class,
         webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)

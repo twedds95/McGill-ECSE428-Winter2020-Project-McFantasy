@@ -10,21 +10,21 @@ import ca.mcgill.ecse428.project.service.McFantasyService;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.junit.runner.RunWith;
+import org.junit.Ignore;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.sql.rowset.serial.SerialException;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.*;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-public class CucumberStepDefinitions {
+//This annotation, makes junit stop looking for tests to initialize, so that the build doesn't fail
+@Ignore
+public class CucumberStepDefinitions extends SpringIntegrationTest{
 	
 	@Autowired
 	private McFantasyRestController api;

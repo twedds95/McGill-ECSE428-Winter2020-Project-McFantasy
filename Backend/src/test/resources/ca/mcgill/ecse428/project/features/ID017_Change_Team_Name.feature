@@ -6,7 +6,7 @@ I would like to change the name of an existing team
 Scenario Outline: Change Team Name (Normal Flow)
 
   Given user with email "<email>" has an existing team "<team>"
-  When the user with email "<email>" attemps to change a team name to "<newTeamName>"
+  When the user with email "<email>" attemps to change a team name from "<team>" to "<newTeamName>"
   Then the user "<email>" new team name is "<newTeamName>"
 
 Examples:
@@ -19,7 +19,7 @@ Examples:
 Scenario Outline: Attempt to Change Team Name to an Invalid Name (Error Flow)
 
   Given user with email "<email>" has an existing team "<team>"
-  When the user with email "<email>" attemps to change a team name to "<newTeamName>"
+  When the user with email "<email>" attemps to change a team name from "<team>" to "<newTeamName>"
   Then an "Team name is not valid" message is issued
 
 Examples:
