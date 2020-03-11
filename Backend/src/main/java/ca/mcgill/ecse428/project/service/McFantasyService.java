@@ -218,7 +218,7 @@ public class McFantasyService {
 
 	@Transactional
 	public Team addPlayer(Set<Player> players, Team team) {
-		Team t = teamRepo.findByName(team.getName());
+		Team t = teamRepo.findByTeamID(team.getTeamID());
 		t.setPlayer(players);
 		// Will also update player's team in the future
 		teamRepo.save(t);
@@ -304,7 +304,7 @@ public class McFantasyService {
 		}
 		
 		League l = leagueRepo.findByName(league.getName());
-		Team t = teamRepo.findByName(team.getName());
+		Team t = teamRepo.findByTeamID(team.getTeamID());
 		AppUser u = t.getUser();
 		
 		Set<Team> lTeams = l.getTeam();
@@ -334,24 +334,30 @@ public class McFantasyService {
 		if (!leagueRepo.existsById(league.getName())){
 			error += "League does not exist";
 		}
-//		if (!teamRepo.existsById(team.getTeamID())){
+		Set<Team> teamsInLeague = leagueRepo.findByName(league.getName()).getTeam();
+		for (Team t: teamsInLeague) {
+			if(t.getName().equals(team.getName())){
+				error += "Team name is already used in this league, please modify your team name before joining.";
+			}
+		}
+//		if (teamRepo.findByName(team.getName()) == null){
 //			error += "Team does not exist";
 //		}
 		if (error.length() > 0){
 			throw new IllegalArgumentException(error);
 		}
 		League l = leagueRepo.findByName(league.getName());
-		Team t = teamRepo.findByName(team.getName());
+		Team foundTeam = teamRepo.findByTeamID(team.getTeamID());
 		
 		Set<Team> teams = l.getTeam();
-		teams.add(t);
+		teams.add(foundTeam);
 		l.setTeam(teams);
 		leagueRepo.save(l);
 		
-		Set<League> leagues = t.getLeague();
+		Set<League> leagues = foundTeam.getLeague();
 		leagues.add(l);
-		t.setLeague(leagues);
-		teamRepo.save(t);
+		foundTeam.setLeague(leagues);
+		teamRepo.save(foundTeam);
 		return l;
 	}
 	
@@ -421,6 +427,12 @@ public class McFantasyService {
 		return l;
 	}
 
+	/**
+	 * @author Patrick Tweddell
+	 * @param user
+	 * @param password
+	 */
+	@Transactional
 	public void deleteUser(AppUser user, String password) {
 		AppUser appUser = userRepo.findByEmail(user.getEmail());
 		if (appUser.getPassword().equals(password)){
@@ -430,4 +442,51 @@ public class McFantasyService {
 			throw new IllegalArgumentException("Unauthorized request");
 		}
 	}
+
+	/**
+	 * @author Patrick Tweddell
+	 * @param name
+	 * @return Team
+	 */
+	@Transactional
+	public Team getTeamByName(String name, AppUser user) {
+		String error = "";
+		List<Team> teams = teamRepo.findByName(name);
+		if(teams.size() == 0 || teams == null){
+			error += "Team does not exist";
+		}
+		if (error.length() > 0){
+			throw new IllegalArgumentException();
+		}
+		Team foundTeam = null;
+		for (Team t : teams) {
+			if (t.getUser().getEmail().equals(user.getEmail())){
+				foundTeam = t;
+			}
+		}
+		return  foundTeam;
+	}
+
+	@Transactional
+	public Team updateTeamName(AppUser user, String oldName, String newName) {
+		Team team = getTeamByName(oldName, user);
+		String error = "";
+		if (team.getLeague() != null) {
+			Set<League> leagueSet = team.getLeague();
+			for (League l:leagueSet) {
+				for (Team t:l.getTeam()) {
+					if (t.getName().equals(newName)){
+						error += "Team name is already used in one of your leagues";
+					}
+				}
+			}
+		}
+		if (error.length() > 0){
+			throw new IllegalArgumentException(error);
+		}
+		team.setName(newName);
+		teamRepo.save(team);
+		return team;
+	}
+
 }

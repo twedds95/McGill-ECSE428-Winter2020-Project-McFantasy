@@ -27,4 +27,4 @@ Examples:
 
 |     email     |    team      |
 |  doe@mail.com |              |
-|  doe@mail.com |     1        |  
+|  doe@mail.com |     1        |

@@ -1,4 +1,4 @@
-Feature: View Teams in a League
+Feature: View League Standings
 
 As a user of McFantasy Sports Web App
 I would like to be able to view the standings of a league

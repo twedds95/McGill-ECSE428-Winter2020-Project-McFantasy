@@ -198,6 +198,16 @@ public class McFantasyRestController {
 		List<Team> teamStandings = service.updateStandings(league);
 		return teamStandings;
 	}
+
+	/**
+	 * @author Patrick Tweddell
+	 */
+	@GetMapping(value = {"/team/{teamName}", "/team/{teamName}/"})
+	public Team getTeamByName(@PathVariable("teamName") String name,
+							  @PathVariable("user") AppUser user) {
+		Team team = service.getTeamByName(name, user);
+		return team;
+	}
 	
 	/*
 	 * @author Ryan Arndtsen
@@ -218,5 +228,20 @@ public class McFantasyRestController {
 			teams.add(x);
 		}
 		return teams;
+	}
+
+	/**
+	 * @author Patrick Tweddell
+	 * @param user
+	 * @param oldName
+	 * @param newName
+	 * @return Team
+	 */
+	@PostMapping(value = {"/team/updateName", "/team/updateName/"})
+	public Team updateTeamName(@RequestParam(name="user") AppUser user,
+							   @RequestParam(name="oldName") String oldName,
+							   @RequestParam(name="newName") String newName) {
+		Team team = service.updateTeamName(user, oldName, newName);
+		return team;
 	}
 }

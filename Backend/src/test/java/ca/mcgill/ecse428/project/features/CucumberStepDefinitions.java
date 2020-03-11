@@ -212,7 +212,12 @@ public class CucumberStepDefinitions {
 	public void user_with_email_has_an_existing_team(String string, String string2) throws IOException, SQLException {
 		AppUser user = api.createUser(string, name, password, null);
 		email = string;
-		api.createTeam(1, string2, user);
+		int teamId = 1;
+		while (teamRepo.findByTeamID(teamId) != null){
+			teamId++;
+		}
+		api.createTeam(teamId, string2, user);
+
 
 	}
 
@@ -271,24 +276,24 @@ public class CucumberStepDefinitions {
 	@Given("league {string} has a team {string} in the league")
 	public void league_has_a_team_in_the_league(String string, String string2) throws IOException, SQLException {
 		League league = leagueRepo.findByName(string);
-		List<Team> teams = teamRepo.findByLeague(league);
-		Team team = teamRepo.findByName(string2);
+		List<Team> teamsLeague = teamRepo.findByLeague(league);
+		List<Team> teams = teamRepo.findByName(string2);
 		boolean found = false;
-		for (int i = 0; i < teams.size(); i++) {
-			if (teams.get(i).getName().equals(string2)){
+		for (int i = 0; i < teamsLeague.size(); i++) {
+				if (teamsLeague.get(i).getName().equals(string2)){
 				found = true;
 			}
 		}
 		if (!found){
-			api.addTeamToLeague(team, league.getName());
+			api.addTeamToLeague(teams.get(0), league.getName());
 		}
 	}
 
 	@When("the user attemps to leave the League {string} with their team {string}")
 	public void the_user_attemps_to_leave_the_League_with_their_team(String string, String string2) throws IOException, SQLException {
 		League league = leagueRepo.findByName(string);
-		Team team = teamRepo.findByName(string2);
-		api.leaveLeague(team, league.getName());
+		List<Team> team = teamRepo.findByName(string2);
+		api.leaveLeague(team.get(0), league.getName());
 	}
 
 	@Then("the user's {string} will be removed from the league {string}")
@@ -308,7 +313,11 @@ public class CucumberStepDefinitions {
 	public void the_user_attemps_to_create_a_new_team(String string) throws IOException, SQLException {
 		AppUser user = api.getUser(email);
 		try {
-			api.createTeam(1, string, user);
+			int teamId = 1;
+			while (teamRepo.findByTeamID(teamId) != null){
+				teamId++;
+			}
+			api.createTeam(teamId, string, user);
 		}catch (Exception e){
 			error = e.getMessage();
 		}
@@ -340,8 +349,12 @@ public class CucumberStepDefinitions {
 		List<Map<String, String>> list = dataTable.asMaps(String.class, String.class);
 		for (int i = 0; i < list.size();i++) {
 			AppUser user = api.createUser(list.get(i).get("userEmail"), list.get(i).get("userName"), password, null);
-			api.createTeam(i+1, list.get(i).get("teamName"), user);
-			api.joinLeague(i+1, string, user);
+			int teamId = 1+i;
+			while (teamRepo.findByTeamID(teamId) != null){
+				teamId++;
+			}
+			api.createTeam(teamId, list.get(i).get("teamName"), user);
+			api.joinLeague(teamId, string, user);
 		}
 	}
 
@@ -378,14 +391,18 @@ public class CucumberStepDefinitions {
 		List<Map<String, String>> list = dataTable.asMaps(String.class, String.class);
 		for (int i = 0; i < list.size();i++) {
 			AppUser user = api.createUser(list.get(i).get("userEmail"), list.get(i).get("userName"), password, null);
-			api.createTeam(i+1, list.get(i).get("teamName"), user);
-			api.joinLeague(i+1, string, user);
-			Team team = teamRepo.findByName(list.get(i).get("teamName"));
-			team.setPoints(Integer.valueOf(list.get(i).get("points")));
-			if (list.get(i).get("wins") != null) {
-				team.setWins(Integer.valueOf(list.get(i).get("wins")));
+			int teamId = 1+i;
+			while (teamRepo.findByTeamID(teamId) != null){
+				teamId++;
 			}
-			teamRepo.save(team);
+			api.createTeam(teamId, list.get(i).get("teamName"), user);
+			api.joinLeague(teamId, string, user);
+			List<Team> team = teamRepo.findByName(list.get(i).get("teamName"));
+			team.get(0).setPoints(Integer.valueOf(list.get(i).get("points")));
+			if (list.get(i).get("wins") != null) {
+				team.get(0).setWins(Integer.valueOf(list.get(i).get("wins")));
+			}
+			teamRepo.save(team.get(0));
 		}
 	}
 
@@ -410,4 +427,21 @@ public class CucumberStepDefinitions {
 		}
 	}
 
+
+	@Then("the user {string} new team name is {string}")
+	public void theUserNewTeamNameIs(String arg0, String arg1) {
+		AppUser user = api.getUser(arg0);
+		assertNotNull(api.getTeamByName(arg1, user));
+	}
+
+	@When("the user with email {string} attemps to change a team name from {string} to {string}")
+	public void theUserWithEmailAttempsToChangeATeamNameFromTo(String arg0, String arg1, String arg2) {
+		AppUser user = api.getUser(arg0);
+		try {
+			api.updateTeamName(user, arg1, arg2);
+		}
+		catch (Exception e){
+			error = e.getMessage();
+		}
+	}
 }

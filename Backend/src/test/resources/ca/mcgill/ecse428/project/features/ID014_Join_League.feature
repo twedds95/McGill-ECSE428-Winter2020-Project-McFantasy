@@ -29,3 +29,19 @@ Examples:
 |     email     |    team      |       leagueName      |
 |  doe@mail.com |  Rascals     |      Champs           |
 |  doe@mail.com |  Baracuda    |    McGill Sports Team |
+
+  Scenario Outline: Attempt to Join a League with a Team Name that is already used in the same League (Error Flow)
+
+    Given user with email "<email>" has an existing team "<team>"
+    Given user with email "jad@mail.com" has an existing team "<newTeamName>"
+    Given a league with name "<league>" exists
+    Given league "<league>" has a team "<team>" in the league
+    Given league "<league>" has a team "<newTeamName>" in the league
+    When the user attemps to join League "<league>" with their team "<team>"
+    Then an "Team name is already used in this league, please modify your team name before joining." message is issued
+
+    Examples:
+
+      |     email     |    team      |    newTeamName |      league    |
+      |  doe@mail.com |  Rascals     |    Rascals2    |     LosLeague  |
+      |  doe@mail.com |  Baracuda    |McGillSportsTeam|    Matata      |
