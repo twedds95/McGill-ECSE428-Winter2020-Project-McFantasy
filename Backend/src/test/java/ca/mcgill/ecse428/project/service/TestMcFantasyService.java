@@ -239,7 +239,7 @@ public class TestMcFantasyService {
 	@Test
 	public void testCreatePlayer() {
 		assertEquals(0, service.getAllPlayers().size());
-		Player player = service.createPlayer(PLAYER_NAME, PLAYER_POSITION);
+		Player player = service.createPlayer(PLAYER_NAME, PLAYER_POSITION, 7);
 		assertEquals(PLAYER_POSITION, service.getPlayer(PLAYER_NAME).getPosition());
 		
 	}
@@ -249,7 +249,7 @@ public class TestMcFantasyService {
 		String error = null;
 		assertEquals(0, service.getAllPlayers().size());
 		try {
-			Player player = service.createPlayer("", PLAYER_POSITION);
+			Player player = service.createPlayer("", PLAYER_POSITION, 7);
 		}
 		catch (IllegalArgumentException e) {
 			error = e.getMessage();
@@ -259,14 +259,16 @@ public class TestMcFantasyService {
 	
 	@Test
 	public void addPlayersToATeam() {
-		Player p1 = service.createPlayer(PLAYER_NAME, PLAYER_POSITION);
+		Player p1 = service.createPlayer(PLAYER_NAME, PLAYER_POSITION, 7);
 		Set<Player> players = new HashSet<Player>();
 		players.add(p1);
 		AppUser user = service.createUser(USER_EMAIL, USER_NAME, USER_PASSWORD, USER_PICTURE);
 		Team team = service.createTeam(TEAM_ID, TEAM_NAME, user);
+		assertEquals(0, service.getTeam(TEAM_ID).getPlayer().size());
 		service.addPlayer(p1, team);
 		assertEquals(1, service.getTeam(TEAM_ID).getPlayer().size());
 		//Why is this 0? Shouldn't it assert with 1?
+		//FIXED: ManyToMany relation requires you to update the sets for both player and team
 	}
 	
 	@Test

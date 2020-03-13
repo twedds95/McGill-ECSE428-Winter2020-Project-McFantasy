@@ -120,8 +120,10 @@ public class McFantasyRestController {
 	 */
 	@PostMapping(value = { "/player/{name}", "/player/{name}/"})
 	public Player createPlayer(@PathVariable("name") String name,
-			@RequestParam(name = "position") String position) throws IllegalArgumentException, SerialException, SQLException, IOException {
-		Player player = service.createPlayer(name, position);
+							   @RequestParam(name = "position") String position,
+							   @RequestParam(name = "rating") int rating) throws IllegalArgumentException, SerialException, SQLException, IOException {
+		Player player = service.createPlayer(name, position, rating);
+		// rating is out of 10 for each player
 		return player;
 	}
 	

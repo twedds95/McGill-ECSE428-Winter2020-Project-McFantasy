@@ -1,13 +1,9 @@
 package ca.mcgill.ecse428.project.model;
 
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 import java.util.Set;
-import javax.persistence.ManyToMany;
 
 @Entity
 public class Team{
@@ -101,7 +97,7 @@ public Integer getMaxRating() {
    
    private Set<Player> player;
    
-   @ManyToMany(mappedBy="team", fetch=FetchType.EAGER )
+   @ManyToMany(mappedBy="team", fetch=FetchType.EAGER, cascade = CascadeType.ALL)
    public Set<Player> getPlayer() {
       return this.player;
    }

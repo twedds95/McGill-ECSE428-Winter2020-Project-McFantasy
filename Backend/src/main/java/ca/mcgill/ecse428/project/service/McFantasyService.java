@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 @Service
@@ -177,7 +178,7 @@ public class McFantasyService {
 	 * @author Ali Tapan
 	 */
 	@Transactional
-	public Player createPlayer(String name, String position) {  // Pls note that you cant create players with same name!
+	public Player createPlayer(String name, String position, int rating) {  // Pls note that you cant create players with same name!
 		// Check if the inputs are wrong
 		String error ="";
 		if (name == null || name.trim().length() == 0) {
@@ -197,7 +198,7 @@ public class McFantasyService {
 		player.setName(name);
 		player.setPosition(position);
 		player.setJerseyNumber(0);
-		player.setRating(0);
+		player.setRating(rating);
 		player.setSeasonsPlayed(0);
 		player.setStilPlaying(true);
 		player.setTotalAssists(0);
@@ -223,21 +224,35 @@ public class McFantasyService {
 	 * @return
 	 */
 	@Transactional
-	public Team addPlayer(Player p, Team team) {
+	public Team addPlayer(Player player, Team team) {
 		String error = "";
 		Team t = teamRepo.findByTeamID(team.getTeamID());
-		Player player = playerRepo.findByName(p.getName());
-		Set<Player> players = team.getPlayer();
-		for (Player play:players) {
-			if (p.getName().equals(play.getName())){
-				error += "This player is already on your team.";
+		Player p = playerRepo.findByName(player.getName());
+		Set<Player> players;
+		if (team.getPlayer() != null) {
+			players = team.getPlayer();
+			for (Player play : players) {
+				if (p.getName().equals(play.getName())) {
+					error += "This player is already on your team.";
+				}
 			}
 		}
-		if (t.getTotalRating() + player.getRating() <= 77) {
-			players.add(player);
+		else {
+			players = new HashSet<>();
+		}
+		if (error.length() > 0 ){
+			throw new IllegalArgumentException(error);
+		}
+		if (t.getTotalRating() + p.getRating() <= 77) {
+			players.add(p);
 			t.setPlayer(players);
-			t.setTotalRating(t.getTotalRating() + player.getRating());
+			t.setTotalRating(t.getTotalRating() + p.getRating());
 			teamRepo.save(t);
+
+			Set<Team> teams = p.getTeam();
+			teams.add(t);
+			p.setTeam(teams);
+			playerRepo.save(p);
 		}else {
 			error += "Cannot add player to team, exceeds the max rating of 77.";
 		}

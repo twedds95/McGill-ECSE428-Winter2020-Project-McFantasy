@@ -2,6 +2,7 @@ package ca.mcgill.ecse428.project.features;
 
 import ca.mcgill.ecse428.project.controller.McFantasyRestController;
 import ca.mcgill.ecse428.project.dao.LeagueRepository;
+import ca.mcgill.ecse428.project.dao.PlayerRepository;
 import ca.mcgill.ecse428.project.dao.TeamRepository;
 import ca.mcgill.ecse428.project.model.AppUser;
 import ca.mcgill.ecse428.project.model.League;
@@ -26,7 +27,7 @@ import java.util.Map;
 
 import static org.junit.Assert.*;
 
-//This annotation, makes junit stop looking for tests to initialize, so that the build doesn't fail
+//This annotation makes junit stop looking for tests to initialize, so that the build doesn't fail
 @Ignore
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -43,6 +44,9 @@ public class CucumberStepDefinitions{
 
 	@Autowired
 	private TeamRepository teamRepo;
+
+	@Autowired
+	private PlayerRepository playerRepo;
 
 
 	
@@ -458,13 +462,11 @@ public class CucumberStepDefinitions{
 			String name = list.get(i).get("name");
 			String position = list.get(i).get("position");
 			int  rating = Integer.parseInt(list.get(i).get("rating"));
-			api.createPlayer(name, position);
-			Player player = api.getPlayer(name);
-			player.setRating(rating);
-			if (list.get(i).get("stillPlaying").equals("yes")){
-				player.setStilPlaying(true);
-			}else {
+			api.createPlayer(name, position, rating);
+			if (!list.get(i).get("stillPlaying").equals("yes")){
+				Player player = api.getPlayer(name);
 				player.setStilPlaying(false);
+				playerRepo.save(player);
 			}
 		}
 	}

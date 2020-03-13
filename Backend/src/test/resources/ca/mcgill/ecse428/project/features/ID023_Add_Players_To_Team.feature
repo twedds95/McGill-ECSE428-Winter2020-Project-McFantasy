@@ -55,7 +55,7 @@ Examples:
       |  Player8  |  defender    |    7       |    yes         |
       |  Player9  |  forward     |      7     |    yes         |
       |  Player10 |  defender    |    7       |    yes         |
-      |  Player11 |  defender    |      7     |    yes         |
+      |  Player11 |  defender    |      10     |    yes         |
     Given  the user "<email>" has the following players on his team "<team>"
       |     name  |    position  |   rating   |  stillPlaying  |
       |  Player1  |  forward     |      7     |    yes         |
