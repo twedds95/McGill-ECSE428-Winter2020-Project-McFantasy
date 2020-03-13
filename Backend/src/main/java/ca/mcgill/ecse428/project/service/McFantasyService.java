@@ -216,12 +216,34 @@ public class McFantasyService {
 	}
 
 
+	/**
+	 * @author Patrick Tweddell
+	 * @param player
+	 * @param team
+	 * @return
+	 */
 	@Transactional
-	public Team addPlayer(Set<Player> players, Team team) {
+	public Team addPlayer(Player p, Team team) {
+		String error = "";
 		Team t = teamRepo.findByTeamID(team.getTeamID());
-		t.setPlayer(players);
-		// Will also update player's team in the future
-		teamRepo.save(t);
+		Player player = playerRepo.findByName(p.getName());
+		Set<Player> players = team.getPlayer();
+		for (Player play:players) {
+			if (p.getName().equals(play.getName())){
+				error += "This player is already on your team.";
+			}
+		}
+		if (t.getTotalRating() + player.getRating() <= 77) {
+			players.add(player);
+			t.setPlayer(players);
+			t.setTotalRating(t.getTotalRating() + player.getRating());
+			teamRepo.save(t);
+		}else {
+			error += "Cannot add player to team, exceeds the max rating of 77.";
+		}
+		if (error.length() > 0 ){
+			throw new IllegalArgumentException(error);
+		}
 		return t;
 	}
 

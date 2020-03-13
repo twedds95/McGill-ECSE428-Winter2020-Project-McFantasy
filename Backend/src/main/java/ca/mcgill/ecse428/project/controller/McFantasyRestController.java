@@ -138,10 +138,10 @@ public class McFantasyRestController {
 	 * 
 	 * @author Ali Tapan
 	 */
-	@PostMapping(value = {"/team/{players}", "/team/{players}/"})
-	public Team addPlayers(@PathVariable("players") Set<Player> players,
+	@PostMapping(value = {"/team/{player}", "/team/{player}/"})
+	public Team addPlayers(@PathVariable("player") Player player,
 			@RequestParam(name = "teamID") Integer teamID) throws IllegalArgumentException, SerialException, SQLException, IOException{
-		return service.addPlayer(players, service.getTeam(teamID));
+		return service.addPlayer(player , service.getTeam(teamID));
 	}
 	
 	/**

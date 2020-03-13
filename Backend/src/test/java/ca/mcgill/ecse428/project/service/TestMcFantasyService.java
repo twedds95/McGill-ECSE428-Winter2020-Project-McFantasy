@@ -64,7 +64,7 @@ public class TestMcFantasyService {
 	
 	private static String PLAYER_NAME = "Burak Yilmaz";
 	private static String PLAYER_POSITION = "ST";
-	
+
 	@After
 	public void clearDatabase() {
 		appUserRepo.deleteAll();
@@ -264,8 +264,8 @@ public class TestMcFantasyService {
 		players.add(p1);
 		AppUser user = service.createUser(USER_EMAIL, USER_NAME, USER_PASSWORD, USER_PICTURE);
 		Team team = service.createTeam(TEAM_ID, TEAM_NAME, user);
-		service.addPlayer(players, team);
-		assertEquals(0, service.getTeam(TEAM_ID).getPlayer().size());
+		service.addPlayer(p1, team);
+		assertEquals(1, service.getTeam(TEAM_ID).getPlayer().size());
 		//Why is this 0? Shouldn't it assert with 1?
 	}
 	

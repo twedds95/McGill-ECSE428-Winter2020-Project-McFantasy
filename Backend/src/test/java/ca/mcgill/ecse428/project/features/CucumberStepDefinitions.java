@@ -5,13 +5,17 @@ import ca.mcgill.ecse428.project.dao.LeagueRepository;
 import ca.mcgill.ecse428.project.dao.TeamRepository;
 import ca.mcgill.ecse428.project.model.AppUser;
 import ca.mcgill.ecse428.project.model.League;
+import ca.mcgill.ecse428.project.model.Player;
 import ca.mcgill.ecse428.project.model.Team;
 import ca.mcgill.ecse428.project.service.McFantasyService;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Ignore;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.sql.rowset.serial.SerialException;
 import java.io.IOException;
@@ -24,7 +28,9 @@ import static org.junit.Assert.*;
 
 //This annotation, makes junit stop looking for tests to initialize, so that the build doesn't fail
 @Ignore
-public class CucumberStepDefinitions extends SpringIntegrationTest{
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class CucumberStepDefinitions{
 	
 	@Autowired
 	private McFantasyRestController api;
@@ -444,4 +450,61 @@ public class CucumberStepDefinitions extends SpringIntegrationTest{
 			error = e.getMessage();
 		}
 	}
+
+	@Given("the players with the following information exist")
+	public void the_players_with_the_following_information_exist(io.cucumber.datatable.DataTable dataTable) throws IOException, SQLException {
+		List<Map<String, String>> list = dataTable.asMaps(String.class, String.class);
+		for (int i = 0; i < list.size();i++) {
+			String name = list.get(i).get("name");
+			String position = list.get(i).get("position");
+			int  rating = Integer.parseInt(list.get(i).get("rating"));
+			api.createPlayer(name, position);
+			Player player = api.getPlayer(name);
+			player.setRating(rating);
+			if (list.get(i).get("stillPlaying").equals("yes")){
+				player.setStilPlaying(true);
+			}else {
+				player.setStilPlaying(false);
+			}
+		}
+	}
+
+	@When("the user {string} adds the following players to his team {string}")
+	public void the_user_adds_the_following_players_to_his_team(String string, String string2, io.cucumber.datatable.DataTable dataTable) throws IOException, SQLException {
+		List<Map<String, String>> list = dataTable.asMaps(String.class, String.class);
+		for (int i = 0; i < list.size();i++) {
+			String name = list.get(i).get("name");
+			Player player = api.getPlayer(name);
+			AppUser user = api.getUser(string);
+			email = string;
+			int teamId = api.getTeamByName(string2, user).getTeamID();
+			try {
+				api.addPlayers(player, teamId);
+			}catch (Exception e){
+				error = e.getMessage();
+			}
+		}
+	}
+
+	@Then("the user's {string} will have the all the players and total rating of {int}")
+	public void the_user_s_will_have_the_all_the_players_and_total_rating_of(String string, Integer int1) {
+		AppUser user = api.getUser(email);
+		Team team = api.getTeamByName(string, user);
+		assertEquals(int1, Integer.valueOf(team.getTotalRating()));
+	}
+
+	@Given("the user {string} has the following players on his team {string}")
+	public void the_user_has_the_following_players_on_his_team(String string, String string2, io.cucumber.datatable.DataTable dataTable) throws IOException, SQLException {
+		List<Map<String, String>> list = dataTable.asMaps(String.class, String.class);
+		for (int i = 0; i < list.size();i++) {
+			String name = list.get(i).get("name");
+			Player player = api.getPlayer(name);
+			AppUser user = api.getUser(string);
+			email = string;
+			int teamId = api.getTeamByName(string2, user).getTeamID();
+			api.addPlayers(player, teamId);
+		}
+	}
+
+
 }
