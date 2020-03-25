@@ -191,8 +191,16 @@ public class McFantasyRestController {
 
 		service.deleteUser(user, password);
 	}
-	
-//	returns Ordered ArrayList of Team Standings
+
+	/**
+	 * @author Patrick Tweddell
+	 * @param name
+	 * @return Ordered ArrayList of Team Standings
+	 * @throws IllegalArgumentException
+	 * @throws SerialException
+	 * @throws SQLException
+	 * @throws IOException
+	 */
 	@GetMapping(value = {"/leagueStandings/{name}", "/leagueStandings/{name}/"})
 	public List<Team> getLeagueStandings(@PathVariable("name") String name) 
 			throws IllegalArgumentException, SerialException, SQLException, IOException {
