@@ -11,10 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+
 @Service
 public class McFantasyService {
 
@@ -114,20 +112,21 @@ public class McFantasyService {
 	 * @author Ali Tapan
 	 */
 	@Transactional
-	public Team createTeam(Integer teamID, String name, AppUser user) {
+	public Team createTeam(String name, AppUser user) {
 		// Check if the inputs are wrong
 		String error ="";
 		if (name == null || name.trim().length() == 0) {
 			error += "Team name is not valid";
 		}
+		Random random = new Random();
+		Integer teamID = random.nextInt((int) Math.pow(2, 25));
 		if (teamID <= 0) {
 			error += "Team ID cannot be zero or less than zero!";
 		}
 
-		// Need to fix this at some point:
-//		if (teamRepo.existsById(teamID) {
-//			error += "Team with this name has already been created!";
-//		}
+		while (teamRepo.existsByTeamID(teamID)) {
+			teamID = random.nextInt((int) Math.pow(2, 25));
+		}
 
 		if (user == null) {
 			error += "Application user is null!";
@@ -294,12 +293,6 @@ public class McFantasyService {
 			throw new IllegalArgumentException("League name is already used");
 		}
 
-		//need to check if league name already exists
-		//will fix this later
-
-//		if (leagueID >= 0) {
-//			error += "League ID cannot be zero or less!";
-//		}
 		if (user == null) {
 			error += "Application user is null!";
 		}

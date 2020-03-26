@@ -8,7 +8,8 @@ import java.util.List;
 
 
 public interface TeamRepository extends CrudRepository<Team, String> {
-        
+
+       Boolean existsByTeamID(Integer teamID);
        Team findByTeamID(Integer teamID);
        List<Team> findByName(String name);
        List<Team> findByLeague (League league);

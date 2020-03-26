@@ -199,7 +199,7 @@ public class TestMcFantasyService {
 	public void testCreateTeam() {
 		assertEquals(0, service.getAllTeams().size());
 		AppUser user = service.createUser(USER_EMAIL, USER_NAME, USER_PASSWORD, USER_PICTURE);
-		service.createTeam(TEAM_ID, TEAM_NAME, user);
+		TEAM_ID = service.createTeam(TEAM_NAME, user).getTeamID();
 		assertEquals(TEAM_NAME, service.getTeam(TEAM_ID).getName());
 	}
 	
@@ -209,7 +209,7 @@ public class TestMcFantasyService {
 		assertEquals(0, service.getAllTeams().size());
 		AppUser user = service.createUser(USER_EMAIL, USER_NAME, USER_PASSWORD, USER_PICTURE);
 		try {
-			Team t = service.createTeam(TEAM_ID, null, user);
+			Team t = service.createTeam(null, user);
 		}
 		catch (IllegalArgumentException e) {
 			error = e.getMessage();
@@ -263,7 +263,8 @@ public class TestMcFantasyService {
 		Set<Player> players = new HashSet<Player>();
 		players.add(p1);
 		AppUser user = service.createUser(USER_EMAIL, USER_NAME, USER_PASSWORD, USER_PICTURE);
-		Team team = service.createTeam(TEAM_ID, TEAM_NAME, user);
+		Team team = service.createTeam(TEAM_NAME, user);
+		TEAM_ID = team.getTeamID();
 		assertEquals(0, service.getTeam(TEAM_ID).getPlayer().size());
 		service.addPlayer(p1, team);
 		assertEquals(1, service.getTeam(TEAM_ID).getPlayer().size());
@@ -275,7 +276,7 @@ public class TestMcFantasyService {
 	public void addTeamToLeague() {
 		AppUser user = service.createUser(USER_EMAIL, USER_NAME, USER_PASSWORD, USER_PICTURE);
 		League league = service.createLeague(LEAGUE_NAME, user);
-		Team team = service.createTeam(TEAM_ID, TEAM_NAME, user);
+		Team team = service.createTeam(TEAM_NAME, user);
 		assertEquals(0, service.getLeague(LEAGUE_NAME).getTeam().size());
 		service.addTeam(team, league);
 		assertEquals(1, service.getLeague(LEAGUE_NAME).getTeam().size());
@@ -285,7 +286,7 @@ public class TestMcFantasyService {
 	public void testLeaveLeague() {
 		AppUser user = service.createUser(USER_EMAIL, USER_NAME, USER_PASSWORD, USER_PICTURE);
 		League league = service.createLeague(LEAGUE_NAME, user);
-		Team team = service.createTeam(TEAM_ID, TEAM_NAME, user);
+		Team team = service.createTeam(TEAM_NAME, user);
 		service.addTeam(team, league);
 		assertEquals(1, service.getLeague(LEAGUE_NAME).getTeam().size());
 		//assertEquals(1, service.getUser(user.getEmail()).getTeam().size());
@@ -297,12 +298,12 @@ public class TestMcFantasyService {
   @Test
 	public void testJoinLeague() {
 		AppUser user = service.createUser(USER_EMAIL, USER_NAME, USER_PASSWORD, USER_PICTURE);
-		Team team = service.createTeam(TEAM_ID, TEAM_NAME, user);
+		Team team = service.createTeam(TEAM_NAME, user);
 		League league = service.createLeague(LEAGUE_NAME, user);
 		
 		assertEquals(0,service.getLeague(LEAGUE_NAME).getTeam().size());
 		//assertEquals(0,service.getUser(user.getEmail()).getTeam().size());
-		service.joinLeague(league, user, TEAM_ID);
+		service.addTeam(team, league);
 		assertEquals(1,service.getLeague(LEAGUE_NAME).getTeam().size());
 		//assertEquals(1,service.getUser(user.getEmail()).getTeam().size());
 	}
@@ -311,9 +312,12 @@ public class TestMcFantasyService {
 	public void updateStandings() {
 		AppUser user = service.createUser(USER_EMAIL, USER_NAME, USER_PASSWORD, USER_PICTURE);
 		League LEAGUE = service.createLeague(LEAGUE_NAME, user);
-		Team TEAM = service.createTeam(TEAM_ID, TEAM_NAME, user);
-		Team TEAM1 = service.createTeam(TEAM1_ID, TEAM1_NAME, user);
-		Team TEAM2 = service.createTeam(TEAM2_ID, TEAM2_NAME, user);
+		Team TEAM = service.createTeam(TEAM_NAME, user);
+		Team TEAM1 = service.createTeam(TEAM1_NAME, user);
+		Team TEAM2 = service.createTeam(TEAM2_NAME, user);
+		TEAM_ID = TEAM.getTeamID();
+		TEAM1_ID = TEAM1.getTeamID();
+		TEAM2_ID = TEAM2.getTeamID();
 		service.getTeam(TEAM_ID).setPoints(TEAM_PTS);
 		service.getTeam(TEAM1_ID).setPoints(TEAM1_PTS);
 		service.getTeam(TEAM2_ID).setPoints(TEAM2_PTS);

@@ -31,9 +31,9 @@ Examples:
   Scenario Outline: Attempt to Change Team Name to a Name that is already used in a League that the Team is in (Error Flow)
 
     Given user with email "<email>" has an existing team "<team>"
-    Given user with email "<email2>" has an existing team "<newTeamName>"
     Given a league with name "<league>" exists
     Given league "<league>" has a team "<team>" in the league
+    Given user with email "<email2>" has an existing team "<newTeamName>"
     Given league "<league>" has a team "<newTeamName>" in the league
     When the user with email "<email>" attemps to change a team name from "<team>" to "<newTeamName>"
     Then an "Team name is already used in one of your leagues" message is issued

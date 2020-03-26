@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="84294190-6555-45b7-b213-1ee6c02fcfa4" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gradle/5.6.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.6.2/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/bin/test/ca/mcgill/ecse428/project/features/CucumberCleanUp.class" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/bin/test/ca/mcgill/ecse428/project/features/CucumberCleanUp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/bin/test/ca/mcgill/ecse428/project/features/CucumberStepDefinitions.class" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/bin/test/ca/mcgill/ecse428/project/features/CucumberStepDefinitions.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/bin/test/ca/mcgill/ecse428/project/features/ID001_Create_New_Account_With_Email.feature" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/bin/test/ca/mcgill/ecse428/project/features/ID001_Create_New_Account_With_Email.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/bin/test/ca/mcgill/ecse428/project/features/SpringAbstractTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/bin/test/ca/mcgill/ecse428/project/features/SpringAbstractTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/test/java/ca/mcgill/ecse428/project/features/CucumberCleanUp.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/test/java/ca/mcgill/ecse428/project/features/CucumberCleanUp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/test/java/ca/mcgill/ecse428/project/features/CucumberStepDefinitions.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/test/java/ca/mcgill/ecse428/project/features/CucumberStepDefinitions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/test/java/ca/mcgill/ecse428/project/features/SpringAbstractTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/test/java/ca/mcgill/ecse428/project/features/SpringAbstractTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/test/resources/ca/mcgill/ecse428/project/features/ID001_Create_New_Account_With_Email.feature" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/test/resources/ca/mcgill/ecse428/project/features/ID001_Create_New_Account_With_Email.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JUnit4 Test Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="C:\Users\user\Documents\ECSE428\Project\McGill-ECSE428-Winter2020-Project-McFantasy\.idea" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectId" id="1YloQxoM9WhamENG4UcA5oOcJCJ" />
+  <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
+    <property name="create.test.in.the.same.root" value="true" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/Backend/src/test/resources/ca/mcgill/ecse428/project/features" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="ca.mcgill.ecse428.project.features" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.McFantasyApplication">
+    <configuration default="true" type="AndroidJUnit">
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="McGill-ECSE428-Winter2020-Project-McFantasy" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list />
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="McFantasyApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="Backend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ca.mcgill.ecse428.project.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="ca.mcgill.ecse428.project.McFantasyApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.McFantasyApplication" />
+        <item itemvalue="Gradle.McGill-ECSE428-Winter2020-Project-McFantasy" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="84294190-6555-45b7-b213-1ee6c02fcfa4" name="Default Changelist" comment="" />
+      <created>1583526530545</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1583526530545</updated>
+      <workItem from="1583526536252" duration="4093000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

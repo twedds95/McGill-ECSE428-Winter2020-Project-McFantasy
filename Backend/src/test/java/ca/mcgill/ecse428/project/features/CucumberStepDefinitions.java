@@ -4,6 +4,8 @@ import ca.mcgill.ecse428.project.controller.McFantasyRestController;
 import ca.mcgill.ecse428.project.dao.LeagueRepository;
 import ca.mcgill.ecse428.project.dao.PlayerRepository;
 import ca.mcgill.ecse428.project.dao.TeamRepository;
+import ca.mcgill.ecse428.project.dto.AppUserDto;
+import ca.mcgill.ecse428.project.dto.TeamDto;
 import ca.mcgill.ecse428.project.model.AppUser;
 import ca.mcgill.ecse428.project.model.League;
 import ca.mcgill.ecse428.project.model.Player;
@@ -70,9 +72,9 @@ public class CucumberStepDefinitions{
 	
 	@Then("a new user with email {string} and password {string} is generated")
 	public void a_new_account_with_email_and_password_is_generated(String email, String password) {
-		AppUser user = new AppUser();
+		AppUser user = null;
 		try {
-			user = api.getUser(email);
+			user = service.getUser(email);
 		} catch (IllegalArgumentException e) {
 			fail();
 		}
@@ -148,7 +150,7 @@ public class CucumberStepDefinitions{
 
 	@Then("their password is still {string}")
 	public void their_password_is_still(String string) {
-	    assertEquals(string, api.getUser(email).getPassword());
+	    assertEquals(string, service.getUser(email).getPassword());
 	}
 
 	@Then("their failed attempts should increase to {int}")
@@ -183,7 +185,7 @@ public class CucumberStepDefinitions{
 
 	@Then("their password will be {string}")
 	public void their_password_will_be(String string) {
-		assertEquals(string, api.getUser(email).getPassword());
+		assertEquals(string, service.getUser(email).getPassword());
 	}
 
 	@Given("person’s email {string} and password {string} is an existing user")
@@ -194,7 +196,7 @@ public class CucumberStepDefinitions{
 
 	@When("a person {string} requests for their account to be deleted with confirmation password {string}")
 	public void a_person_requests_for_their_account_to_be_deleted_with_confirmation_password(String string, String string2) throws IOException, SQLException {
-	    AppUser user = api.getUser(string);
+	    AppUser user = service.getUser(string);
 		try {
 	    	api.deleteUser(user, string2);
 		} catch (IllegalArgumentException e) {
@@ -214,27 +216,28 @@ public class CucumberStepDefinitions{
 
 	@Given("a league with {string} exists")
 	public void a_league_with_exists(String string) throws IOException, SQLException {
-		AppUser user = api.getUser(email);
-	    api.createLeague(string, user);
+		AppUser user = service.getUser(email);
+	    api.createLeague(string, email);
 	}
 
 	@Given("user with email {string} has an existing team {string}")
 	public void user_with_email_has_an_existing_team(String string, String string2) throws IOException, SQLException {
-		AppUser user = api.createUser(string, name, password, null);
+		AppUser user = service.createUser(string, name, password, null);
 		email = string;
-		int teamId = 1;
-		while (teamRepo.findByTeamID(teamId) != null){
-			teamId++;
-		}
-		api.createTeam(teamId, string2, user);
+		api.createTeam(string2, user.getEmail());
 
 
 	}
 
 	@Given("a league with name {string} exists")
 	public void a_league_with_name_exists(String string) throws IOException, SQLException {
-	    AppUser user = api.getUser(email);
-	    api.createLeague(string, user);
+	    AppUser user = service.getUser(email);
+	    try {
+	    	api.createLeague(string, email);
+		}
+	    catch (Exception e){
+	    	error = e.getMessage();
+		}
 	}
 	
 	@Given("user {string} is logged in")
@@ -245,8 +248,8 @@ public class CucumberStepDefinitions{
 
 	@When("the user inputs a valid league name {string} and clicks Create League button")
 	public void the_user_inputs_a_valid_league_name_and_clicks_Create_League_button(String string) throws IOException, SQLException {
-	    AppUser user = api.getUser(email);
-		api.createLeague(string, user);
+	    AppUser user = service.getUser(email);
+		api.createLeague(string, email);
 	}
 
 	@Then("the new league with name {string} will be created")
@@ -257,8 +260,9 @@ public class CucumberStepDefinitions{
 	@When("the user attemps to join League {string} with their team {string}")
 	public void the_user_attemps_to_join_League_with_their_team(String string, String string2) throws IOException, SQLException {
 		try {
-			Team team = api.getTeam(1);
-			api.addTeamToLeague(team, string);
+			AppUser user = service.getUser(email);
+			Team team = service.getTeamByName(string2, user);
+			api.addTeamToLeague(string2, string, email);
 		}catch (Exception e){
 			error = e.getMessage();
 		}
@@ -267,7 +271,7 @@ public class CucumberStepDefinitions{
 
 	@Then("the user's {string} will be added to the league {string}")
 	public void the_user_s_will_be_added_to_the_league(String string, String string2) {
-	    assertNotNull(api.getLeague(string2).getTeam());
+	    assertNotNull(service.getLeague(string2).getTeam());
 	}
 
 	@Given("a league with name {string} deos not exist")
@@ -295,7 +299,7 @@ public class CucumberStepDefinitions{
 			}
 		}
 		if (!found){
-			api.addTeamToLeague(teams.get(0), league.getName());
+			api.addTeamToLeague(teams.get(0).getName(), league.getName(), email);
 		}
 	}
 
@@ -321,13 +325,13 @@ public class CucumberStepDefinitions{
 
 	@When("the user attemps to create a new team {string}")
 	public void the_user_attemps_to_create_a_new_team(String string) throws IOException, SQLException {
-		AppUser user = api.getUser(email);
+		AppUser user = service.getUser(email);
 		try {
 			int teamId = 1;
 			while (teamRepo.findByTeamID(teamId) != null){
 				teamId++;
 			}
-			api.createTeam(teamId, string, user);
+			api.createTeam(string, user.getEmail());
 		}catch (Exception e){
 			error = e.getMessage();
 		}
@@ -342,8 +346,8 @@ public class CucumberStepDefinitions{
 	@When("the user inputs an invalid league name {string} and clicks Create League button")
 	public void theUserInputsAnInvalidLeagueNameAndClicksCreateLeagueButton(String arg0) {
 		try {
-			AppUser user = api.getUser(email);
-			api.createLeague(arg0, user);
+			AppUser user = service.getUser(email);
+			api.createLeague(arg0, email);
 		}catch (Exception e){
 			error = e.getMessage();
 		}
@@ -358,13 +362,10 @@ public class CucumberStepDefinitions{
 	public void the_league_has_the_following_teams(String string, io.cucumber.datatable.DataTable dataTable) throws IOException, SQLException {
 		List<Map<String, String>> list = dataTable.asMaps(String.class, String.class);
 		for (int i = 0; i < list.size();i++) {
-			AppUser user = api.createUser(list.get(i).get("userEmail"), list.get(i).get("userName"), password, null);
-			int teamId = 1+i;
-			while (teamRepo.findByTeamID(teamId) != null){
-				teamId++;
-			}
-			api.createTeam(teamId, list.get(i).get("teamName"), user);
-			api.joinLeague(teamId, string, user);
+			AppUserDto user = api.createUser(list.get(i).get("userEmail"), list.get(i).get("userName"), password, null);
+			TeamDto teamDto = api.createTeam(list.get(i).get("teamName"), user.getEmail());
+			Team team = service.getTeamByName(teamDto.getName(), service.getUser(user.getEmail()));
+			api.addTeamToLeague(team.getName(), string, user.getEmail());
 		}
 	}
 
@@ -372,8 +373,8 @@ public class CucumberStepDefinitions{
 	@When("the user attemps to view the teams in the league {string}")
 	public void the_user_attemps_to_view_the_teams_in_the_league(String string) {
 		try {
-			List<Team> teamsList = api.getTeamsInLeague(string);
-			for (Team x : teamsList)
+			List<TeamDto> teamsList = api.getTeamsInLeague(string);
+			for (TeamDto x : teamsList)
 				teams.add(x.getName());
 		}
 		catch (Exception e){
@@ -400,14 +401,10 @@ public class CucumberStepDefinitions{
 	public void the_league_has_the_following_teams_with_the_the_followings_statistics(String string, io.cucumber.datatable.DataTable dataTable) throws IOException, SQLException {
 		List<Map<String, String>> list = dataTable.asMaps(String.class, String.class);
 		for (int i = 0; i < list.size();i++) {
-			AppUser user = api.createUser(list.get(i).get("userEmail"), list.get(i).get("userName"), password, null);
-			int teamId = 1+i;
-			while (teamRepo.findByTeamID(teamId) != null){
-				teamId++;
-			}
-			api.createTeam(teamId, list.get(i).get("teamName"), user);
-			api.joinLeague(teamId, string, user);
+			AppUserDto user = api.createUser(list.get(i).get("userEmail"), list.get(i).get("userName"), password, null);
+			api.createTeam(list.get(i).get("teamName"), user.getEmail());
 			List<Team> team = teamRepo.findByName(list.get(i).get("teamName"));
+			api.addTeamToLeague(team.get(0).getName(), string, user.getEmail());
 			team.get(0).setPoints(Integer.valueOf(list.get(i).get("points")));
 			if (list.get(i).get("wins") != null) {
 				team.get(0).setWins(Integer.valueOf(list.get(i).get("wins")));
@@ -418,8 +415,8 @@ public class CucumberStepDefinitions{
 
 	@When("the user attemps to view the standings of league {string}")
 	public void the_user_attemps_to_view_the_standings_of_league(String string) throws IOException, SQLException {
-		List<Team> teamsList = api.getLeagueStandings(string);
-		for (Team t : teamsList) {
+		List<TeamDto> teamsList = api.getLeagueStandings(string);
+		for (TeamDto t : teamsList) {
 			teams.add(t.getName());
 		}
 	}
@@ -440,15 +437,16 @@ public class CucumberStepDefinitions{
 
 	@Then("the user {string} new team name is {string}")
 	public void theUserNewTeamNameIs(String arg0, String arg1) {
-		AppUser user = api.getUser(arg0);
-		assertNotNull(api.getTeamByName(arg1, user));
+		AppUserDto u = api.getUser(arg0);
+		AppUser user = service.getUser(u.getEmail());
+		assertNotNull(api.getTeamByName(arg1, user.getEmail()));
 	}
 
 	@When("the user with email {string} attemps to change a team name from {string} to {string}")
 	public void theUserWithEmailAttempsToChangeATeamNameFromTo(String arg0, String arg1, String arg2) {
-		AppUser user = api.getUser(arg0);
+		AppUser user = service.getUser(arg0);
 		try {
-			api.updateTeamName(user, arg1, arg2);
+			api.updateTeamName(user.getEmail(), arg1, arg2);
 		}
 		catch (Exception e){
 			error = e.getMessage();
@@ -464,7 +462,7 @@ public class CucumberStepDefinitions{
 			int  rating = Integer.parseInt(list.get(i).get("rating"));
 			api.createPlayer(name, position, rating);
 			if (!list.get(i).get("stillPlaying").equals("yes")){
-				Player player = api.getPlayer(name);
+				Player player = service.getPlayer(name);
 				player.setStilPlaying(false);
 				playerRepo.save(player);
 			}
@@ -476,12 +474,12 @@ public class CucumberStepDefinitions{
 		List<Map<String, String>> list = dataTable.asMaps(String.class, String.class);
 		for (int i = 0; i < list.size();i++) {
 			String name = list.get(i).get("name");
-			Player player = api.getPlayer(name);
-			AppUser user = api.getUser(string);
+			Player player = service.getPlayer(name);
+			AppUser user = service.getUser(string);
 			email = string;
-			int teamId = api.getTeamByName(string2, user).getTeamID();
+			int teamId = api.getTeamByName(string2, user.getEmail()).getTeamID();
 			try {
-				api.addPlayers(player, teamId);
+				api.addPlayers(player.getName(), teamId);
 			}catch (Exception e){
 				error = e.getMessage();
 			}
@@ -490,8 +488,8 @@ public class CucumberStepDefinitions{
 
 	@Then("the user's {string} will have the all the players and total rating of {int}")
 	public void the_user_s_will_have_the_all_the_players_and_total_rating_of(String string, Integer int1) {
-		AppUser user = api.getUser(email);
-		Team team = api.getTeamByName(string, user);
+		AppUser user = service.getUser(email);
+		TeamDto team = api.getTeamByName(string, email);
 		assertEquals(int1, Integer.valueOf(team.getTotalRating()));
 	}
 
@@ -500,11 +498,11 @@ public class CucumberStepDefinitions{
 		List<Map<String, String>> list = dataTable.asMaps(String.class, String.class);
 		for (int i = 0; i < list.size();i++) {
 			String name = list.get(i).get("name");
-			Player player = api.getPlayer(name);
-			AppUser user = api.getUser(string);
+			Player player = service.getPlayer(name);
+			AppUser user = service.getUser(string);
 			email = string;
-			int teamId = api.getTeamByName(string2, user).getTeamID();
-			api.addPlayers(player, teamId);
+			int teamId = api.getTeamByName(string2, string).getTeamID();
+			api.addPlayers(name, teamId);
 		}
 	}
 
