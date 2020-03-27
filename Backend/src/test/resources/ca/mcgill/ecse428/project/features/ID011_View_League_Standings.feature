@@ -38,9 +38,9 @@ Examples:
       | teamName  |      userEmail  |   userName  |   points    |  wins  |
       |   team1   | user1@mail.com  |  userName1  |    22       |  6     |
       |   team2   | user2@mail.com  |  userName2  |    22       |  7     |
-      |   team3   | user3@mail.com  |  userName3  |    25       |  12    |
-      |   team4   | user4@mail.com  |  userName4  |    25       | 11     |
-      |   team5   | user5@mail.com  |  userName5  |    23       |  9     |
+      |   team3   | user3@mail.com  |  userName3  |    22       |  12    |
+      |   team4   | user4@mail.com  |  userName4  |    22       | 11     |
+      |   team5   | user5@mail.com  |  userName5  |    22       |  9     |
     When the user attemps to view the standings of league "<league>"
     Then the standings in the league "<league>" are shown to be the following
       | teamName  |standing|

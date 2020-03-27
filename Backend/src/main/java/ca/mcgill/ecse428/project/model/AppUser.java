@@ -1,13 +1,8 @@
 package ca.mcgill.ecse428.project.model;
 
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
-import java.sql.Blob;
+import javax.persistence.*;
 import java.util.Set;
-import javax.persistence.CascadeType;
-import javax.persistence.OneToMany;
 
 @Entity
 public class AppUser{
@@ -49,7 +44,7 @@ public class AppUser{
 	}
 	private Set<Team> team;
 
-	@OneToMany(mappedBy="user" , cascade={CascadeType.ALL})
+	@OneToMany(mappedBy="user" , fetch = FetchType.EAGER, cascade={CascadeType.ALL})
 	public Set<Team> getTeam() {
 		return this.team;
 	}
@@ -60,7 +55,7 @@ public class AppUser{
 
 	private Set<League> league;
 
-	@OneToMany(mappedBy="user" , cascade={CascadeType.ALL})
+	@OneToMany(mappedBy="user" , fetch = FetchType.EAGER, cascade={CascadeType.ALL})
 	public Set<League> getLeague() {
 		return this.league;
 	}

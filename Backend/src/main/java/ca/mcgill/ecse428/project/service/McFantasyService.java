@@ -11,10 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+
 @Service
 public class McFantasyService {
 
@@ -114,20 +112,21 @@ public class McFantasyService {
 	 * @author Ali Tapan
 	 */
 	@Transactional
-	public Team createTeam(Integer teamID, String name, AppUser user) {
+	public Team createTeam(String name, AppUser user) {
 		// Check if the inputs are wrong
 		String error ="";
 		if (name == null || name.trim().length() == 0) {
 			error += "Team name is not valid";
 		}
+		Random random = new Random();
+		Integer teamID = random.nextInt((int) Math.pow(2, 25));
 		if (teamID <= 0) {
 			error += "Team ID cannot be zero or less than zero!";
 		}
 
-		// Need to fix this at some point:
-//		if (teamRepo.existsById(teamID) {
-//			error += "Team with this name has already been created!";
-//		}
+		while (teamRepo.existsByTeamID(teamID)) {
+			teamID = random.nextInt((int) Math.pow(2, 25));
+		}
 
 		if (user == null) {
 			error += "Application user is null!";
@@ -294,18 +293,13 @@ public class McFantasyService {
 			throw new IllegalArgumentException("League name is already used");
 		}
 
-		//need to check if league name already exists
-		//will fix this later
-
-//		if (leagueID >= 0) {
-//			error += "League ID cannot be zero or less!";
-//		}
 		if (user == null) {
 			error += "Application user is null!";
 		}
 		if (error.length() > 0 ){
 			throw new IllegalArgumentException(error);
 		}
+
 		League league = new League();
 		league.setName(name);
 		league.setUser(user);
@@ -524,6 +518,25 @@ public class McFantasyService {
 		team.setName(newName);
 		teamRepo.save(team);
 		return team;
+	}
+
+	@Transactional
+	public Set<Team> getTeamsForUser(AppUser user) {
+		return teamRepo.findByUser(user);
+	}
+
+	@Transactional
+	public Set<League> getLeaguesForUser(AppUser user){
+		Set<Team> teamSet = teamRepo.findByUser(user);
+		Set<League> leagueSet = leagueRepo.findByUser(user);
+		for (Team t : teamSet) {
+			for (League l : t.getLeague()) {
+				if (!leagueSet.contains(l)){
+					leagueSet.add(l);
+				}
+			}
+		}
+		return leagueSet;
 	}
 
 }
