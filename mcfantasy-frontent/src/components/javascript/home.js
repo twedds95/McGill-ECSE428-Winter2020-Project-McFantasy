@@ -3,7 +3,6 @@ import Vue from 'vue';
 import VuejsDialog from 'vuejs-dialog';
 import VuejsDialogMixin from 'vuejs-dialog/dist/vuejs-dialog-mixin.min.js'; // only needed in custom components
 import 'vuejs-dialog/dist/vuejs-dialog.min.css';
-import { response } from 'express';
 
 Vue.use(VuejsDialog);
 
@@ -88,32 +87,34 @@ export default {
         var self = this;
         var email = window.sessionStorage.getItem("email");
         let params = {
-            userEmail: this.email,
+            userEmail: email
         };
         AXIOS.get('/user/' + email).then(function (response) {
             self.name = response.data.name;
             self.email = response.data.email;
             self.picture = "data:image/png;base64, " + response.data.profilePicture;
         });
-        AXIOS.get('/leaguesForUser/', { params : params })
+        AXIOS.get('/leaguesForUser/', { params: params })
             .then(response => {
                 if (!response.data || response.data.length <= 0) return;
                 this.leagues = response.data;
+                console.log(response.data);
             })
             .catch(e => {
                 e = e.response.data.message ? e.response.data.message : e;
                 console.log(e);
-                errorMessage = e;
+                this.errorMessage = e;
             });
         AXIOS.get('/teamsForUser/', { params : params })
             .then(response => {
                 if (!response.data || response.data.length <= 0) return;
                 this.teams = response.data;
+                console.log(response.data);
             })
             .catch(e => {
                 e = e.response.data.message ? e.response.data.message : e;
                 console.log(e);
-                errorMessage = e;
+                this.errorMessage = e;
             });
     },
     methods: {
@@ -126,13 +127,13 @@ export default {
                 .catch(e => {
                     e = e.response.data.message ? e.response.data.message : e;
                     console.log(e);
-                    errorMessage = e;
+                    this.errorMessage = e;
                 });
         },
 
         getTeamPlayers: function () {
             let params = {
-                userEmail: this.email,
+                userEmail: this.email
             };
             AXIOS.get('/playersOnTeam/'.concat(this.selectedTeam), { params : params })
                 .then(response => {
@@ -142,7 +143,7 @@ export default {
                 .catch(e => {
                     e = e.response.data.message ? e.response.data.message : e;
                     console.log(e);
-                    errorMessage = e;
+                    this.errorMessage = e;
                 });
 
         },
@@ -194,11 +195,12 @@ export default {
                 .then(dialog => {
                     // Triggered when proceed button is clicked
                     let params = {
-                        user: this.email,
+                        user: this.email
                     };
                     AXIOS.post('/newTeam/'.concat(dialog.data), {}, { params: params })
                         .then(response => {
-                            this.$router.push({ name: 'AddPlayers', params: { user: this.email, teamId: response.data.teamId } });
+                            console.log(response.data)
+                            this.$router.push({ name: 'AddPlayers', params: { user: this.email, teamID: response.data.teamID } });
                         })
                         .catch(e => {
                             e = e.response.data.message ? e.response.data.message : e;
@@ -214,8 +216,8 @@ export default {
         },
 
         addPlayersredirect: function () {
-            let team = this.teams.find(x => x.name === selectedTeam);
-            this.$router.push({ name: 'AddPlayers', params: { user: this.email, teamId: team.teamId } });
+            let team = this.teams.find(x => x.name === this.selectedTeam);
+            this.$router.push({ name: 'AddPlayers', params: { user: this.email, teamID: team.teamID } });
         }
 
     }

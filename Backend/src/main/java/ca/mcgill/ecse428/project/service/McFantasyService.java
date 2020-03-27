@@ -299,6 +299,7 @@ public class McFantasyService {
 		if (error.length() > 0 ){
 			throw new IllegalArgumentException(error);
 		}
+
 		League league = new League();
 		league.setName(name);
 		league.setUser(user);
@@ -517,6 +518,25 @@ public class McFantasyService {
 		team.setName(newName);
 		teamRepo.save(team);
 		return team;
+	}
+
+	@Transactional
+	public Set<Team> getTeamsForUser(AppUser user) {
+		return teamRepo.findByUser(user);
+	}
+
+	@Transactional
+	public Set<League> getLeaguesForUser(AppUser user){
+		Set<Team> teamSet = teamRepo.findByUser(user);
+		Set<League> leagueSet = leagueRepo.findByUser(user);
+		for (Team t : teamSet) {
+			for (League l : t.getLeague()) {
+				if (!leagueSet.contains(l)){
+					leagueSet.add(l);
+				}
+			}
+		}
+		return leagueSet;
 	}
 
 }

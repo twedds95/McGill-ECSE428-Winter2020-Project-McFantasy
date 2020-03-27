@@ -6,7 +6,7 @@
       <br />
       <br />
       <select id="team-select" v-model="selectedTeam">
-        <option disabled value>select Your Team Add Players</option>
+        <option disabled value>Select Team To Add Players</option>
         <option v-for="(team, i) in teams" v-bind:key="`team-${i}`">{{team.name}}</option>
       </select>
       <table id="playersInTeam-table" class="tableCentered">

@@ -247,7 +247,7 @@ public class McFantasyRestController {
 	@GetMapping(value = {"/teamsForUser/", "/teamsForUser/"})
 	public List<TeamDto> getTeamsForUser(@RequestParam("userEmail") String userEmail){
 		AppUser user = service.getUser(userEmail);
-		Set<Team> teams = user.getTeam();
+		Set<Team> teams = service.getTeamsForUser(user);
 		List<TeamDto> teamDtos = new ArrayList<>();
 		for (Team t : teams) {
 			teamDtos.add(convertTeamToDTO(t));
@@ -263,19 +263,10 @@ public class McFantasyRestController {
 	@GetMapping(value = {"/leaguesForUser/", "/leaguesForUser/"})
 	public List<LeagueDto> getLeaguesForUser(@RequestParam("userEmail") String userEmail){
 		AppUser user = service.getUser(userEmail);
-		Set<Team> teams = user.getTeam();
-		Set<League> leagues = user.getLeague();
+		Set<League> leagues = service.getLeaguesForUser(user);
 		List<LeagueDto> leagueDtos = new ArrayList<>();
 		for (League l : leagues) {
 			leagueDtos.add(convertLeagueToDTO(l));
-		}
-		for (Team t : teams) {
-			for (League l: t.getLeague()) {
-				if (!leagues.contains(l)){
-					leagueDtos.add(convertLeagueToDTO(l));
-					leagues.add(l);
-				}
-			}
 		}
 		return leagueDtos;
 	}

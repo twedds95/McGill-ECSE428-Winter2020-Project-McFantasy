@@ -255,6 +255,8 @@ public class CucumberStepDefinitions{
 	@Then("the new league with name {string} will be created")
 	public void the_new_league_with_name_will_be_created(String string) {
 	    assertNotNull(leagueRepo.findByName(string));
+	    assertEquals(1, api.getLeaguesForUser(email).size());
+	    assertEquals(string, api.getLeaguesForUser(email).get(0).getName());
 	}
 
 	@When("the user attemps to join League {string} with their team {string}")

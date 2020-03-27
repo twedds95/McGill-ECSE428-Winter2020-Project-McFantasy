@@ -200,6 +200,7 @@ public class TestMcFantasyService {
 		assertEquals(0, service.getAllTeams().size());
 		AppUser user = service.createUser(USER_EMAIL, USER_NAME, USER_PASSWORD, USER_PICTURE);
 		TEAM_ID = service.createTeam(TEAM_NAME, user).getTeamID();
+		assertEquals(1, service.getUser(USER_EMAIL).getTeam().size());
 		assertEquals(TEAM_NAME, service.getTeam(TEAM_ID).getName());
 	}
 	
@@ -336,6 +337,7 @@ public class TestMcFantasyService {
 		assertEquals(0, service.getAllLeagues().size());
 		AppUser user = service.createUser(USER_EMAIL, USER_NAME, USER_PASSWORD, USER_PICTURE);
 		service.createLeague(LEAGUE_NAME, user);
+		assertEquals(1, service.getUser(USER_EMAIL).getLeague().size());
 		assertEquals(LEAGUE_NAME, service.getLeague(LEAGUE_NAME).getName());
 	}
 	

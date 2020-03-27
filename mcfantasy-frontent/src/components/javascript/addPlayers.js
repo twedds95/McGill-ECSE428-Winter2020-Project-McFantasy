@@ -53,9 +53,23 @@ export default {
         AXIOS.get('/user/' + email).then(function (response) {
             self.name = response.data.name;
             self.email = response.data.email;
-            self.teams = response.data.team;
             self.picture = "data:image/png;base64, " + response.data.profilePicture;
         });
+        let params = {
+            userEmail: email
+        };
+        AXIOS.get('/teamsForUser/', { params : params })
+            .then(response => {
+                if (!response.data || response.data.length <= 0) return;
+                console.log(this.email);
+                this.teams = response.data;
+                console.log(this.teams);
+            })
+            .catch(e => {
+                e = e.response.data.message ? e.response.data.message : e;
+                console.log(e);
+                this.errorMessage = e;
+            });
     },
     methods: {
         
